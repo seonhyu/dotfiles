@@ -1,0 +1,1 @@
+/usr/local/Cellar/autojump/21.6.9/etc/autojump.zsh

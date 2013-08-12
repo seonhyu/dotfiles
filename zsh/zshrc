@@ -1,0 +1,29 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+if [ -d $HOME/.zsh/modules/ ]; then
+  if [ "$(ls -A $HOME/.zsh/modules/)" ]; then
+    for config_file ($HOME/.zsh/modules/*.zsh) source $config_file
+  fi
+fi
+
+if [ -d $HOME/.zsh/config/ ]; then
+  if [ "$(ls -A $HOME/.zsh/config/)" ]; then
+    for config_file ($HOME/.zsh/config/*.zsh) source $config_file
+  fi
+fi
+
+export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+
+# Play Version Manager(PVM) 활성화
+. /usr/local/pvm/pvm.sh
