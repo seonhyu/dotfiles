@@ -15,7 +15,7 @@ alias gw='grunt watch'
 
 # Shell
 alias ll='ls -alGh'
-alias l='ls -Gh'
+alias l='ls -lGh'
 alias du='du -h -d 2'
 
 # Alias Editing
