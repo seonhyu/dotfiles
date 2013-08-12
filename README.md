@@ -1,6 +1,5 @@
 # zsh
 
-# symbolic links
+# vim
 
-ln -s Dropbox
-
+# tmux
