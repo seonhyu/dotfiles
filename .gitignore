@@ -1,5 +1,6 @@
 vim/backups
 vim/tmp
-vim/bundle
+vim/bundle/*
+!vim/bundle/vundle
 vim/sessions
 tags

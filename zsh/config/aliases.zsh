@@ -1,3 +1,6 @@
+# vagrant
+alias vg='vagrant'
+
 # Git
 alias ga='git add -A'
 alias gb='git branch'
