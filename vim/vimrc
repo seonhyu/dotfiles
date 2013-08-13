@@ -114,6 +114,10 @@ set foldnestmax=3
 	runtime! config/highlight.vim
 " }}}
 
+if filereadable(".vimrc.local")
+    source .vimrc.local
+endif
+
 " Source extra config files {{{
 	" Parse local vimrc (useful for per-project settings)
 	if filereadable(".lvimrc")
