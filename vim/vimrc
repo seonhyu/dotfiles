@@ -48,10 +48,13 @@ set showmode		" show current mode
 set nowrap             " Line wrapping off
 set splitbelow
 set splitright
+
+" Ubuntu에서 에러 발생함
 set fillchars=vert:│,fold:┄,diff:╱
 set listchars=tab:│\ ,trail:⌴,eol:·,precedes:◂,extends:▸
-set nolist
 set showbreak=↪
+
+set nolist
 set lazyredraw
 set autoread           " Automatically reload changes if detected
 set autowrite          " Writes on make/shell commands
