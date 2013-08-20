@@ -56,6 +56,7 @@ Bundle "mattn/gist-vim"
 Bundle "tjennings/git-grep-vim"
 Bundle "tpope/vim-fugitive"
 Bundle "tpope/vim-git"
+Bundle "airblade/vim-gitgutter"
 
 " General text editing improvements...
 Bundle "AndrewRadev/splitjoin.vim"
