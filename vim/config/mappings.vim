@@ -66,13 +66,13 @@ let mapleader=","
     endif
 " }}}
 
-" Leader {{{
-    " NerdCommenter. vim-commentary로 대체되어 사용하지 않음.
-    " map <D-/> <plug>NERDCommenterToggle
-    " imap <D-/> <Esc><plug>NERDCommenterToggle<CR>
-    " imap <Leader>/ <Esc><plug>NERDCommenterToggle<CR>
-    map <Leader>/ <plug>CommentaryLine
+" comment {{{
+map <D-/> :TComment<CR>
+imap <D-/> <ESC>:TComment<CR>
+map <Leader>/ :TComment<CR>
+" }}}
 
+" Leader {{{
     " Zoomwin
     nmap <leader>1 :ZoomWin<CR>
 

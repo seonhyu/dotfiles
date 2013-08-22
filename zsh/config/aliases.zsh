@@ -8,6 +8,10 @@ alias gc='git checkout'
 alias gcm='git ci -m'
 alias gl='git l'
 alias gs='git status'
+alias gf='git-flow'
+alias gff='git-flow feature'
+alias gfr='git-flow release'
+alias gfh='git-flow hotfix'
 
 # Autojump
 alias jj='j -a'
