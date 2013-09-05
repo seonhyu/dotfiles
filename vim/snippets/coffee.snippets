@@ -1,0 +1,33 @@
+snippet desc
+	describe '${1}', ->
+		${2}
+snippet it
+	it '${1}', ->
+		${2}
+snippet log
+	console.log ${1}
+snippet dir
+	console.dir ${1}
+snippet eh
+	${1}: (e) ->
+		${2}
+snippet model
+	class ${1} extends Backbone.Model
+		defaults:
+			${2}
+snippet coll
+	class ${1} extends Backbone.Collection
+		model: ${2:Backbone.Model}
+		url: "${3}"
+snippet view
+	class ${1} extends Backbone.View
+snippet init
+	initialize: ->
+		${1}
+snippet render
+	render: =>
+		${1}
+snippet #=
+	#============================================================
+snippet f
+	(${1}) ->${2}

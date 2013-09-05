@@ -1,0 +1,43 @@
+snippet infake
+	"${1}" in {
+		running(FakeApplication()) {
+			failure${2}
+		}
+	}
+snippet fake
+	running(FakeApplication()) {
+		${1}
+	}
+snippet spec
+	package test
+
+	import org.specs2.mutable._
+	import play.api.test._
+	import play.api.test.Helpers._
+
+	class ${1:`Filename()`} extends Specification {
+		${2}
+	}
+snippet in
+	"${1:spec}" in {
+	}
+snippet should
+	"${1:spec}" should {
+	}
+snippet tget
+	"${1:case} ${2:url}" in {
+		val Some(result) = routeAndCall(FakeRequest(GET, "$2"))
+
+		status(result) must equalTo(OK)
+		contentType(result) must beSome("text/html")
+		charset(result) must beSome("utf-8")
+		contentAsString(result) must contain("<title>$3</ttle>")
+	}
+snippet tmodel
+	"${1:case}" in {
+		running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
+			${2}
+		}
+	}
+snippet contain
+	contentAsString(${1:result}) must contain(${2:what})

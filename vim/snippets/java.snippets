@@ -1,0 +1,294 @@
+snippet dbt
+	switch (ConfigHelper.databaseType()) {
+		case MYSQL:
+			break;
+		case ORACLE:
+			break;
+	}
+snippet sep
+	// ${1}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+snippet df
+	DynamicForm f = form().bindFromRequest();
+snippet ev
+	@EnumValue("$1") ${1}("${2}")${3:,}
+snippet enum
+	public enum ${1} {
+		${2}
+
+		private String name;
+
+		$1(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+	}
+snippet update
+	String qry = "";
+	SqlUpdate update = Ebean.createSqlUpdate(qry)
+			.setParameter("id", id);
+	update.execute();
+snippet tx
+	Ebean.execute(new TxRunnable() {
+		public void run() {
+			${1}
+		}
+	});
+snippet modeltest
+	package models;
+	
+	import org.junit.*;
+	
+	import java.util.*;
+	
+	import play.mvc.*;
+	import play.test.*;
+	import play.libs.F.*;
+	
+	import static play.test.Helpers.*;
+	import static org.fest.assertions.Assertions.*;
+	
+	import models.*;
+	
+	public class ${1:`Filename()`} extends ModelTest {
+
+		${2}
+	
+	}
+snippet test
+	@Test
+	public void ${1}() {
+		${2}
+	}
+snippet ifne
+	if (isNotEmpty(${1})) {
+		${2}
+	}
+snippet ife
+	if (isEmpty(${1})) {
+		${2}
+	}
+snippet query
+	com.avaje.ebean.Query<${1:`Filename()`}> q = find${2};
+	ExpressionList w = q.where();
+	${3}
+	return w.order().desc("id").findList();
+snippet ok
+	return ok(
+		${1}
+	);
+snippet closed
+	/** 사용가능 여부: false(사용가능) true(사용중지) */
+	public Boolean isClosed;
+snippet createdAt
+	/** 최초 등록일 */
+	@Formats.DateTime(pattern="yyyy-MM-dd hh:mm")
+	public Date createdAt;
+snippet updatedAt
+	/** 최근 수정일 */
+	@Formats.DateTime(pattern="yyyy-MM-dd hh:mm")
+	public Date updatedAt;
+snippet closedAt
+	/** 최종 종료(논리삭제)일 */
+	@Formats.DateTime(pattern="yyyy-MM-dd hh:mm")
+	public Date closedAt;
+#
+# Play bean properties
+snippet pp
+	/** ${1} */
+	public ${2:String} ${3};
+snippet filter
+	package models;
+
+	import java.util.*;
+	import play.data.format.*;
+
+	/**
+	 * 방문신청 검색조건
+	 */
+	public class ${1:`Filename()`} {
+		${2}
+	}
+snippet controller
+	package controllers;
+	
+	import java.util.*;
+	
+	import play.*;
+	import play.mvc.*;
+	import play.data.*;
+	import play.data.validation.Constraints.*;
+	import play.libs.Json;
+	
+	import views.html.*;
+	import models.*;
+	
+	public class ${1:`Filename()`} extends Controller {
+	  
+		public static Result index() {
+			return ok(index.render("$1 controller is ready."));
+		}${2}
+	  
+	}
+snippet form
+	Form<${1:type}> ${2:f} = form($1.class);${3}
+snippet ebean
+	package models;
+
+	import java.util.*;
+	import javax.persistence.*;
+
+	import play.*;
+	import play.db.ebean.*;
+	import play.data.format.*;
+	import play.data.validation.*;
+
+	import com.avaje.ebean.*;
+	import com.avaje.ebean.annotation.*;
+
+	/**
+	 * ${1:`Filename()`} entity managed by Ebean
+	 */
+	@Entity 
+	public class $1 extends Model {
+		
+		@Id
+		public ${2:Long} id;
+		${3}
+		/**
+		 * Generic query helper for entity Project with id Long
+		 */
+		public static Model.Finder<$2,$1> find = new Model.Finder<$2,$1>($2.class, $1.class);
+
+		public static $1 get($2 id) {
+			return find.byId(id);
+		}
+
+		public static void remove($2 id) {
+			$1 obj = get(id);
+			if (obj != null) obj.delete();
+		}
+	}
+snippet find
+	/**
+	 * Generic query helper for entity Project with id Long
+	 */
+	public static Model.Finder<Long,${1}> find = new Model.Finder<Long,$1>(Long.class, $1.class);
+snippet act
+	public static Result ${1}() {
+		return TODO;
+	}
+snippet ifnull
+	if (${1} == null) {
+		${2}
+	}
+snippet toast
+	Toast.makeText(${1:this}, ${2:toastMsg}, Toast.LENGTH_LONG).show();
+snippet logw
+	Log.w(${1:getLogTag()}, ${2});
+snippet logi
+	Log.i(${1:getLogTag()}, ${2});
+snippet logd
+	Log.d(${1:getLogTag()}, ${2});
+snippet main
+	public static void main (String [] args)
+	{
+		${1:/* code */}
+	}
+snippet notnull
+	!= null
+snippet isnull
+	== null
+snippet pu
+	public
+snippet po
+	protected
+snippet pr
+	private
+snippet st
+	static
+snippet fi
+	final
+snippet ab
+	abstract
+snippet re
+	return
+snippet br
+	break;
+snippet de
+	default:
+		${1}
+snippet ca
+	catch(${1:Exception} ${2:e}) ${3}
+snippet th
+	throw 
+snippet sy
+	synchronized
+snippet im
+	import
+snippet imp
+	implements
+snippet ext
+	extends 
+snippet j.u
+	java.util
+snippet j.i
+	java.io.
+snippet j.b
+	java.beans.
+snippet j.n
+	java.net.
+snippet j.m
+	java.math.
+snippet if
+	if (${1}) ${2}
+snippet el
+	else 
+snippet elif
+	else if (${1}) ${2}
+snippet wh
+	while (${1}) ${2}
+snippet for
+	for (${1}; ${2}; ${3}) ${4}
+snippet fore
+	for (${1} : ${2}) ${3}
+snippet sw
+	switch (${1}) ${2}
+snippet cs
+	case ${1}:
+		${2}
+	${3}
+snippet tc
+	public class ${1:`Filename()`} extends ${2:TestCase}
+snippet t
+	public void test${1:Name}() throws Exception ${2}
+snippet cl
+	class ${1:`Filename("", "untitled")`} ${2}
+snippet in
+	interface ${1:`Filename("", "untitled")`} ${2:extends Parent}${3}
+snippet m
+	${1:void} ${2:method}(${3}) ${4:throws }${5}
+snippet v
+	${1:String} ${2:var}${3: = null}${4};${5}
+snippet co
+	static public final ${1:String} ${2:var} = ${3};${4}
+snippet cos
+	static public final String ${1:var} = "${2}";${3}
+snippet as
+	assert ${1:test} : "${2:Failure message}";${3}
+snippet try
+	try {
+		${3}
+	} catch(${1:Exception} ${2:e}) {
+	}
+snippet tryf
+	try {
+		${3}
+	} catch(${1:Exception} ${2:e}) {
+	} finally {
+	}
+snippet rst
+	ResultSet ${1:rst}${2: = null}${3};${4}

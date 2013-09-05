@@ -1,0 +1,18 @@
+snippet table
+	create table ${1:table} (
+		id                  int unsigned not null auto_increment,
+		primary key (id)
+	);
+# 컬럼 정의. H2
+snippet cnum
+	${1:name}              ${4} int${2} comment ${3},
+snippet cvar
+	${1:name}              ${4} varchar(50)${2} comment '${3}',
+snippet ctext
+	${1:name}              ${4} varchar(255)${2} comment '${3}',
+snippet cboolean
+	${1:name}              ${4} tinyint${2} comment '${3}',
+snippet cdate
+	${1:name}              ${4} date${2} comment '${3}',
+snippet ctime
+	${1:name}              ${4} timestamp${2} comment '${3}',
