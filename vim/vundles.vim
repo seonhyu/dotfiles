@@ -19,6 +19,7 @@ Bundle "gmarik/vundle"
 " All your bundles here
 
 " Ruby, Rails, Rake...
+"=======================================
 "Bundle "astashov/vim-ruby-debugger"
 "Bundle "ecomba/vim-ruby-refactoring"
 "Bundle "skwp/vim-ruby-conque"
@@ -30,10 +31,13 @@ Bundle "gmarik/vundle"
 "Bundle "ck3g/vim-change-hash-syntax"
 
 " Other languages
+"=======================================
 "Bundle "briancollins/vim-jst"
 Bundle "pangloss/vim-javascript"
+Bundle "derekwyatt/vim-scala"
 
 " Html, Xml, Css, Markdown...
+"=======================================
 "Bundle "claco/jasmine.vim"
 "Bundle "digitaltoad/vim-jade.git"
 Bundle "groenewege/vim-less.git"
@@ -50,6 +54,7 @@ Bundle "kogakure/vim-sparkup.git"
 "Bundle "wavded/vim-stylus"
 
 " Git related...
+"=======================================
 " Bundle "gregsexton/gitv"
 " Bundle "mattn/gist-vim"
 "Bundle "skwp/vim-git-grep-rails-partial"
@@ -59,6 +64,7 @@ Bundle "tpope/vim-fugitive"
 " Bundle "airblade/vim-gitgutter"
 
 " General text editing improvements...
+"=======================================
 " Bundle "AndrewRadev/splitjoin.vim"
 Bundle "Raimondi/delimitMate"
 Bundle "Shougo/neocomplcache.git"
@@ -76,6 +82,7 @@ Bundle "tomtom/tcomment_vim.git"
 " Bundle "terryma/vim-multiple-cursors"
 
 " General vim improvements
+"=======================================
 Bundle "MarcWeber/vim-addon-mw-utils.git"
 " Bundle "jistr/vim-nerdtree-tabs.git"
 Bundle "kien/ctrlp.vim"
@@ -83,7 +90,7 @@ Bundle "kien/ctrlp.vim"
 " Bundle "mattn/webapi-vim.git"
 Bundle "rking/ag.vim"
 Bundle "scrooloose/nerdtree.git"
-"Bundle "scrooloose/syntastic.git"
+Bundle "scrooloose/syntastic.git"
 " Bundle "sjl/gundo.vim"
 " Bundle "skwp/YankRing.vim"
 " Bundle "skwp/greplace.vim"
@@ -105,6 +112,7 @@ Bundle "tpope/vim-surround.git"
 " Bundle "xolox/vim-session"
 
 " Text objects
+"=======================================
 " Bundle "austintaylor/vim-indentobject"
 "Bundle "bootleq/vim-textobj-rubysymbol"
 "Bundle "coderifous/textobj-word-column.vim"
@@ -119,11 +127,13 @@ Bundle "tpope/vim-surround.git"
 " Bundle "vim-scripts/argtextobj.vim"
 
 " Cosmetics, color scheme, Powerline...
+"=======================================
 " Bundle "chrisbra/color_highlight.git"
 " Bundle "skwp/vim-colors-solarized"
 Bundle "bling/vim-airline.git"
 " Bundle "vim-scripts/TagHighlight.git"
 " Bundle "bogado/file-line.git"
+Bundle "nanotech/jellybeans.vim"
 
 "Filetype plugin indent on is required by vundle
 filetype plugin indent on

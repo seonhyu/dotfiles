@@ -1,7 +1,7 @@
 " Syntastic {{{
 let g:syntastic_mode_map = { 'mode': 'active',
-                        \ 'active_filetypes': ['coffee'],
-                        \ 'passive_filetypes': ['java', 'scala'] }
+                        \ 'active_filetypes': [],
+                        \ 'passive_filetypes': ['java', 'scala', 'html'] }
 " }}}
 
 " CtrlP {{{
@@ -186,6 +186,7 @@ let g:airline_right_alt_sep = '⮃'
 let g:airline_branch_prefix = '⭠ '
 let g:airline_readonly_symbol = '⭤'
 let g:airline_linecolumn_prefix = '⭡'
+let g:airline_theme = 'bubblegum'
 "}}}
 
 " ConqueTerm {{{

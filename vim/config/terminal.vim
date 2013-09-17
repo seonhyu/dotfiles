@@ -6,7 +6,7 @@ if ! has('gui_running')
 	"let g:solarized_visibility="low"
     "color solarized
 
-    color hybrid
+    color jellybeans
 
 	" let g:molokai_original = 0
     " color molokai
