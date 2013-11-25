@@ -132,7 +132,7 @@ Bundle "tpope/vim-surround.git"
 " Bundle "skwp/vim-colors-solarized"
 Bundle "bling/vim-airline.git"
 " Bundle "vim-scripts/TagHighlight.git"
-" Bundle "bogado/file-line.git"
+" Bundle "bogado/file-line.git
 Bundle "nanotech/jellybeans.vim"
 
 "Filetype plugin indent on is required by vundle

@@ -1,3 +1,5 @@
+alias pg='ps -ef | grep'
+
 # vagrant
 alias vg='vagrant'
 
