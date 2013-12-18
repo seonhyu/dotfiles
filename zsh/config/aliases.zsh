@@ -1,4 +1,5 @@
 alias pg='ps -ef | grep'
+alias gm='git commit -m'
 
 # vagrant
 alias vg='vagrant'
