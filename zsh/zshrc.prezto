@@ -24,10 +24,10 @@ if [ -d $HOME/.zsh/config/ ]; then
 fi
 
 # ===================== Custom zsh themes ======================
-autoload promptinit
-fpath=($HOME/.zsh/themes $fpath)
-promptinit
-prompt steeef_simplified
+# autoload promptinit
+# fpath=($HOME/.zsh/themes $fpath)
+# promptinit
+# prompt steeef_simplified
 
 # ===================== Key bindings ===========================
 bindkey -v                                          # Use vi key bindings

@@ -10,7 +10,7 @@
 #
 
 # Set case-sensitivity for completion, history lookup, etc.
-zstyle ':prezto:*:*' case-sensitive 'no'
+# zstyle ':prezto:*:*' case-sensitive 'yes'
 
 # Color output (auto set to 'no' on dumb terminals).
 zstyle ':prezto:*:*' color 'yes'
@@ -40,6 +40,8 @@ zstyle ':prezto:load' pmodule \
   'history-substring-search' \
   'ssh' \
   'homebrew' \
+  'tmux' \
+  'node' \
   'prompt'
 
 #
@@ -93,14 +95,18 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
+# zstyle ':prezto:module:prompt' theme 'sorin'
 zstyle ':prezto:module:prompt' theme 'sorin'
 
 #
 # Screen
 #
 
-# Auto start a session when Zsh is launched.
-# zstyle ':prezto:module:screen' auto-start 'yes'
+# Auto start a session when Zsh is launched in a local terminal.
+# zstyle ':prezto:module:screen:auto-start' local 'yes'
+
+# Auto start a session when Zsh is launched in a SSH connection.
+# zstyle ':prezto:module:screen:auto-start' remote 'yes'
 
 #
 # SSH
@@ -127,7 +133,6 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 #   'builtin' 'bg=blue' \
 #   'command' 'bg=blue' \
 #   'function' 'bg=blue'
-#
 
 #
 # Terminal
@@ -136,10 +141,19 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # Auto set the tab and window titles.
 zstyle ':prezto:module:terminal' auto-title 'yes'
 
+# Set the window title format.
+# zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
+
+# Set the tab title format.
+# zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
+
 #
 # Tmux
 #
 
-# Auto start a session when Zsh is launched.
-# zstyle ':prezto:module:tmux' auto-start 'yes'
+# Auto start a session when Zsh is launched in a local terminal.
+# zstyle ':prezto:module:tmux:auto-start' local 'yes'
+
+# Auto start a session when Zsh is launched in a SSH connection.
+# zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
