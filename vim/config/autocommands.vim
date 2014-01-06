@@ -34,7 +34,7 @@ if has("autocmd")
 
     "au BufWritePost *.coffee silent CoffeeMake! -b | cwindow
 
-    autocmd FileType scala,jade,html,css,javascript,json,less,coffee setlocal sw=2 sts=2 ts=2
+    autocmd FileType scala,jade,html,css,json,less setlocal sw=2 sts=2 ts=2
 
     " 외부에서 변경된 파일 자동 다시 읽기.
     " set autoread 에 의존한다. autoread는 키입력 다음 또는 checktime에 의해 

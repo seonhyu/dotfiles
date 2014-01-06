@@ -47,3 +47,6 @@ export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:/usr/bin:/bin:/usr/sbi
 
 # Play Version Manager(PVM) 활성화
 . /usr/local/pvm/pvm.sh
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
