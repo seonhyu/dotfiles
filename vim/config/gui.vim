@@ -13,6 +13,8 @@ if has('gui_running')
 		" Windows has a nasty habit of launching gVim in the wrong working directory
 		cd ~
 	else
+        set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+
 		set guifont=Source\ Code\ Pro\ Light:h13
 		set linespace=0
 

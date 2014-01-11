@@ -8,15 +8,18 @@ if filereadable(expand("~/.vim/vundles.vim"))
     source ~/.vim/vundles.vim
 endif
 
+filetype on
+filetype plugin on
+filetype indent on
+
+" =============== Indentation =========================
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set autoindent
+
 " =============== General config ======================
-
-" IME  {{{
-set imak=S-space
-set noimdisable     " normal mode로 돌아갈 때 ime 끔
-set imi=1           " insert mode 들어갈 때 ime 전환하지 않음
-set ims=-1          " search imi 설정 따름
-" }}}
-
 set nobackup
 set noswapfile
 set nowritebackup
@@ -26,19 +29,22 @@ set directory=~/.vim/tmp
 set undodir=~/.vim/backups
 set undofile
 
+" by derekwyatt
+set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
+
 set conceallevel=2
 set diffopt+=context:3
 set noerrorbells visualbell t_vb=  " Disable bells
 set formatoptions=crqwnl1          " Help fo-table
 set hidden             " Change buffer - without saving
-set history=768        " Number of things to remember in history.
+set history=100        " Number of things to remember in history.
 set hlsearch
 set incsearch
 set ignorecase         " Case insensitive search
 set smartcase          " Non-case sensitive search
 set laststatus=2       " Always show the statusline
 set cmdheight=1
-set number
+set relativenumber
 set report=0
 set scrolloff=6       " minimum lines to keep above and below cursor
 set scrolljump=10
@@ -51,7 +57,7 @@ set splitright
 
 " Ubuntu에서 에러 발생함
 set fillchars=vert:│,fold:┄,diff:╱
-set listchars=tab:│\ ,trail:⌴,eol:·,precedes:◂,extends:▸
+"set listchars=tab:│\ ,trail:⌴,eol:·,precedes:◂,extends:▸
 set showbreak=↪
 
 set nolist
@@ -60,11 +66,20 @@ set autoread           " Automatically reload changes if detected
 set autowrite          " Writes on make/shell commands
 set cf                 " Enable error files & error jumping.
 set clipboard+=unnamed " Yanks go on clipboard instead.
+
+" 2014.1.10 all 한번 사용해보자 
 set virtualedit=onemore
+
 set backspace=2        " Delete everything with backspace
 set showmatch          " Show matching brackets.
 set matchtime=2        " How many tenths of a second to blink
-set complete=.,w,b,u,U " Better complete options to speed it up
+
+" current buffer, buffers in window, other loaded buffers, tags
+set complete=.,w,b,t
+
+" When completing by tag, show the whole tag, not just the function name
+set showfulltag
+
 set timeoutlen=300   " Mapping delay
 set ttimeoutlen=-1   " Key code delay
 
@@ -73,16 +88,6 @@ let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 " 성능. 200자 넘는 라인은 syntax highlight 하지 않는다.
 set synmaxcol=200
 
-
-" =============== Indentation =========================
-set autoindent
-set smartindent
-
-set smarttab
-set expandtab
-set ts=4 sts=4 sw=4
-
-filetype plugin indent on
 
 " =============== Mouse ===============================
 set mousehide   " Hide mouse after chars typed
@@ -101,6 +106,8 @@ set foldlevel=0
 set foldcolumn=0
 set foldtext=FoldText()
 set foldnestmax=3
+" These commands open folds
+set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
 " Source vim config files {{{
 	runtime! config/plugins.vim
