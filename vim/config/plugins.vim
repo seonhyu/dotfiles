@@ -220,3 +220,7 @@ let g:gundo_right = 1
 " a little wider for wider screens
 let g:gundo_width = 60
 " }}}
+
+" vim-instant-markdown {{{
+let g:instant_markdown_slow = 1
+" }}}
