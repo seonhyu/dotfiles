@@ -83,7 +83,7 @@ set showfulltag
 set timeoutlen=300   " Mapping delay
 set ttimeoutlen=-1   " Key code delay
 
-let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+set tags=tags;/
 
 " 성능. 200자 넘는 라인은 syntax highlight 하지 않는다.
 set synmaxcol=200

@@ -12,7 +12,7 @@ if has("autocmd")
     au BufNewFile,BufRead *.markdown,*.md,*.txt,*.rst setlocal wrap linebreak
 
     " FileType 지정
-    au BufRead,BufNewFile *.{txt,md,markdown,mdown,mkd,mkdn} set ft=markdown
+    au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} set ft=markdown
     au BufNewFile,BufRead *.json set ft=javascript
 
     aut BufRead,BufNewFile *.html set ft=html

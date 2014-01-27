@@ -134,6 +134,7 @@ if executable('coffeetags')
             \ }
             \ }
 endif
+map T :TagbarToggle<CR>
 " }}}
 
 " NERDTree {{{
