@@ -36,3 +36,5 @@ alias ar='source $HOME/.zsh/config/aliases.zsh'
 alias ze='vim ~/.zshrc'
 alias zr='source ~/.zshrc'
 
+alias vi='/usr/local/bin/vim'
+
