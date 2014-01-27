@@ -4,9 +4,9 @@ if ! has('gui_running')
     set background=dark
 
 	"let g:solarized_visibility="low"
-    "color solarized
+    color solarized
 
-    color jellybeans
+    " color jellybeans
 
 	" let g:molokai_original = 0
     " color molokai
