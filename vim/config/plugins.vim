@@ -8,22 +8,8 @@ let g:syntastic_mode_map = { 'mode': 'active',
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|tags$|\.target|\.idea$'
-" }}}
-
-" Eclim {{{
-imap <C-Space> <C-x><C-u>
-" ,i imports whatever is needed for current line
-nnoremap <silent> <leader>ji :JavaImportMissing<cr>
-" ,d opens javadoc for statement in browser
-nnoremap <silent> <leader>jd :JavaDocSearch -x declarations<cr>
-" ,<enter> searches context for statement
-nnoremap <silent> <leader>jc :JavaSearchContext<cr>
-" ,jv validates current java file
-nnoremap <silent> <leader>jv :Validate<cr>
-" ,jc shows corrections for the current line of java
-nnoremap <silent> <leader>jc :JavaCorrect<cr>
-" 'open' on OSX will open the url in the default browser without issue
-let g:EclimBrowser='open'
+" 속도 빠르게
+let g:ctrlp_user_command='ag %s -l --nocolor --hidden -g ""'
 " }}}
 
 " DelimitMate {{{
@@ -34,23 +20,6 @@ let delimitMate_matchpairs= "(:),[:],<:>,<%:%>,<%=:%>"
 
 " 적용하지 않을 filetype. ,로 구분.
 let delimitMate_excluded_ft = "vim"
-" }}}
-
-" Indent Guides {{{
-" let g:indent_guides_start_level=1
-let g:indent_guides_auto_colors=0
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_color_change_percent=3
-
-if has('unix') && !has('gui_running')
-    if $TERM == 'xterm-256color'
-        " Make the guides smaller since they will be crazy visible in 256color mode
-        let g:indent_guides_guide_size=1
-    else
-        " Turn off the guides when 256color mode isn't available
-        let g:indent_guides_enable_on_vim_startup=0
-    endif
-endif
 " }}}
 
 " Session {{{
@@ -134,7 +103,6 @@ if executable('coffeetags')
             \ }
             \ }
 endif
-map T :TagbarToggle<CR>
 " }}}
 
 " NERDTree {{{
@@ -225,3 +193,5 @@ let g:gundo_width = 60
 " vim-instant-markdown {{{
 let g:instant_markdown_slow = 1
 " }}}
+
+" vim:foldmethod=marker:foldlevel=0

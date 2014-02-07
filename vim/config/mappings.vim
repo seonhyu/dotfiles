@@ -1,76 +1,94 @@
 let mapleader=","
 
 " Overwrite {{{
-    " Don't move to next
-    nnoremap * *N
-
-    " Indent
-    vnoremap > >gv
-    vnoremap < <gv
-
-    " Fixes common typos
-    command! W w
-    nmap K k
-    vmap K k
-
-    " Close window
-    map Q :close<cr>
+" Don't move to next
+nnoremap * *N
+" Indent
+vnoremap > >gv
+vnoremap < <gv
+" Fixes common typos
+command! W w
+nmap K k
+vmap K k
 " }}}
 
-" Function key {{{
-    nnoremap <silent> <F1> :set number!<CR>
-    nnoremap <silent> <F2> :set paste!<CR>
-    nnoremap <silent> <F3> :set spell!<CR>
+" Moving {{{
+nnoremap j gj
+nnoremap k gk
+nnoremap B ^
+nnoremap E $
+"Go to last edit location
+nnoremap ,. '.
+"}}}
+
+" UI {{{
+" 줄번호 toggle
+nnoremap <silent> <F1> :set number!<CR>
+" 폴딩 toggle
+nnoremap <Space> za
 " }}}
 
-" Control key {{{
-    " Window Movement
-    nmap <silent> <C-h> :wincmd h<CR>
-    nmap <silent> <C-j> :wincmd j<CR>
-    nmap <silent> <C-k> :wincmd k<CR>
-    nmap <silent> <C-l> :wincmd l<CR>
+" Editing {{{
+nnoremap <silent> <F2> :set paste!<CR>
+nnoremap <silent> <F3> :set spell!<CR>
+" 마지막 입력한 부분을 선택
+nnoremap gV `[v`]
+nnoremap Y y$
+imap {<Enter> {<Enter>}<ESC>O
+imap <S-Enter> <cr><esc>O
+imap jj <cr><esc>O
+imap ;; <END>
+imap ,, <ESC>wa,
+imap jk <ESC>
+" Normal mode에서 백스페이스는 단어단위 지우기
+nnoremap <bs> bdw
+" 이전 입력한 문자열 Complete
+imap <C-l> <C-x><C-n>
+" }}}
 
-    " Create window splits easier. The default
-    " way is Ctrl-w,v and Ctrl-w,s. I remap
-    " this to vv and ss
-    nnoremap <silent> vv <C-w>v
-    nnoremap <silent> ss <C-w>s
+" Searching {{{
+nnoremap <Leader>a :Ag 
+" }}}
 
-    " Complete
-    imap <C-l> <C-x><C-n>
+" Window {{{
+" Window Movement
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-j> :wincmd j<CR>
+nmap <silent> <C-k> :wincmd k<CR>
+nmap <silent> <C-l> :wincmd l<CR>
+" Close window
+nnoremap Q :close<cr>
+" Create window splits easier.
+nnoremap <silent> vv <C-w>v
+nnoremap <silent> ss <C-w>s
 " }}}
 
 " Command key {{{
-    if has('gui_running')
-        " Cmt-w로 창 닫을 때 버퍼 종료
-        map <D-w> ""
-        nmap <Leader>vr :RestartVim<CR>
-        nmap <Leader>vo :OpenSession<CR>
+if has('gui_running')
+    " Cmt-w로 창 닫을 때 버퍼 종료
+    "map <D-w> ""
+    nmap <Leader>vr :RestartVim<CR>
+    nmap <Leader>vo :OpenSession<CR>
 
-        map  <D-1> :tabn 1<CR>
-        imap <D-1> <Esc> :tabn 1<CR>
-        map  <D-2> :tabn 2<CR>
-        imap <D-2> <Esc> :tabn 2<CR>
-        map  <D-3> :tabn 3<CR>
-        imap <D-3> <Esc> :tabn 3<CR>
-        map  <D-4> :tabn 4<CR>
-        imap <D-4> <Esc> :tabn 4<CR>
-        map  <D-5> :tabn 5<CR>
-        imap <D-5> <Esc> :tabn 5<CR>
-        map  <D-6> :tabn 6<CR>
-        imap <D-6> <Esc> :tabn 6<CR>
-        map  <D-7> :tabn 7<CR>
-        imap <D-7> <Esc> :tabn 7<CR>
-        map  <D-8> :tabn 8<CR>
-        imap <D-8> <Esc> :tabn 8<CR>
-    endif
+    map  <D-1> :tabn 1<CR>
+    imap <D-1> <Esc> :tabn 1<CR>
+    map  <D-2> :tabn 2<CR>
+    imap <D-2> <Esc> :tabn 2<CR>
+    map  <D-3> :tabn 3<CR>
+    imap <D-3> <Esc> :tabn 3<CR>
+    map  <D-4> :tabn 4<CR>
+    imap <D-4> <Esc> :tabn 4<CR>
+    map  <D-5> :tabn 5<CR>
+    imap <D-5> <Esc> :tabn 5<CR>
+    map  <D-6> :tabn 6<CR>
+    imap <D-6> <Esc> :tabn 6<CR>
+    map  <D-7> :tabn 7<CR>
+    imap <D-7> <Esc> :tabn 7<CR>
+    map  <D-8> :tabn 8<CR>
+    imap <D-8> <Esc> :tabn 8<CR>
+endif
 " }}}
 
-" comment {{{
-map <D-/> :TComment<CR>
-imap <D-/> <ESC>:TComment<CR>
-map <Leader>/ :TComment<CR>
-" }}}
 
 " Leader {{{
     " Zoomwin
@@ -202,21 +220,9 @@ map <Leader>/ :TComment<CR>
     nmap ,cc :set cuc<cr>
 " }}}
 
-" Editing {{{
-    nnoremap Y y$
-
-    "Go to last edit location
-    nnoremap ,. '.
-
-    imap {<Enter> {<Enter>}<ESC>O
-    imap <S-Enter> <cr><esc>O
-    imap jj <cr><esc>O
-    imap ;; <END>
-    imap ,, <ESC>wa,
-    imap jk <ESC>wa
-
-    " Normal mode에서 백스페이스는 단어단위 지우기
-    map <bs> bdw
-" }}}
 
 cmap <Up> <C-p>
+
+map T :TagbarToggle<CR>
+
+" vim:foldmethod=marker:foldlevel=0

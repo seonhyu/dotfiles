@@ -134,6 +134,8 @@ Bundle "bling/vim-airline.git"
 " Bundle "vim-scripts/TagHighlight.git"
 " Bundle "bogado/file-line.git
 Bundle "nanotech/jellybeans.vim"
+Bundle "binarypie/blueberrypie-vim"
+Bundle "sjl/badwolf"
 
 "Filetype plugin indent on is required by vundle
 filetype plugin indent on
