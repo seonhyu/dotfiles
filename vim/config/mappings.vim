@@ -90,7 +90,6 @@ if has('gui_running')
 endif
 " }}}
 
-
 " Leader {{{
     " Zoomwin
     nmap <leader>1 :ZoomWin<CR>
@@ -224,6 +223,6 @@ endif
 
 cmap <Up> <C-p>
 
-map T :TagbarToggle<CR>
+map <leader>t :TagbarToggle<CR>
 
 " vim:foldmethod=marker:foldlevel=0
