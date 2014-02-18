@@ -7,6 +7,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 " CtrlP {{{
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
+" user command를 사용하면 적용되지 않는다
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|tags$|\.target|\.idea$'
 " 속도 빠르게
 let g:ctrlp_user_command='ag %s -l --nocolor --hidden -g ""'

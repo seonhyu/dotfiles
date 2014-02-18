@@ -33,7 +33,7 @@ set showmode		" show current mode
 set nocursorline
 set wildmenu        " Command line에서 선택가능한 목록을 보여주는 형태로 자동완성
 set wildmode=full
-set wildignore+=.git,target,.DS_Store,.settings,*.class,dist,logs,img,*.log,*.zip,*.jpg,*.gif,*.png
+set wildignore+=.git,target,.DS_Store,.settings,*.class,*.jar,dist,logs,img,*.log,*.zip,*.jpg,*.gif,*.png
 set wildignore+=*/.target/*,.target,.idea,tags,*/node-modules/*
 " TODO Ubuntu에서 에러 발생함
 set fillchars=vert:│,fold:┄,diff:╱

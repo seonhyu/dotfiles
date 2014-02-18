@@ -36,7 +36,8 @@ nnoremap gV `[v`]
 nnoremap Y y$
 imap {<Enter> {<Enter>}<ESC>O
 imap <S-Enter> <cr><esc>O
-imap jj <cr><esc>O
+imap jj <esc>o
+imap kk <esc>O
 imap ;; <END>
 imap ,, <ESC>wa,
 imap jk <ESC>

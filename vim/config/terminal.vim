@@ -6,7 +6,7 @@ if ! has('gui_running')
 	"let g:solarized_visibility="low"
     "color solarized
 
-    color badwolf
+    color jellybeans
 
     " 모드에 따라 cursor 모양 바꾸기 {{{
 		if exists('$TMUX')
