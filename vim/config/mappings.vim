@@ -91,6 +91,8 @@ endif
 " }}}
 
 " Leader {{{
+    nmap <Leader>/ :TComment<CR>
+
     " Zoomwin
     nmap <leader>1 :ZoomWin<CR>
 
