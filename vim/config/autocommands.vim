@@ -32,10 +32,9 @@ augroup configgroup
     autocmd FileType scala,jade,html,css,json,less setlocal sw=2 sts=2 ts=2
 
     " 외부에서 변경된 파일 자동 다시 읽기.
-    " set autoread 에 의존한다. autoread는 키입력 다음 또는 checktime에 의해 
-    " 실행된다.
+    " set autoread 에 의존한다. autoread는 키입력 다음 또는 checktime에의해 실행된다.
     set updatetime=1000     " CursorHold,CursorHoldI의 대기 시간.
-    autocmd! CursorHold,CursorHoldI,BufEnter,WinEnter *.{java,scala,coffee,html,js} checktime
+    autocmd! CursorHold,CursorHoldI,BufEnter,WinEnter * checktime
 augroup END
 
 function! StripTrailingWhitespaces()

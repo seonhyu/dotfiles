@@ -38,7 +38,8 @@ imap {<Enter> {<Enter>}<ESC>O
 imap <S-Enter> <cr><esc>O
 imap jj <esc>o
 imap kk <esc>O
-imap ;; <END>
+imap ll <END>
+imap ;; <END>;
 imap ,, <ESC>wa,
 imap jk <ESC>
 " Normal mode에서 백스페이스는 단어단위 지우기

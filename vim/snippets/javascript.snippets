@@ -1,3 +1,14 @@
+# Gulp관련 -->
+snippet req
+	require('${1}');
+snippet gt
+	gulp.task('${1}', function() {
+		var SRC = '${2}';
+		var DEST = DEST_ROOT + '${3}';
+		return gulp.src(SRC)${4}
+			.pipe(gulp.dest(DEST));
+	});
+# <-- Gulp
 snippet undef
 	angular.isUndefined(${1})
 snippet $s
