@@ -6,7 +6,8 @@ if ! has('gui_running')
     " let g:solarized_visibility="low"
     " color solarized
 
-    color jellybeans
+    let g:hybrid_use_iTerm_colors = 1
+    color hybrid
 
     " 모드에 따라 cursor 모양 바꾸기 {{{
     if exists('$TMUX')

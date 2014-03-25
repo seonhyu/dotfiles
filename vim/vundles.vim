@@ -138,6 +138,7 @@ Bundle "nanotech/jellybeans.vim"
 Bundle "binarypie/blueberrypie-vim"
 Bundle "sjl/badwolf"
 Bundle "nathanaelkane/vim-indent-guides"
+Bundle "w0ng/vim-hybrid"
 
 "Filetype plugin indent on is required by vundle
 filetype plugin indent on

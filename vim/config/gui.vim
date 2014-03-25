@@ -13,20 +13,14 @@ if has('gui_running')
 		" Windows has a nasty habit of launching gVim in the wrong working directory
 		cd ~
 	else
-		set guifont=Source\ Code\ Pro\ Light:h12
 		set linespace=0
+		set guifont=Sauce\ Code\ Powerline:h12
 
 		" Hide Toolbar in MacVim
 		set guioptions=egmrt
 		set guioptions-=r
 
         set background=dark
-        color solarized
-        " color jellybeans
-
-		" color smyck
-		" hi ColorColumn guibg=#333333
-		" hi LineNr guibg=#1c1c1c
-		" hi VertSplit guifg=#1c1c1c guibg=#999999
+        color hybrid
 	endif
 endif
