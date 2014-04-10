@@ -34,12 +34,8 @@ nnoremap <silent> <F3> :set spell!<CR>
 " 마지막 입력한 부분을 선택
 nnoremap gV `[v`]
 nnoremap Y y$
-imap {<Enter> {<Enter>}<ESC>O
 imap <S-Enter> <cr><esc>O
-imap jj <esc>o
-imap kk <esc>O
-imap ll <END>
-imap ;; <END>;
+imap ;; <END>
 imap ,, <ESC>wa,
 imap jk <ESC>
 " Normal mode에서 백스페이스는 단어단위 지우기
