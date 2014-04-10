@@ -4,7 +4,8 @@ if [ -d $HOME/.zsh/ ]; then
         for config_file ($HOME/.zsh/*.zsh) source $config_file
     fi
 fi
-source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+source $HOME/.zsh/history-substring-search/zsh-history-substring-search.zsh
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
@@ -13,7 +14,8 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.zsh/git-prompt/zshrc.sh
 # }}}
 
 # Prompt {{{
@@ -26,7 +28,8 @@ zstyle ':vcs_info:*' enable git hg
 setopt prompt_subst
 autoload -Uz vcs_info
 precmd() { vcs_info }
-PROMPT=$'%f${vcs_info_msg_0_}%f%F{cyan}%3~%F{magenta}$%f ' # %F{green}❱
+#PROMPT=$'%f${vcs_info_msg_0_}%f%F{cyan}%3~%F{magenta}$%f ' # %F{green}❱
+PROMPT=$'%f%F{cyan}%3~ $(git_super_status)%F{magenta}$ '
 PROMPT2='%F{yellow}%_ %f%f '                               # %F{green}❭
 # }}}
 
