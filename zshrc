@@ -72,6 +72,7 @@ alias vim='mvim -v'
 
 alias gs='git status'
 alias gl='git l'
+alias ga='git add -A'
 
 alias pg='ps -ef | grep'
 alias vg='vagrant'
