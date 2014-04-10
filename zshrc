@@ -1,3 +1,5 @@
+autoload -U compinit
+
 # External modules {{{
 if [ -d $HOME/.zsh/ ]; then
     if [ "$(ls -A $HOME/.zsh/)" ]; then
@@ -16,6 +18,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 source $HOME/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.zsh/git-prompt/zshrc.sh
+
+# brew install zsh-completions
+fpath=(/usr/local/share/zsh-completions $fpath)
 # }}}
 
 # Prompt {{{
