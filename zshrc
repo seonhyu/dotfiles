@@ -10,17 +10,16 @@ if [ -d $HOME/.zsh/ ]; then
     fi
 fi
 
-source $HOME/.zsh/history-substring-search/zsh-history-substring-search.zsh
-# bind UP and DOWN arrow keys
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-# bind k and j for VI mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-
-source $HOME/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.zsh/git-prompt/zshrc.sh
+source $HOME/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.zsh/history-substring-search/zsh-history-substring-search.zsh
+    # bind UP and DOWN arrow keys
+    zmodload zsh/terminfo
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
+    # bind k and j for VI mode
+    bindkey -M vicmd 'k' history-substring-search-up
+    bindkey -M vicmd 'j' history-substring-search-down
 # }}}
 # Prompt {{{
 # https://github.com/wellle/dotfiles/blob/master/zshrc
