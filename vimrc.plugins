@@ -1,4 +1,139 @@
+" Syntastic {{{
+let g:syntastic_mode_map = { 'mode': 'active',
+                        \ 'active_filetypes': [],
+                        \ 'passive_filetypes': ['java', 'scala', 'html'] }
+" }}}
+" CtrlP {{{
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 0
+" user command를 사용하면 적용되지 않는다
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|tags$|\.target|\.idea$'
+" 속도 빠르게
+let g:ctrlp_user_command='ag %s -l --nocolor --hidden -g ""'
 
-let g:solarized_termtrans=1
-colorscheme solarized
-set background=dark
+nnoremap <silent> <Leader>t   :CtrlP<CR>
+nnoremap <silent> <Leader>f   :CtrlP<CR>
+nnoremap <silent> <Leader>b  :CtrlPBuffer<CR>
+nnoremap <silent> <Leader>m  :CtrlPMRUFiles<CR>
+" }}}
+" DelimitMate {{{
+let delimitMate_expand_cr = 0
+let delimitMate_smart_quotes = 0
+let delimitMate_smart_matchpairs = 0
+let delimitMate_matchpairs= "(:),[:],<:>,<%:%>,<%=:%>"
+
+" 적용하지 않을 filetype. ,로 구분.
+let delimitMate_excluded_ft = "vim"
+" }}}
+" Session {{{
+let g:session_autosave=0
+let g:session_autoload=0
+" }}}
+" Screen {{{
+let g:ScreenImpl = 'Tmux'
+" }}}
+" Neocomplcache {{{
+let g:acp_enableAtStartup = 0
+let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+"let g:neocomplcache_force_overwrite_completefunc = 1
+
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+    \ }
+
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" default 100
+let g:neocomplcache_max_list = 10
+
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+"inoremap <expr><CR>  pumvisible() ? "\<C-y>" : "\<CR>"
+
+" <TAB>: completion.
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+endif
+" }}}
+" Tagbar {{{
+if executable('coffeetags')
+    let g:tagbar_type_coffee = {
+            \ 'ctagsbin' : 'coffeetags',
+            \ 'ctagsargs' : '',
+            \ 'kinds' : [
+            \ 'f:functions',
+            \ 'o:object',
+            \ ],
+            \ 'sro' : ".",
+            \ 'kind2scope' : {
+            \ 'f' : 'object',
+            \ 'o' : 'object',
+            \ }
+            \ }
+endif
+
+map <leader>t :TagbarToggle<CR>
+" }}}
+" NERDTree {{{
+let NERDTreeHighlightCursorline=0
+
+" NerdTree
+nnoremap <leader>n :NERDTreeToggle<CR>
+"}}}
+" SnipMate {{{
+nnoremap ,se :SnipMateOpenSnippetFilescr>
+" }}}
+" ZenCoding {{{
+let g:user_zen_expandabbr_key="<c-e>"
+let g:user_zen_mode='inv'
+" }}}
+" ShowMarks {{{
+let g:showmarks_enable=0
+let g:showmarks_textlower="\t"
+let g:showmarks_textother="\t"
+"}}}
+" javascript-libraries-syntax {{{
+let g:used_javascript_libs = 'underscore,backbone'
+"}}}--
+" airline {{{
+let g:airline_powerline_fonts = 1
+"}}}
+" gh-markdown {{{
+" Support for github flavored markdown
+" via https://github.com/jtratner/vim-flavored-markdown
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
+"}}}
+" vim-instant-markdown {{{
+let g:instant_markdown_slow = 1
+" }}}
+
+" vim:foldmethod=marker:foldlevel=0

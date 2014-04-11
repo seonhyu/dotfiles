@@ -28,7 +28,7 @@ NeoBundle "Shougo/neocomplcache.git"
 NeoBundle "garbas/vim-snipmate.git"
 NeoBundle "godlygeek/tabular"
 NeoBundle "skwp/vim-easymotion"
-NeoBundle "tomtom/tcomment_vim.git"
+NeoBundle "tpope/vim-commentary"
 
 " General vim improvements
 "=======================================
@@ -49,5 +49,6 @@ NeoBundle 'wellle/vim-colors-solarized'
 NeoBundle "w0ng/vim-hybrid"
 NeoBundle "bling/vim-airline.git"
 NeoBundle "nathanaelkane/vim-indent-guides"
+
 
 NeoBundleCheck

@@ -1,6 +1,9 @@
 autoload -U compinit
 
 # External modules {{{
+# brew install zsh-completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 if [ -d $HOME/.zsh/ ]; then
     if [ "$(ls -A $HOME/.zsh/)" ]; then
         for config_file ($HOME/.zsh/*.zsh) source $config_file
@@ -18,11 +21,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 source $HOME/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.zsh/git-prompt/zshrc.sh
-
-# brew install zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
 # }}}
-
 # Prompt {{{
 # https://github.com/wellle/dotfiles/blob/master/zshrc
 
@@ -37,7 +36,6 @@ precmd() { vcs_info }
 PROMPT=$'%f%F{cyan}%3~ $(git_super_status)%F{magenta}$ '
 PROMPT2='%F{yellow}%_ %f%f '                               # %F{green}❭
 # }}}
-
 # Key bindings {{{
 bindkey -v                                          # Use vi key bindings
 bindkey '^r' history-incremental-search-backward    # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
@@ -46,19 +44,16 @@ bindkey '^r' history-incremental-search-backward    # [Ctrl-r] - Search backward
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 # }}}
-
 # vi mode {{{
 set -o vi
 export EDITOR=vim
 export VISUAL=vim
 # }}}
-
 # Env {{{
 export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 # }}}
-
 # Java {{{
 # Play Version Manager(PVM) 활성화
 . /usr/local/pvm/pvm.sh
@@ -69,7 +64,6 @@ alias setjdk16='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
 alias setjdk17='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
 alias setjdk18='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
 # }}}
-
 # Aliases {{{
 alias ll='ls -alGh'
 alias l='ls -lGh'
