@@ -3,7 +3,6 @@ let g:syntastic_mode_map = { 'mode': 'active',
                         \ 'active_filetypes': [],
                         \ 'passive_filetypes': ['java', 'scala', 'html'] }
 " }}}
-
 " CtrlP {{{
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
@@ -11,8 +10,12 @@ let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|tags$|\.target|\.idea$'
 " 속도 빠르게
 let g:ctrlp_user_command='ag %s -l --nocolor --hidden -g ""'
-" }}}
 
+nnoremap <silent> <Leader>t   :CtrlP<CR>
+nnoremap <silent> <Leader>f   :CtrlP<CR>
+nnoremap <silent> <Leader>b  :CtrlPBuffer<CR>
+nnoremap <silent> <Leader>m  :CtrlPMRUFiles<CR>
+" }}}
 " DelimitMate {{{
 let delimitMate_expand_cr = 0
 let delimitMate_smart_quotes = 0
@@ -22,16 +25,13 @@ let delimitMate_matchpairs= "(:),[:],<:>,<%:%>,<%=:%>"
 " 적용하지 않을 filetype. ,로 구분.
 let delimitMate_excluded_ft = "vim"
 " }}}
-
 " Session {{{
 let g:session_autosave=0
 let g:session_autoload=0
 " }}}
-
 " Screen {{{
 let g:ScreenImpl = 'Tmux'
 " }}}
-
 " Neocomplcache {{{
 let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_auto_select = 1
@@ -81,13 +81,6 @@ if !exists('g:neocomplcache_omni_patterns')
     let g:neocomplcache_omni_patterns = {}
 endif
 " }}}
-
-" PowerLine {{{
-" let g:Powerline_colorscheme = 'default'
-" let g:Powerline_theme = 'default'
-" let g:Powerline_symbols = 'fancy'
-" }}}
-
 " Tagbar {{{
 if executable('coffeetags')
     let g:tagbar_type_coffee = {
@@ -104,75 +97,33 @@ if executable('coffeetags')
             \ }
             \ }
 endif
-" }}}
 
+map <leader>t :TagbarToggle<CR>
+" }}}
 " NERDTree {{{
 let NERDTreeHighlightCursorline=0
+
+" NerdTree
+nnoremap <leader>n :NERDTreeToggle<CR>
 "}}}
-
-" Startify - Vim 시작화면 {{{
-let g:startify_enable_special=0
-" }}}
-
 " SnipMate {{{
 nnoremap ,se :SnipMateOpenSnippetFilescr>
 " }}}
-
 " ZenCoding {{{
 let g:user_zen_expandabbr_key="<c-e>"
 let g:user_zen_mode='inv'
 " }}}
-
-" vim-multiple-cursors {{{
-let g:multi_cursor_next_key='<C-]>'
-let g:multi_cursor_prev_key='<C-[>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-" }}}
-
 " ShowMarks {{{
 let g:showmarks_enable=0
 let g:showmarks_textlower="\t"
 let g:showmarks_textother="\t"
 "}}}
-
 " javascript-libraries-syntax {{{
 let g:used_javascript_libs = 'underscore,backbone'
 "}}}--
-
-" Unite.vim {{{
-" call unite#custom#source('file,file/new,buffer,file_rec', 'matchers', 'matcher_fuzzy')
-"call unite#custom#source('file_rec', 'matchers', 'matcher_fuzzy')
-"call unite#custom#source('file_rec', 'ignore_pattern', '\.class$')
-"let g:unite_source_rec_max_cache_files=3000
-"nmap ,uc <Plug>(unite_redraw)
-" }}}
-
 " airline {{{
 let g:airline_powerline_fonts = 1
-" let g:airline_left_sep = '⮀'
-" "let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = '⮁'
-" "let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = '⮃'
-" let g:airline_branch_prefix = '⭠ '
-" let g:airline_readonly_symbol = '⭤'
-" let g:airline_linecolumn_prefix = '⭡'
-"let g:airline_theme = 'base16'
 "}}}
-
-" ConqueTerm {{{
-let g:ConqueTerm_InsertOnEnter = 0
-let g:ConqueTerm_CWInsert = 1
-let g:ConqueTerm_Color = 2
-let g:ConqueTerm_ReadUnfocused = 1 " update conqueterm buffer while we're not looking (for running tests)
-
-" Open up a variety of commands in the ConqueTerm
-"nmap <silent> <Leader>pp :execute 'ConqueTermSplit pry'<CR>
-
-let g:ConqueTerm_SendVisKey = '<Leader>e'
-"}}}
-
 " gh-markdown {{{
 " Support for github flavored markdown
 " via https://github.com/jtratner/vim-flavored-markdown
@@ -181,17 +132,6 @@ augroup markdown
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
 "}}}
-
-" Gundo {{{
-nmap ,u :GundoToggle<CR>
-
-" open on the right so as not to compete with the nerdtree
-let g:gundo_right = 1
-
-" a little wider for wider screens
-let g:gundo_width = 60
-" }}}
-
 " vim-instant-markdown {{{
 let g:instant_markdown_slow = 1
 " }}}
