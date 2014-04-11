@@ -2,6 +2,8 @@
 " Use Macvim as terminal vim
 " alias vim='mvim -V'
 " ===========================================================
+set nocompatible
+
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
 if filereadable(expand("~/dotfiles/vimrc.neobundle"))
@@ -108,7 +110,7 @@ else
 endif
 
 if !has('gui_running')
-    "모드에 따라 cursor 모양 바꾸기 {{{
+    "모드에 따라 cursor 모양 바꾸기
     if exists('$TMUX')
         let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
         let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
