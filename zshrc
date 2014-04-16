@@ -78,5 +78,10 @@ alias ga='git add -A'
 alias pg='ps -ef | grep'
 alias vg='vagrant'
 # }}}
+# Help {{{
+unalias run-help
+autoload run-help
+HELPDIR=/usr/local/share/zsh/helpfiles
+#}}}
 
 # vim:foldmethod=marker:foldlevel=0
