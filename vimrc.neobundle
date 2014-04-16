@@ -24,7 +24,7 @@ NeoBundle "tpope/vim-fugitive"
 " General text editing improvements...
 "=======================================
 NeoBundle "Raimondi/delimitMate"
-NeoBundle "Shougo/neocomplcache.git"
+NeoBundle "Shougo/neocomplete.git"
 NeoBundle "garbas/vim-snipmate.git"
 NeoBundle "godlygeek/tabular"
 NeoBundle "skwp/vim-easymotion"
