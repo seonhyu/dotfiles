@@ -1,9 +1,9 @@
-" Syntastic {{{
+"-------------------------------------------------- Syntastic {{{
 let g:syntastic_mode_map = { 'mode': 'active',
                         \ 'active_filetypes': [],
                         \ 'passive_filetypes': ['java', 'scala', 'html'] }
 " }}}
-" CtrlP {{{
+"-------------------------------------------------- CtrlP {{{
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 " user command를 사용하면 적용되지 않는다
@@ -16,7 +16,7 @@ nnoremap <silent> <Leader>f   :CtrlP<CR>
 nnoremap <silent> <Leader>b  :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>m  :CtrlPMRUFiles<CR>
 " }}}
-" DelimitMate {{{
+"-------------------------------------------------- DelimitMate {{{
 let delimitMate_expand_cr = 0
 let delimitMate_smart_quotes = 0
 let delimitMate_smart_matchpairs = 0
@@ -25,14 +25,14 @@ let delimitMate_matchpairs= "(:),[:],<:>,<%:%>,<%=:%>"
 " 적용하지 않을 filetype. ,로 구분.
 let delimitMate_excluded_ft = "vim"
 " }}}
-" Session {{{
+"-------------------------------------------------- Session {{{
 let g:session_autosave=0
 let g:session_autoload=0
 " }}}
-" Screen {{{
+"-------------------------------------------------- Screen {{{
 let g:ScreenImpl = 'Tmux'
 " }}}
-" Neocomplete {{{
+"-------------------------------------------------- Neocomplete {{{
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -77,7 +77,7 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 " }}}
-" Tagbar {{{
+"-------------------------------------------------- Tagbar {{{
 if executable('coffeetags')
     let g:tagbar_type_coffee = {
             \ 'ctagsbin' : 'coffeetags',
@@ -96,31 +96,31 @@ endif
 
 map <leader>t :TagbarToggle<CR>
 " }}}
-" NERDTree {{{
+"-------------------------------------------------- NERDTree {{{
 let NERDTreeHighlightCursorline=0
 
 " NerdTree
 nnoremap <leader>n :NERDTreeToggle<CR>
 "}}}
-" SnipMate {{{
+"-------------------------------------------------- SnipMate {{{
 nnoremap ,se :SnipMateOpenSnippetFilescr>
 " }}}
-" ZenCoding {{{
+"-------------------------------------------------- ZenCoding {{{
 let g:user_zen_expandabbr_key="<c-e>"
 let g:user_zen_mode='inv'
 " }}}
-" ShowMarks {{{
+"-------------------------------------------------- ShowMarks {{{
 let g:showmarks_enable=0
 let g:showmarks_textlower="\t"
 let g:showmarks_textother="\t"
 "}}}
-" javascript-libraries-syntax {{{
+"-------------------------------------------------- javascript-libraries-syntax {{{
 let g:used_javascript_libs = 'underscore,backbone'
 "}}}--
-" airline {{{
+"-------------------------------------------------- airline {{{
 let g:airline_powerline_fonts = 1
 "}}}
-" gh-markdown {{{
+"-------------------------------------------------- gh-markdown {{{
 " Support for github flavored markdown
 " via https://github.com/jtratner/vim-flavored-markdown
 augroup markdown
@@ -128,7 +128,7 @@ augroup markdown
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
 "}}}
-" vim-instant-markdown {{{
+"-------------------------------------------------- vim-instant-markdown {{{
 let g:instant_markdown_slow = 1
 " }}}
 
