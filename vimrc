@@ -64,8 +64,7 @@ set undofile
 " }}}
 " Set :: Peformance {{{
 set lazyredraw
-"set timeoutlen=300  " Mapping delay
-"set ttimeoutlen=-1  " Key code delay
+set timeoutlen=300  " 기본값은 1000(1초)
 set synmaxcol=200   " 200자 넘는 라인은 syntax highlight 하지 않는다.
 " }}}
 " Set :: Overwrite default {{{
@@ -153,6 +152,7 @@ imap ;; <END>
 imap ,, <ESC>wa,
 " 이전 입력한 문자열 Complete
 imap <C-l> <C-x><C-n>
+imap <M-/> <C-x><C-n>
 
 nnoremap <Leader>a :Ag
 
@@ -322,7 +322,7 @@ augroup configgroup
 
     " 외부에서 변경된 파일 자동 다시 읽기.
     " set autoread 에 의존한다. autoread는 키입력 다음 또는 checktime에의해 실행된다.
-    set updatetime=1000     " CursorHold,CursorHoldI의 대기 시간.
+    set updatetime=500     " CursorHold,CursorHoldI의 대기 시간.
     autocmd! CursorHold,CursorHoldI,BufEnter,WinEnter * checktime
 augroup END
 " }}}

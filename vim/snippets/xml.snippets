@@ -1,0 +1,16 @@
+snippet select
+	<!--============= ${1} ===========-->
+	<select id="${2}" resultType="java.util.LinkedHashMap">
+	</select>
+snippet func
+	/***************************************************************************
+	* DESC   : ${1}
+	* Param  : ${2:N/A}
+	* Return : ${3:N/A}
+	****************************************************************************/
+	function fn${4}()
+	{
+		${5}
+	}
+snippet col
+	<Column id="${1}" type="string" size="32"/>

@@ -1,26 +1,5 @@
 autoload -U compinit
 
-# External modules {{{
-# brew install zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
-
-if [ -d $HOME/.zsh/ ]; then
-    if [ "$(ls -A $HOME/.zsh/)" ]; then
-        for config_file ($HOME/.zsh/*.zsh) source $config_file
-    fi
-fi
-
-source $HOME/.zsh/git-prompt/zshrc.sh
-source $HOME/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/.zsh/history-substring-search/zsh-history-substring-search.zsh
-    # bind UP and DOWN arrow keys
-    zmodload zsh/terminfo
-    bindkey "$terminfo[kcuu1]" history-substring-search-up
-    bindkey "$terminfo[kcud1]" history-substring-search-down
-    # bind k and j for VI mode
-    bindkey -M vicmd 'k' history-substring-search-up
-    bindkey -M vicmd 'j' history-substring-search-down
-# }}}
 # Prompt {{{
 # https://github.com/wellle/dotfiles/blob/master/zshrc
 
@@ -83,5 +62,28 @@ unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/helpfiles
 #}}}
+# External modules {{{
+# brew install zsh-completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+if [ -d $HOME/.zsh/ ]; then
+    if [ "$(ls -A $HOME/.zsh/)" ]; then
+        for config_file ($HOME/.zsh/*.zsh) source $config_file
+    fi
+fi
+
+source $HOME/.zsh/git-prompt/zshrc.sh
+source $HOME/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.zsh/history-substring-search/zsh-history-substring-search.zsh
+# bind UP and DOWN arrow keys
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+# bind k and j for VI mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+# }}}
 
 # vim:foldmethod=marker:foldlevel=0
