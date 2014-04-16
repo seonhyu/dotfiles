@@ -151,8 +151,9 @@ imap <S-Enter> <cr><esc>O
 imap ;; <END>
 imap ,, <ESC>wa,
 " 이전 입력한 문자열 Complete
-imap <C-l> <C-x><C-n>
-imap <M-/> <C-x><C-n>
+inoremap <C-l> <C-x><C-n>
+inoremap <M-/> <C-x><C-n>
+inoremap <Leader>/ <C-x><C-n>
 
 nnoremap <Leader>a :Ag
 
@@ -316,6 +317,7 @@ augroup configgroup
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
     autocmd FileType snippet setlocal noexpandtab
     autocmd FileType scala,jade,html,css,json,less setlocal sw=2 sts=2 ts=2
