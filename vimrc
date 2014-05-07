@@ -78,7 +78,8 @@ set shortmess=atToOI
 set autoread            " Automatically reload changes if detected
 set autowrite           " Writes on make/shell commands
 set cf                  " Enable error files & error jumping.
-"set complete=.,w,b,u,U  " Better complete options to speed it up
+set complete=.,w,b,u,U,t  " Better complete options to speed it up
+set completeopt=menuone,preview
 set tags=tags;/
 "}}}
 " Theme {{{

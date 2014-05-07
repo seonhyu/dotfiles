@@ -1,3 +1,13 @@
+snippet svc
+	/**
+	* 조회
+	* @param param
+	* @return
+	*/
+	public ServiceResult selectData(ServiceParam param) {
+		List dataList = mapper.selectData(param.getSearchParam());
+		return new ServiceResult("dsList", dataList);
+	}
 snippet dbt
 	switch (ConfigHelper.databaseType()) {
 		case MYSQL:
