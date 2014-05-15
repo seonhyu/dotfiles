@@ -149,14 +149,14 @@ nnoremap <Space> za
 nnoremap gV `[v`]
 nnoremap Y y$
 imap <S-Enter> <cr><esc>O
-imap ;; <END>
+imap ;; <ESC>A
 imap ,, <ESC>wa,
 " 이전 입력한 문자열 Complete
 inoremap <C-l> <C-x><C-n>
 inoremap <M-/> <C-x><C-n>
-inoremap <Leader>/ <C-x><C-n>
+inoremap ,/ <C-x><C-n>
 
-nnoremap <Leader>a :Ag
+nnoremap ,a :Ag
 
 " Window Movement
 nmap <silent> <C-h> :wincmd h<CR>
@@ -170,8 +170,8 @@ nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
 if has('gui_running')
-    nmap <Leader>vr :RestartVim<CR>
-    nmap <Leader>vo :OpenSession<CR>
+    nmap ,vr :RestartVim<CR>
+    nmap ,vo :OpenSession<CR>
 
     map  <D-1> :tabn 1<CR>
     imap <D-1> <Esc> :tabn 1<CR>
@@ -191,36 +191,36 @@ if has('gui_running')
     imap <D-8> <Esc> :tabn 8<CR>
 endif
 
-nmap <leader>1 :ZoomWin<CR>
+nmap ,1 :ZoomWin<CR>
 
 " Tabular
-nmap <Leader>a" :Tabularize /"/<CR>
-nmap <Leader>a, :Tabularize /,\zs<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-nmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a> :Tabularize /=>\zs<CR>
-vmap <Leader>a" :Tabularize /"/<CR>
-vmap <Leader>a, :Tabularize /,\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a> :Tabularize /=>\zs<CR>
-vmap <Leader>as :Tabularize / [ ]*/l0l0l0<CR>
+nmap ,a" :Tabularize /"/<CR>
+nmap ,a, :Tabularize /,\zs<CR>
+nmap ,a: :Tabularize /:\zs<CR>
+nmap ,a= :Tabularize /=<CR>
+nmap ,a> :Tabularize /=>\zs<CR>
+vmap ,a" :Tabularize /"/<CR>
+vmap ,a, :Tabularize /,\zs<CR>
+vmap ,a: :Tabularize /:\zs<CR>
+vmap ,a= :Tabularize /=<CR>
+vmap ,a> :Tabularize /=>\zs<CR>
+vmap ,as :Tabularize / [ ]*/l0l0l0<CR>
 
 " Select a buffer
-nnoremap <leader><leader> <c-^>
-nnoremap <leader>bp :bprev<CR>
-nnoremap <leader>bn :bnext<CR>
+nnoremap ,, <c-^>
+nnoremap ,bp :bprev<CR>
+nnoremap ,bn :bnext<CR>
 
-nnoremap <Leader>co :copen<CR>
-nnoremap <Leader>cc :cc<CR>
-nnoremap <Leader>cp :cprev<CR>
-nnoremap <Leader>cn :cnext<CR>
+nnoremap ,co :copen<CR>
+nnoremap ,cc :cc<CR>
+nnoremap ,cp :cprev<CR>
+nnoremap ,cn :cnext<CR>
 
 " 마지막 변경 선택
 nnoremap gp `[v`]
 
 " Hide search highlight
-nnoremap <Leader>h :nohlsearch<CR>
+nnoremap ,h :nohlsearch<CR>
 
 map ,jm :CloseSingleConque<CR>:CtrlP app/models<CR>
 map ,jc :CloseSingleConque<CR>:CtrlP app/controllers<CR>
@@ -230,53 +230,53 @@ map ,jC :CloseSingleConque<CR>:CtrlP config<CR>
 map ,jT :CloseSingleConque<CR>:CtrlP test<CR>
 
 " fugitive
-nmap <leader>gs :Gstatus<cr><c-w>20+
-nmap <leader>gm :Gcommit<cr>
+nmap ,gs :Gstatus<cr><c-w>20+
+nmap ,gm :Gcommit<cr>
 
 " markdown
-nnoremap <leader>h1 o<Esc>70i=<Esc>
-nnoremap <leader>h2 o<Esc>70i-<Esc>
-nnoremap <leader>h3 3I#<Esc>a <Esc>
+nnoremap ,h1 o<Esc>70i=<Esc>
+nnoremap ,h2 o<Esc>70i-<Esc>
+nnoremap ,h3 3I#<Esc>a <Esc>
 
 " 인코딩 전환
-nnoremap <leader>k <Esc>:e ++enc=euc-kr<CR>
+nnoremap ,k <Esc>:e ++enc=euc-kr<CR>
 
 " Refresh project
-nnoremap <leader>pr :!/usr/local/bin/ctags --extra=+f -R app/<CR><CR>:CtrlPClearAllCaches<CR>
+nnoremap ,pr :!/usr/local/bin/ctags --extra=+f -R app/<CR><CR>:CtrlPClearAllCaches<CR>
 
 " Use Q for formatting the current paragraph (or selection)
-vmap <leader>q gq
-nmap <leader>q gqap
+vmap ,q gq
+nmap ,q gqap
 
 " surround with double quatation
-nmap <leader>qq ysiw"
+nmap ,qq ysiw"
 
 " 화면꺠졌을 때 다시 그림
-nnoremap <leader>r :redraw!<CR>
+nnoremap ,r :redraw!<CR>
 
 " Move between tabs with t/T
-map  <leader>t1 :tabn 1<CR>
-imap <leader>t1 <Esc> :tabn 1<CR>
-map  <leader>t2 :tabn 2<CR>
-imap <leader>t2 <Esc> :tabn 2<CR>
-map  <leader>t3 :tabn 3<CR>
-imap <leader>t3 <Esc> :tabn 3<CR>
-map  <leader>t4 :tabn 4<CR>
-imap <leader>t4 <Esc> :tabn 4<CR>
-map  <leader>t5 :tabn 5<CR>
-imap <leader>t5 <Esc> :tabn 5<CR>
-map  <leader>t6 :tabn 6<CR>
-imap <leader>t6 <Esc> :tabn 6<CR>
-map  <leader>t7 :tabn 7<CR>
-imap <leader>t7 <Esc> :tabn 7<CR>
-map  <leader>t8 :tabn 8<CR>
-imap <leader>t8 <Esc> :tabn 8<CR>
+map  ,t1 :tabn 1<CR>
+imap ,t1 <Esc> :tabn 1<CR>
+map  ,t2 :tabn 2<CR>
+imap ,t2 <Esc> :tabn 2<CR>
+map  ,t3 :tabn 3<CR>
+imap ,t3 <Esc> :tabn 3<CR>
+map  ,t4 :tabn 4<CR>
+imap ,t4 <Esc> :tabn 4<CR>
+map  ,t5 :tabn 5<CR>
+imap ,t5 <Esc> :tabn 5<CR>
+map  ,t6 :tabn 6<CR>
+imap ,t6 <Esc> :tabn 6<CR>
+map  ,t7 :tabn 7<CR>
+imap ,t7 <Esc> :tabn 7<CR>
+map  ,t8 :tabn 8<CR>
+imap ,t8 <Esc> :tabn 8<CR>
 
 " W as sudo write
 command! -bar -nargs=0 W silent! exec "write !sudo tee % >/dev/null" | silent! edit!
 
 " Remove trailing white space
-map <leader>ws <ESC>:%s/\s\+$//e<CR>
+map ,ws <ESC>:%s/\s\+$//e<CR>
 
 "(v)im (c)ommand - execute current line as a vim command
 nmap <silent> ,vc yy:<C-f>p<C-c><CR>
