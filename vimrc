@@ -255,8 +255,6 @@ nmap <leader>qq ysiw"
 nnoremap <leader>r :redraw!<CR>
 
 " Move between tabs with t/T
-nnoremap t gt
-nnoremap T gT
 map  <leader>t1 :tabn 1<CR>
 imap <leader>t1 <Esc> :tabn 1<CR>
 map  <leader>t2 :tabn 2<CR>
