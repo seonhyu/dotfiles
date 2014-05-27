@@ -1,4 +1,14 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/Users/moomoo/.zshrc'
+
 autoload -U compinit
+compinit
 
 # Prompt {{{
 # https://github.com/wellle/dotfiles/blob/master/zshrc
@@ -64,16 +74,19 @@ HELPDIR=/usr/local/share/zsh/helpfiles
 #}}}
 # External modules {{{
 # brew install zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
+#fpath=($fpath /usr/local/share/zsh-completions)
 
-if [ -d $HOME/.zsh/ ]; then
-    if [ "$(ls -A $HOME/.zsh/)" ]; then
-        for config_file ($HOME/.zsh/*.zsh) source $config_file
-    fi
-fi
+#if [ -d $HOME/.zsh/ ]; then
+#    if [ "$(ls -A $HOME/.zsh/)" ]; then
+#        for config_file ($HOME/.zsh/*.zsh) source $config_file
+#    fi
+#fi
 
+source $HOME/.zsh/autojump.zsh
 source $HOME/.zsh/git-prompt/zshrc.sh
 source $HOME/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /usr/local/share/zsh/site-functions/git-completion.bash
+source /usr/local/share/zsh/site-functions/git-flow-completion.zsh
 source $HOME/.zsh/history-substring-search/zsh-history-substring-search.zsh
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
