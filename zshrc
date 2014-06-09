@@ -66,6 +66,8 @@ alias ga='git add -A'
 
 alias pg='ps -ef | grep'
 alias vg='vagrant'
+
+alias act='activator'
 # }}}
 # Help {{{
 unalias run-help
