@@ -46,7 +46,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # Play Version Manager(PVM) 활성화
 . /usr/local/pvm/pvm.sh
 
-export M2_HOME="/usr/local/Cellar/maven/3.2.1"
+export M3_HOME="/usr/local/Cellar/maven/3.2.1"
 
 alias setjdk16='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
 alias setjdk17='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
