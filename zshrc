@@ -38,7 +38,7 @@ export EDITOR=vim
 export VISUAL=vim
 # }}}
 # Env {{{
-export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+export PATH=~/bin:/usr/local/bin:~/work/tools/activator:/usr/local/share/npm/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 # }}}
@@ -66,6 +66,8 @@ alias ga='git add -A'
 
 alias pg='ps -ef | grep'
 alias vg='vagrant'
+
+alias act='activator'
 # }}}
 # Help {{{
 unalias run-help
