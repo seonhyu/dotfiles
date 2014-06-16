@@ -38,7 +38,7 @@ export EDITOR=vim
 export VISUAL=vim
 # }}}
 # Env {{{
-export PATH=~/bin:/usr/local/bin:~/work/tools/activator:/usr/local/share/npm/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 # }}}
@@ -67,7 +67,7 @@ alias ga='git add -A'
 alias pg='ps -ef | grep'
 alias vg='vagrant'
 
-alias act='activator'
+alias act='~/work/tools/activator/activator'
 # }}}
 # Help {{{
 unalias run-help
@@ -84,7 +84,7 @@ HELPDIR=/usr/local/share/zsh/helpfiles
 #    fi
 #fi
 
-source $HOME/.zsh/autojump.zsh
+source /usr/local/etc/autojump.zsh
 source $HOME/.zsh/git-prompt/zshrc.sh
 source $HOME/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/local/share/zsh/site-functions/git-completion.bash
