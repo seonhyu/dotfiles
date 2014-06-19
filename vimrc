@@ -3,6 +3,7 @@
 " alias vim='mvim -V'
 " ===========================================================
 set nocompatible
+"set shell=bash\ -i
 
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
@@ -104,9 +105,10 @@ else
     set guioptions=egmrt
     set guioptions-=r
 
+    set t_Co=256
     let g:solarized_termtrans=1
-    color solarized
     set background=dark
+    color solarized
 endif
 
 if !has('gui_running')
@@ -307,7 +309,7 @@ augroup configgroup
     autocmd BufNewFile,BufRead *.markdown,*.md,*.txt,*.rst setlocal wrap linebreak
 
     " FileType 지정
-    autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} set ft=markdown
+    autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=markdown
     autocmd BufNewFile,BufRead *.json set ft=javascript
 
     set completeopt=menu,menuone,longest

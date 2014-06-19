@@ -120,16 +120,9 @@ let g:used_javascript_libs = 'underscore,backbone'
 "-------------------------------------------------- airline {{{
 let g:airline_powerline_fonts = 1
 "}}}
-"-------------------------------------------------- gh-markdown {{{
-" Support for github flavored markdown
-" via https://github.com/jtratner/vim-flavored-markdown
-augroup markdown
-    au!
-    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
-"}}}
 "-------------------------------------------------- vim-instant-markdown {{{
-let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
+let g:instant_markdown_slow = 0
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

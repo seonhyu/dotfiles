@@ -53,8 +53,8 @@ alias setjdk17='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
 alias setjdk18='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
 # }}}
 # Aliases {{{
-alias ll='ls -alGh'
-alias l='ls -lGh'
+alias ll='ls -lGh'
+alias l='ls -alGh'
 alias du='du -h -d 2'
 
 alias vi='mvim -v'
@@ -100,5 +100,7 @@ bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 # }}}
+
+eval "$(rbenv init -)"
 
 # vim:foldmethod=marker:foldlevel=0
