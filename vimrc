@@ -98,17 +98,19 @@ if has('win32') || has('win64')
     " Windows has a nasty habit of launching gVim in the wrong working directory
     cd ~
 else
-    set linespace=0
-    set guifont=Sauce\ Code\ Powerline:h12
+    if has('gui_running')
+        " Hide Toolbar in MacVim
+        set guioptions=egmrt
+        set guioptions-=r
+        set guifont=Sauce\ Code\ Powerline:h12
+        set background=light
+    else
+        let g:solarized_termcolors=16
+        set background=dark
+    endif
 
-    " Hide Toolbar in MacVim
-    set guioptions=egmrt
-    set guioptions-=r
-
-    set t_Co=256
-    let g:solarized_termtrans=1
-    set background=dark
     color solarized
+    call togglebg#map("<F5>")
 endif
 
 if !has('gui_running')
@@ -124,6 +126,8 @@ endif
 " }}}
 " Mappings {{{
 let mapleader=","
+
+nnoremap ,mp :InstantMarkdownPreview<CR>
 
 " Don't move to next
 nnoremap * *N
@@ -309,7 +313,7 @@ augroup configgroup
     autocmd BufNewFile,BufRead *.markdown,*.md,*.txt,*.rst setlocal wrap linebreak
 
     " FileType 지정
-    autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=markdown
+    autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=ghmarkdown
     autocmd BufNewFile,BufRead *.json set ft=javascript
 
     set completeopt=menu,menuone,longest

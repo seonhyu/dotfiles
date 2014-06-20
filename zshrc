@@ -76,7 +76,7 @@ HELPDIR=/usr/local/share/zsh/helpfiles
 #}}}
 # External modules {{{
 # brew install zsh-completions
-#fpath=($fpath /usr/local/share/zsh-completions)
+# fpath=(/usr/local/share/zsh-completions $fpath)
 
 #if [ -d $HOME/.zsh/ ]; then
 #    if [ "$(ls -A $HOME/.zsh/)" ]; then

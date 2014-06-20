@@ -14,7 +14,7 @@ NeoBundle "derekwyatt/vim-scala"
 NeoBundle "groenewege/vim-less.git"
 NeoBundle "itspriddle/vim-jquery.git"
 NeoBundle "kchmck/vim-coffee-script"
-NeoBundle "plasticboy/vim-markdown"
+NeoBundle "jtratner/vim-flavored-markdown"
 NeoBundle "suan/vim-instant-markdown"
 
 " Git related...
@@ -45,7 +45,8 @@ NeoBundle "tpope/vim-surround.git"
 
 " Cosmetics, color scheme, Powerline...
 "=======================================
-NeoBundle 'wellle/vim-colors-solarized'
+" NeoBundle "https://github.com/wellle/vim-colors-solarized.git"
+NeoBundle "skwp/vim-colors-solarized"
 NeoBundle "w0ng/vim-hybrid"
 NeoBundle "bling/vim-airline.git"
 NeoBundle "nathanaelkane/vim-indent-guides"
