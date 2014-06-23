@@ -39,9 +39,9 @@ NeoBundle "rking/ag.vim"
 NeoBundle "scrooloose/nerdtree.git"
 NeoBundle "scrooloose/syntastic.git"
 NeoBundle "tomtom/tlib_vim.git"
+NeoBundle "tpope/vim-surround.git"
 " repeat plugin은 surround 기능을 .으로 반복할 수 있게한다.
 NeoBundle "tpope/vim-repeat.git"
-NeoBundle "tpope/vim-surround.git"
 
 " Cosmetics, color scheme, Powerline...
 "=======================================
