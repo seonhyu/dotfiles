@@ -9,7 +9,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="simple"
+ZSH_THEME="clean"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -54,6 +54,7 @@ ZSH_THEME="simple"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git git-flow-avh brew autojump vi-mode forklift zsh-syntax-highlighting zsh-history-substring-search npm)
 
+export LANG="en_US.UTF-8"
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
