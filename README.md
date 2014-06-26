@@ -11,11 +11,10 @@
 
 # 시작하기
 
-    clone
+```
+clone
+```
 
 Make symbolic links
 
     support/makelinks.sh
-
-
-

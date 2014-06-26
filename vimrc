@@ -105,7 +105,7 @@ else
         set guifont=Sauce\ Code\ Powerline:h12
         set background=light
     else
-        let g:solarized_termcolors=16
+        let g:solarized_vsisibility='low'
         set background=dark
     endif
 

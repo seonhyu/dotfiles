@@ -1,3 +1,9 @@
+snippet http
+	$http.get("${1:/api/}")
+		.success (data) ->
+			${2}
+		.error (data, status) ->
+			$log.error '$http error ', status
 snippet desc
 	describe '${1}', ->
 		${2}
@@ -29,5 +35,7 @@ snippet render
 		${1}
 snippet #=
 	#============================================================
+snippet #-
+	#------------------------------------------------------------
 snippet f
 	(${1}) ->${2}
