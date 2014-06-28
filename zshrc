@@ -9,7 +9,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="clean"
+ZSH_THEME="gentoo"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -101,6 +101,7 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
     alias pg='ps -ef | grep'
     alias vg='vagrant'
+    alias tmux='tmux -2'
 
     # Java
     alias act='activator'

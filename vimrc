@@ -102,11 +102,14 @@ else
         " Hide Toolbar in MacVim
         set guioptions=egmrt
         set guioptions-=r
-        set guifont=Sauce\ Code\ Powerline:h12
+        set guifont=Sauce\ Code\ Powerline:h14
         set background=light
     else
-        let g:solarized_vsisibility='low'
-        set background=dark
+        set background=light
+        set t_Co=256
+        let g:solarized_termcolors=256
+        let g:solarized_vsisibility="low"
+        let g:solarized_contrast="normal"
     endif
 
     color solarized
