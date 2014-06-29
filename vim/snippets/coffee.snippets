@@ -1,9 +1,11 @@
 snippet http
-	$http.get("${1:/api/}")
-		.success (data) ->
-			${2}
-		.error (data, status) ->
-			$log.error '$http error ', status
+	$http
+		method: '${1:GET}'
+		url: '${3:/api/}'
+	.success (data) ->
+		${3}
+	.error (data, status) ->
+		$log.error '$http error ', status
 snippet desc
 	describe '${1}', ->
 		${2}

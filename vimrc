@@ -106,7 +106,7 @@ else
         set background=dark
     else
         set background=dark
-        "set t_Co=256
+        set t_Co=256
         let g:solarized_termcolors=16
         let g:solarized_vsisibility="low"
     endif
@@ -360,13 +360,13 @@ endif
 set statusline=
 set statusline+=%<
 set statusline+=%{strlen(fugitive#head())?fugitive#head():''}
-set statusline+=%{strlen(fugitive#head())?'⚡︎':''}
+set statusline+=%{strlen(fugitive#head())?'\ ⚡︎\ ':''}
 set statusline+=%f
 set statusline+=\ %h%m%r%w
+set statusline+=%=      " right align
 set statusline+=[%{strlen(&filetype)?&filetype:'unknown'}]
 set statusline+=[%{strlen(&fileencoding)?&fileencoding:&encoding}:%{strlen(&fileformat)?&fileformat:'unknown'}]
-set statusline+=%=      " right align
-set statusline+=%-14.(%l,%c%V%)\ %<%P
+set statusline+=\ %-14.(%l,%c%V%)\ %<%P
 " }}}
 
 
