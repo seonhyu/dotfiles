@@ -102,14 +102,13 @@ else
         " Hide Toolbar in MacVim
         set guioptions=egmrt
         set guioptions-=r
-        set guifont=Sauce\ Code\ Powerline:h14
-        set background=light
+        set guifont=Source\ Code:h14
+        set background=dark
     else
-        set background=light
-        set t_Co=256
-        let g:solarized_termcolors=256
+        set background=dark
+        "set t_Co=256
+        let g:solarized_termcolors=16
         let g:solarized_vsisibility="low"
-        let g:solarized_contrast="normal"
     endif
 
     color solarized
@@ -356,6 +355,18 @@ endif
 if filereadable(".lvimrc")
     source .lvimrc
 endif
+" }}}
+" Status line {{{
+set statusline=
+set statusline+=%<
+set statusline+=%{strlen(fugitive#head())?fugitive#head():''}
+set statusline+=%{strlen(fugitive#head())?'⚡︎':''}
+set statusline+=%f
+set statusline+=\ %h%m%r%w
+set statusline+=[%{strlen(&filetype)?&filetype:'unknown'}]
+set statusline+=[%{strlen(&fileencoding)?&fileencoding:&encoding}:%{strlen(&fileformat)?&fileformat:'unknown'}]
+set statusline+=%=      " right align
+set statusline+=%-14.(%l,%c%V%)\ %<%P
 " }}}
 
 
