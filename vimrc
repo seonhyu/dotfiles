@@ -102,7 +102,7 @@ else
         " Hide Toolbar in MacVim
         set guioptions=egmrt
         set guioptions-=r
-        set guifont=Source\ Code:h14
+        set guifont=Source\ Code\ Pro:h13
         set background=dark
     else
         set background=dark
