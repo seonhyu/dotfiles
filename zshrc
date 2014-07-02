@@ -98,6 +98,7 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
     alias gs='git status'
     alias gl='git l'
     alias ga='git add -A'
+    alias gca='git add -A; git commit -v'
 
     alias pg='ps -ef | grep'
     alias vg='vagrant'
