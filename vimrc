@@ -73,7 +73,7 @@ set noerrorbells visualbell t_vb=  " Disable bells
 set formatoptions=crqwnl1          " Help fo-table
 set hidden              " Change buffer - without saving
 set report=0
-set scrolljump=10
+set scrolljump=5
 set shortmess=atToOI
 
 set autoread            " Automatically reload changes if detected
