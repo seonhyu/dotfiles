@@ -52,7 +52,7 @@ ZSH_THEME="gentoo"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow-avh brew autojump vi-mode forklift zsh-syntax-highlighting zsh-history-substring-search npm)
+plugins=(git git-flow-avh brew autojump vi-mode zsh-syntax-highlighting zsh-history-substring-search)
 
 export LANG="en_US.UTF-8"
 source $ZSH/oh-my-zsh.sh

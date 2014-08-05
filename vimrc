@@ -102,16 +102,20 @@ else
         " Hide Toolbar in MacVim
         set guioptions=egmrt
         set guioptions-=r
-        set guifont=Source\ Code\ Pro:h13
-        set background=dark
+        set guifont=Source\ Code\ Pro:h12
+
+        color hybrid-light
     else
         set background=dark
         set t_Co=256
-        let g:solarized_termcolors=16
-        let g:solarized_vsisibility="low"
+        "let g:solarized_termcolors=16
+        "let g:solarized_vsisibility="low"
+        "color solarized
+
+        let g:hybrid_use_iTerm_colors = 1
+        color hybrid
     endif
 
-    color solarized
     call togglebg#map("<F5>")
 endif
 
