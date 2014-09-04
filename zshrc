@@ -109,6 +109,8 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
     alias setjdk16='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
     alias setjdk17='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
     alias setjdk18='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
+
+    alias ssh='TERM=xterm ssh'
 # }}}
 # Bind keys {{{
     zmodload zsh/terminfo
