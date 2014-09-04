@@ -102,7 +102,7 @@ else
         " Hide Toolbar in MacVim
         set guioptions=egmrt
         set guioptions-=r
-        set guifont=Source\ Code\ Pro:h12
+        set guifont=Source\ Code\ Pro:h13
 
         color hybrid-light
     else
@@ -144,8 +144,6 @@ vnoremap < <gv
 " Moving
 nnoremap j gj
 nnoremap k gk
-nnoremap B ^
-nnoremap E $
 "Go to last edit location
 nnoremap ,. '.
 
