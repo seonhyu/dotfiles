@@ -86,6 +86,7 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
     export M3_HOME="/usr/local/Cellar/maven/3.2.1"
     # play build with NodeJS
     export SBT_OPTS="$SBT_OPTS -Dsbt.jse.engineType=Node"
+    export EDITOR='vim'
 # }}}
 # Aliases {{{
     alias ll='ls -lGh'
@@ -111,6 +112,9 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
     alias setjdk18='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
 
     alias ssh='TERM=xterm ssh'
+
+    alias pgrep='pgrep -ilf'
+    alias pkill='pkill -ilf'
 # }}}
 # Bind keys {{{
     zmodload zsh/terminfo
