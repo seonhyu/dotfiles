@@ -5,6 +5,8 @@
 set nocompatible
 "set shell=bash\ -i
 
+let mapleader=" "
+
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
 if filereadable(expand("~/dotfiles/vimrc.neobundle"))
@@ -20,6 +22,9 @@ set tabstop=4       " 탭당 보여지는 스페이스 크기
 set softtabstop=4   " 편집할 때 적용되는 스페이스 크기. 탭키/백스페이스에 영향
 set shiftwidth=4    " autoindent에 영향. 이게 없으면 들여쓰기 내어쓰기 자동정렬 안됨
 set expandtab       " 탭문자 대신 스페이스 사용
+
+nnoremap <Leader>t2 :setlocal ts=2 sw=2 sts=2<CR>
+nnoremap <Leader>t4 :setlocal ts=4 sw=4 sts=4<CR>
 " }}}
 " Set :: UI {{{
 set number
@@ -102,7 +107,7 @@ else
         " Hide Toolbar in MacVim
         set guioptions=egmrt
         set guioptions-=r
-        set guifont=Source\ Code\ Pro:h12
+        set guifont=Source\ Code\ Pro:h13
 
         color hybrid-light
     else
@@ -129,9 +134,14 @@ if !has('gui_running')
         let &t_EI = "\<Esc>]50;CursorShape=0\x7"
     endif
 endif
+
+" Italic font 지원
+highlight Comment cterm=italic
+highlight Comment gui=italic
+highlight Comment ctermfg=240 guifg=#aaaaaa
+
 " }}}
 " Mappings {{{
-let mapleader=","
 
 nnoremap ,mp :InstantMarkdownPreview<CR>
 
@@ -144,8 +154,6 @@ vnoremap < <gv
 " Moving
 nnoremap j gj
 nnoremap k gk
-nnoremap B ^
-nnoremap E $
 "Go to last edit location
 nnoremap ,. '.
 
