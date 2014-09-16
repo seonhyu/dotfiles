@@ -108,12 +108,12 @@ else
     else
         set background=dark
         set t_Co=256
-        "let g:solarized_termcolors=16
-        "let g:solarized_vsisibility="low"
-        "color solarized
+        let g:solarized_termcolors=16
+        let g:solarized_vsisibility="low"
+        color solarized
 
-        let g:hybrid_use_iTerm_colors = 1
-        color hybrid
+        "let g:hybrid_use_iTerm_colors = 1
+        "color hybrid
     endif
 
     call togglebg#map("<F5>")
