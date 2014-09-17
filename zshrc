@@ -59,7 +59,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -90,7 +90,7 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 # }}}
 # Aliases {{{
     alias ll='ls -lGh'
-    alias l='ls -alGh'
+    alias l='ls -AlGh'
     alias du='du -h -d 2'
 
     alias vi='mvim -v'

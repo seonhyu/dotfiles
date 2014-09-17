@@ -16,6 +16,16 @@ endif
 " 기본설정 적용
 runtime! plugin/sensible.vim
 " }}}
+" Vimrc files {{{
+if filereadable(expand("~/dotfiles/vimrc.plugins"))
+    source ~/dotfiles/vimrc.plugins
+endif
+
+" Parse local vimrc (useful for per-settings)
+if filereadable(".lvimrc")
+    source .lvimrc
+endif
+" }}}
 " Set :: Indentation {{{
 " Tab키 동작 설정
 set tabstop=4       " 탭당 보여지는 스페이스 크기
@@ -168,7 +178,6 @@ nnoremap <Space> za
 " 마지막 입력한 부분을 선택
 nnoremap gV `[v`]
 nnoremap Y y$
-imap <S-Enter> <cr><esc>O
 imap ;; <ESC>A
 imap ,, <ESC>wa,
 " 이전 입력한 문자열 Complete
@@ -358,16 +367,6 @@ function! StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 " }}}
-" Vimrc files {{{
-if filereadable(expand("~/dotfiles/vimrc.plugins"))
-    source ~/dotfiles/vimrc.plugins
-endif
-
-" Parse local vimrc (useful for per-settings)
-if filereadable(".lvimrc")
-    source .lvimrc
-endif
-" }}}
 " Status line {{{
 set statusline=
 set statusline+=%<
@@ -380,6 +379,5 @@ set statusline+=[%{strlen(&filetype)?&filetype:'unknown'}]
 set statusline+=[%{strlen(&fileencoding)?&fileencoding:&encoding}:%{strlen(&fileformat)?&fileformat:'unknown'}]
 set statusline+=\ %-14.(%l,%c%V%)\ %<%P
 " }}}
-
 
 " vim:foldmethod=marker:foldlevel=0
