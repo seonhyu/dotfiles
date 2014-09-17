@@ -5,7 +5,7 @@
 set nocompatible
 "set shell=bash\ -i
 
-let mapleader=" "
+let mapleader=","
 
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
@@ -136,9 +136,9 @@ if !has('gui_running')
 endif
 
 " Italic font 지원
-highlight Comment cterm=italic
-highlight Comment gui=italic
-highlight Comment ctermfg=240 guifg=#aaaaaa
+"highlight Comment cterm=italic
+"highlight Comment gui=italic
+"highlight Comment ctermfg=240 guifg=#aaaaaa
 
 " }}}
 " Mappings {{{
