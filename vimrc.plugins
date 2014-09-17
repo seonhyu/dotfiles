@@ -76,6 +76,9 @@ inoremap <expr><BS> "\<BS>"
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
+
+" tab으로 목록 이동
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " }}}
 "-------------------------------------------------- Tagbar {{{
 if executable('coffeetags')
