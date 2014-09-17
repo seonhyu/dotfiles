@@ -24,6 +24,8 @@ let delimitMate_matchpairs= "(:),[:],<:>,<%:%>,<%=:%>"
 
 " 적용하지 않을 filetype. ,로 구분.
 let delimitMate_excluded_ft = "vim"
+
+au FileType python let b:delimitMate_matchpairs = "(:),[:],{:}"
 " }}}
 "-------------------------------------------------- Session {{{
 let g:session_autosave=0
@@ -61,13 +63,6 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
 
-" enter 키 동작을 단순 선택에서 끝내기.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  " For no inserting <CR> key.
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> "\<BS>"
@@ -78,7 +73,18 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 
 " tab으로 목록 이동
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" enter 키 동작을 단순 선택에서 끝내기.
+inoremap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
+" SuperTab like snippets behavior.
+" }}}
+"-------------------------------------------------- Neocomplete {{{
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: pumvisible() ? "\<C-n>" : "\<TAB>"
 " }}}
 "-------------------------------------------------- Tagbar {{{
 if executable('coffeetags')
@@ -126,9 +132,6 @@ let g:airline_powerline_fonts = 1
 "-------------------------------------------------- vim-instant-markdown {{{
 let g:instant_markdown_autostart = 0
 let g:instant_markdown_slow = 0
-" }}}
-"-------------------------------------------------- delimitMate {{{
-au FileType python let b:delimitMate_matchpairs = "(:),[:],{:}"
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
