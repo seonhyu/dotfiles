@@ -127,5 +127,8 @@ let g:airline_powerline_fonts = 1
 let g:instant_markdown_autostart = 0
 let g:instant_markdown_slow = 0
 " }}}
+"-------------------------------------------------- delimitMate {{{
+au FileType python let b:delimitMate_matchpairs = "(:),[:],{:}"
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0
