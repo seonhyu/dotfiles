@@ -331,7 +331,7 @@ augroup configgroup
                 \ endif
 
     " 파일 저장 직전에 줄끝 공백 지우기
-    autocmd BufWritePre *.{java,js,txt,md,mardkwon,css} :call StripTrailingWhitespaces()
+    autocmd BufWritePre *.{java,js,txt,md,mardkwon,css,py} :call StripTrailingWhitespaces()
 
     autocmd BufNewFile,BufRead *.markdown,*.md,*.txt,*.rst setlocal wrap linebreak
 
@@ -357,14 +357,14 @@ augroup configgroup
 augroup END
 " }}}
 " functions {{{
+" 줄끝의 공백제거
 function! StripTrailingWhitespaces()
-    " save last cusor postion
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    let @/=_s
-    call cursor(l, c)
+python << endpython
+import vim
+row, col = vim.current.window.cursor
+vim.command('%s/\s\+$//e')
+vim.current.window.cursor = (row, col)
+endpython
 endfunction
 " }}}
 " Status line {{{
