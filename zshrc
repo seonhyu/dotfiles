@@ -115,6 +115,8 @@ export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
     alias pgrep='pgrep -ilf'
     alias pkill='pkill -ilf'
+
+    alias pip='pip --cert ~/work/snnc/SNNC.pem'
 # }}}
 # Bind keys {{{
     zmodload zsh/terminfo
