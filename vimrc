@@ -9,16 +9,16 @@ let mapleader=","
 
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
-if filereadable(expand("~/dotfiles/vimrc.neobundle"))
-    source ~/dotfiles/vimrc.neobundle
+if filereadable(expand("~/dotfiles/neobundle.vimrc"))
+    source ~/dotfiles/neobundle.vimrc
 endif
 
 " 기본설정 적용
 runtime! plugin/sensible.vim
 " }}}
 " Vimrc files {{{
-if filereadable(expand("~/dotfiles/vimrc.plugins"))
-    source ~/dotfiles/vimrc.plugins
+if filereadable(expand("~/dotfiles/plugins.vimrc"))
+    source ~/dotfiles/plugins.vimrc
 endif
 
 " Parse local vimrc (useful for per-settings)
@@ -334,6 +334,7 @@ augroup configgroup
     autocmd BufWritePre *.{java,js,txt,md,mardkwon,css,py} :call StripTrailingWhitespaces()
 
     autocmd BufNewFile,BufRead *.markdown,*.md,*.txt,*.rst setlocal wrap linebreak
+    autocmd BufNewFile,BufRead *.xfdl setlocal noexpandtab
 
     " FileType 지정
     autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=ghmarkdown

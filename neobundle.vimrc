@@ -5,12 +5,12 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle "tpope/vim-sensible"
 
 " languages
-"=======================================
+"===========================================================
 NeoBundle "pangloss/vim-javascript"
 NeoBundle "derekwyatt/vim-scala"
 
 " Html, Xml, Css, Markdown...
-"=======================================
+"===========================================================
 NeoBundle "groenewege/vim-less.git"
 NeoBundle "itspriddle/vim-jquery.git"
 NeoBundle "kchmck/vim-coffee-script"
@@ -18,11 +18,11 @@ NeoBundle "jtratner/vim-flavored-markdown"
 NeoBundle "suan/vim-instant-markdown"
 
 " Git related...
-"=======================================
+"===========================================================
 NeoBundle "tpope/vim-fugitive"
 
 " General text editing improvements...
-"=======================================
+"===========================================================
 NeoBundle "Raimondi/delimitMate"
 NeoBundle "Shougo/neocomplete.git"
 NeoBundle "Shougo/neosnippet.git"
@@ -32,7 +32,8 @@ NeoBundle "skwp/vim-easymotion"
 NeoBundle "scrooloose/nerdcommenter"
 
 " General vim improvements
-"=======================================
+"===========================================================
+NeoBundle "Shougo/unite.vim"
 NeoBundle "MarcWeber/vim-addon-mw-utils.git"
 NeoBundle "kien/ctrlp.vim"
 NeoBundle "majutsushi/tagbar.git"
@@ -45,7 +46,7 @@ NeoBundle "tpope/vim-surround.git"
 NeoBundle "tpope/vim-repeat.git"
 
 " Cosmetics, color scheme, Powerline...
-"=======================================
+"===========================================================
 " NeoBundle "https://github.com/wellle/vim-colors-solarized.git"
 NeoBundle "seonhyu/vim-colors-solarized"
 NeoBundle "seonhyu/vim-hybrid"
@@ -53,7 +54,7 @@ NeoBundle "seonhyu/vim-hybrid"
 NeoBundle "nathanaelkane/vim-indent-guides"
 
 "  Dev tools
-"=======================================
+"===========================================================
 NeoBundle "rizzatti/dash.vim"
 
 NeoBundleCheck
