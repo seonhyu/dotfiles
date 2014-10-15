@@ -17,10 +17,12 @@ nnoremap <silent> <Leader>t   :CtrlP<CR>
 "nnoremap <silent> <Leader>m  :CtrlPMRUFiles<CR>
 " }}}
 "-------------------------------------------------- Unite {{{
-nnoremap <leader>f :Unite buffer file_rec<CR>
+nnoremap <leader>f :Unite -start-insert file_rec<CR>
+nnoremap <leader>b :Unite buffer<CR>
 let g:unite_source_history_yank_enable = 1
 nnoremap <leader>y :Unite history/yank<CR>
 nnoremap <leader>um :Unite mapping<CR>
+call unite#custom#source('buffer,file_rec', 'sorters', 'sorter_rank')
 " }}}
 "-------------------------------------------------- DelimitMate {{{
 let delimitMate_expand_cr = 0
@@ -48,7 +50,7 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#sources#syntax#min_keyword_length = 2
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 let g:neocomplete#enable_auto_select = 1
@@ -78,9 +80,11 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
+"let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>","\<C-x>\<C-p>","\<C-x>\<C-n>"]
+
 "inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " }}}
-"-------------------------------------------------- Neocomplete {{{
+"-------------------------------------------------- Neosnippet {{{
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
 
@@ -92,6 +96,10 @@ imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
     \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
     \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+if has('conceal')
+    set conceallevel=2 concealcursor=i
+endif
 " }}}
 "-------------------------------------------------- Tagbar {{{
 if executable('coffeetags')
@@ -139,6 +147,10 @@ let g:airline_powerline_fonts = 1
 "-------------------------------------------------- vim-instant-markdown {{{
 let g:instant_markdown_autostart = 0
 let g:instant_markdown_slow = 0
+" }}}
+"-------------------------------------------------- jedi-vim {{{
+let g:jedi#popup_on_dot = 0
+let g:jedi#auto_vim_configuration = 0
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

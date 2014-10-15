@@ -3,7 +3,6 @@
 " alias vim='mvim -V'
 " ===========================================================
 set nocompatible
-"set shell=bash\ -i
 
 let mapleader=","
 
@@ -94,7 +93,7 @@ set shortmess=atToOI
 set autoread            " Automatically reload changes if detected
 set autowrite           " Writes on make/shell commands
 set cf                  " Enable error files & error jumping.
-set complete=.,w,b,u,U,t  " Better complete options to speed it up
+set complete=.,w,b,t    " Scan current buffer, other windows buffer, loaded buffer, tags
 set completeopt=menuone,preview
 set tags=tags;/
 "}}}
