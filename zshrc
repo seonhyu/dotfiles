@@ -115,11 +115,14 @@ export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
     alias pgrep='pgrep -ilf'
     alias pkill='pkill -ilf'
+
+    alias python='python3'
+    alias pip='pip3'
 # }}}
 # Bind keys {{{
     zmodload zsh/terminfo
-    bindkey "$terminfo[kcuu1]" history-substring-search-up
-    bindkey "$terminfo[kcud1]" history-substring-search-down
+    #bindkey "$terminfo[kcuu1]" history-substring-search-up
+    #bindkey "$terminfo[kcud1]" history-substring-search-down
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
     # bind k and j for VI mode
