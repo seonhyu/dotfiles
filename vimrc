@@ -3,22 +3,21 @@
 " alias vim='mvim -V'
 " ===========================================================
 set nocompatible
-"set shell=bash\ -i
 
 let mapleader=","
 
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
-if filereadable(expand("~/dotfiles/vimrc.neobundle"))
-    source ~/dotfiles/vimrc.neobundle
+if filereadable(expand("~/dotfiles/neobundle.vimrc"))
+    source ~/dotfiles/neobundle.vimrc
 endif
 
 " 기본설정 적용
 runtime! plugin/sensible.vim
 " }}}
 " Vimrc files {{{
-if filereadable(expand("~/dotfiles/vimrc.plugins"))
-    source ~/dotfiles/vimrc.plugins
+if filereadable(expand("~/dotfiles/plugins.vimrc"))
+    source ~/dotfiles/plugins.vimrc
 endif
 
 " Parse local vimrc (useful for per-settings)
@@ -94,7 +93,7 @@ set shortmess=atToOI
 set autoread            " Automatically reload changes if detected
 set autowrite           " Writes on make/shell commands
 set cf                  " Enable error files & error jumping.
-set complete=.,w,b,u,U,t  " Better complete options to speed it up
+set complete=.,w,b,t    " Scan current buffer, other windows buffer, loaded buffer, tags
 set completeopt=menuone,preview
 set tags=tags;/
 "}}}
@@ -146,8 +145,8 @@ if !has('gui_running')
 endif
 
 " Italic font 지원
-"highlight Comment cterm=italic
-"highlight Comment gui=italic
+highlight Comment cterm=italic
+highlight Comment gui=italic
 "highlight Comment ctermfg=240 guifg=#aaaaaa
 
 " }}}
@@ -331,9 +330,10 @@ augroup configgroup
                 \ endif
 
     " 파일 저장 직전에 줄끝 공백 지우기
-    autocmd BufWritePre *.{java,js,txt,md,mardkwon,css} :call StripTrailingWhitespaces()
+    autocmd BufWritePre *.{java,js,txt,md,mardkwon,css,py} :call StripTrailingWhitespaces()
 
     autocmd BufNewFile,BufRead *.markdown,*.md,*.txt,*.rst setlocal wrap linebreak
+    autocmd BufNewFile,BufRead *.xfdl setlocal noexpandtab
 
     " FileType 지정
     autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=ghmarkdown
@@ -357,14 +357,14 @@ augroup configgroup
 augroup END
 " }}}
 " functions {{{
+" 줄끝의 공백제거
 function! StripTrailingWhitespaces()
-    " save last cusor postion
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    let @/=_s
-    call cursor(l, c)
+python << endpython
+import vim
+row, col = vim.current.window.cursor
+vim.command('%s/\s\+$//e')
+vim.current.window.cursor = (row, col)
+endpython
 endfunction
 " }}}
 " Status line {{{
