@@ -50,7 +50,7 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 2
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 let g:neocomplete#enable_auto_select = 1
@@ -77,12 +77,22 @@ inoremap <expr><BS> "\<BS>"
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
+    let g:neocomplete#sources#omni#input_patterns = {}
 endif
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 "let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>","\<C-x>\<C-p>","\<C-x>\<C-n>"]
 
 "inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" }}}
+"-------------------------------------------------- jedi-vim {{{
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 1
+"let g:jedi#auto_vim_configuration = 0
 " }}}
 "-------------------------------------------------- Neosnippet {{{
 " Enable snipMate compatibility feature.
@@ -147,10 +157,6 @@ let g:airline_powerline_fonts = 1
 "-------------------------------------------------- vim-instant-markdown {{{
 let g:instant_markdown_autostart = 0
 let g:instant_markdown_slow = 0
-" }}}
-"-------------------------------------------------- jedi-vim {{{
-let g:jedi#popup_on_dot = 0
-let g:jedi#auto_vim_configuration = 0
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

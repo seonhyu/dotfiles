@@ -33,6 +33,7 @@ NeoBundle "tpope/vim-fugitive"
 NeoBundle "Raimondi/delimitMate"
 NeoBundle "Shougo/neocomplete.git"
 NeoBundle "Shougo/neosnippet.git"
+"NeoBundle "Valloric/YouCompleteMe"
 NeoBundle "godlygeek/tabular"
 NeoBundle "skwp/vim-easymotion"
 NeoBundle "scrooloose/nerdcommenter"
@@ -53,10 +54,9 @@ NeoBundle "tpope/vim-repeat.git"
 
 " Cosmetics, color scheme, Powerline...
 "===========================================================
-" NeoBundle "https://github.com/wellle/vim-colors-solarized.git"
 NeoBundle "seonhyu/vim-colors-solarized"
 NeoBundle "seonhyu/vim-hybrid"
-" NeoBundle "bling/vim-airline.git"
+NeoBundle "cocopon/iceberg.vim"
 NeoBundle "nathanaelkane/vim-indent-guides"
 
 "  Dev tools

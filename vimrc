@@ -122,12 +122,14 @@ else
     else
         set background=dark
         "set t_Co=256
-        "let g:solarized_termcolors=16
-        "let g:solarized_vsisibility="low"
-        "color solarized
 
-        let g:hybrid_use_iTerm_colors = 1
+        let g:solarized_termcolors=16
+        let g:solarized_vsisibility="low"
         color solarized
+
+        "let g:hybrid_use_iTerm_colors = 1
+
+        "color iceberg
     endif
 
     call togglebg#map("<F5>")
@@ -343,7 +345,7 @@ augroup configgroup
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown,play2-html setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType python setlocal omnifunc=jedi#completions
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
@@ -378,6 +380,5 @@ set statusline+=%=      " right align
 set statusline+=[%{strlen(&filetype)?&filetype:'unknown'}]
 set statusline+=[%{strlen(&fileencoding)?&fileencoding:&encoding}:%{strlen(&fileformat)?&fileformat:'unknown'}]
 set statusline+=\ %-14.(%l,%c%V%)\ %<%P
-" }}}
 
 " vim:foldmethod=marker:foldlevel=0
