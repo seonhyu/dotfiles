@@ -131,4 +131,7 @@ export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 eval "$(rbenv init -)"
 
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
 # vim:foldmethod=marker:foldlevel=0

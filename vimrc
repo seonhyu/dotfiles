@@ -121,15 +121,21 @@ else
         color hybrid-light
     else
         set background=dark
-        "set t_Co=256
 
-        let g:solarized_termcolors=16
-        let g:solarized_vsisibility="low"
+        let g:solarized_termtrans = 1
+        let g:solarized_visibility = "high"
+        let g:solarized_contrast = "high"
         color solarized
+        hi Normal ctermfg=14
+        hi link xmlCdata Normal
+        hi link SpecialComment MoreMsg
+        hi! link PmenuSel TabLineSel
 
         "let g:hybrid_use_iTerm_colors = 1
+        "color hybrid
 
         "color iceberg
+        "hi Normal ctermfg=251
     endif
 
     call togglebg#map("<F5>")
@@ -147,8 +153,8 @@ if !has('gui_running')
 endif
 
 " Italic font 지원
-highlight Comment cterm=italic
-highlight Comment gui=italic
+"highlight Comment cterm=italic
+"highlight Comment gui=italic
 "highlight Comment ctermfg=240 guifg=#aaaaaa
 
 " }}}
@@ -179,7 +185,7 @@ nnoremap <Space> za
 " 마지막 입력한 부분을 선택
 nnoremap gV `[v`]
 nnoremap Y y$
-imap ;; <ESC>A
+imap ;; <ESC>A;
 imap ,, <ESC>wa,
 " 이전 입력한 문자열 Complete
 inoremap <C-l> <C-x><C-n>
@@ -285,22 +291,22 @@ nmap ,qq ysiw"
 nnoremap ,r :redraw!<CR>
 
 " Move between tabs with t/T
-map  ,t1 :tabn 1<CR>
-imap ,t1 <Esc> :tabn 1<CR>
-map  ,t2 :tabn 2<CR>
-imap ,t2 <Esc> :tabn 2<CR>
-map  ,t3 :tabn 3<CR>
-imap ,t3 <Esc> :tabn 3<CR>
-map  ,t4 :tabn 4<CR>
-imap ,t4 <Esc> :tabn 4<CR>
-map  ,t5 :tabn 5<CR>
-imap ,t5 <Esc> :tabn 5<CR>
-map  ,t6 :tabn 6<CR>
-imap ,t6 <Esc> :tabn 6<CR>
-map  ,t7 :tabn 7<CR>
-imap ,t7 <Esc> :tabn 7<CR>
-map  ,t8 :tabn 8<CR>
-imap ,t8 <Esc> :tabn 8<CR>
+map  ,1 :tabn 1<CR>
+imap ,1 <Esc> :tabn 1<CR>
+map  ,2 :tabn 2<CR>
+imap ,2 <Esc> :tabn 2<CR>
+map  ,3 :tabn 3<CR>
+imap ,3 <Esc> :tabn 3<CR>
+map  ,4 :tabn 4<CR>
+imap ,4 <Esc> :tabn 4<CR>
+map  ,5 :tabn 5<CR>
+imap ,5 <Esc> :tabn 5<CR>
+map  ,6 :tabn 6<CR>
+imap ,6 <Esc> :tabn 6<CR>
+map  ,7 :tabn 7<CR>
+imap ,7 <Esc> :tabn 7<CR>
+map  ,8 :tabn 8<CR>
+imap ,8 <Esc> :tabn 8<CR>
 
 " W as sudo write
 command! -bar -nargs=0 W silent! exec "write !sudo tee % >/dev/null" | silent! edit!
@@ -380,5 +386,6 @@ set statusline+=%=      " right align
 set statusline+=[%{strlen(&filetype)?&filetype:'unknown'}]
 set statusline+=[%{strlen(&fileencoding)?&fileencoding:&encoding}:%{strlen(&fileformat)?&fileformat:'unknown'}]
 set statusline+=\ %-14.(%l,%c%V%)\ %<%P
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0

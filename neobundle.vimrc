@@ -63,6 +63,7 @@ NeoBundle "nathanaelkane/vim-indent-guides"
 "===========================================================
 NeoBundle "rizzatti/dash.vim"
 NeoBundle "Shougo/vimshell.vim"
+NeoBundle "davidoc/taskpaper.vim"
 
 NeoBundle 'Shougo/vimproc.vim', {
 \ 'build' : {
