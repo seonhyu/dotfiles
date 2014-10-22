@@ -158,5 +158,15 @@ let g:airline_powerline_fonts = 1
 let g:instant_markdown_autostart = 0
 let g:instant_markdown_slow = 0
 " }}}
+"-------------------------------------------------- taskpaper {{{
+function! s:taskpaper_setup()
+    let g:task_paper_styles={'started': 'ctermbg=Red ctermfg=White guibg=Red', 'FAIL':'ctermbg=Red guibg=Red'}
+endfunction
+
+augroup vimrc-taskpaper
+    autocmd!
+    autocmd FileType taskpaper call s:taskpaper_setup()
+augroup END
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0

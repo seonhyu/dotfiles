@@ -130,6 +130,7 @@ export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
     bindkey -M vicmd 'j' history-substring-search-down
 # }}}
 
+setjdk17
 eval "$(rbenv init -)"
 
 # vim:foldmethod=marker:foldlevel=0
