@@ -4,7 +4,7 @@
 " ===========================================================
 set nocompatible
 
-let mapleader=","
+let mapleader=" "
 
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
@@ -79,7 +79,7 @@ set undofile
 " }}}
 " Set :: Peformance {{{
 set lazyredraw
-set timeoutlen=300  " 기본값은 1000(1초)
+set timeoutlen=500  " 기본값은 1000(1초)
 set synmaxcol=200   " 200자 넘는 라인은 syntax highlight 하지 않는다.
 " }}}
 " Set :: Overwrite default {{{
@@ -160,7 +160,7 @@ endif
 " }}}
 " Mappings {{{
 
-nnoremap ,mp :InstantMarkdownPreview<CR>
+nnoremap <leader>mp :InstantMarkdownPreview<CR>
 
 " Don't move to next
 nnoremap * *N
@@ -172,15 +172,12 @@ vnoremap < <gv
 nnoremap j gj
 nnoremap k gk
 "Go to last edit location
-nnoremap ,. '.
+nnoremap <leader>. '.
 
 " toggle
 nnoremap <silent> <F1> :set number!<CR>
 nnoremap <silent> <F2> :set paste!<CR>
 nnoremap <silent> <F3> :set spell!<CR>
-
-" 폴딩 toggle
-nnoremap <Space> za
 
 " 마지막 입력한 부분을 선택
 nnoremap gV `[v`]
@@ -188,11 +185,11 @@ nnoremap Y y$
 imap ;; <ESC>A;
 imap ,, <ESC>wa,
 " 이전 입력한 문자열 Complete
-inoremap <C-l> <C-x><C-n>
-inoremap <M-/> <C-x><C-n>
-inoremap ,/ <C-x><C-n>
+inoremap <C-l> <C-x><C-p>
+inoremap <M-/> <C-x><C-p>
+inoremap <leader>/ <C-x><C-p>
 
-nnoremap ,a :Ag
+nnoremap <leader>a :Ag
 
 " Window Movement
 nmap <silent> <C-h> :wincmd h<CR>
@@ -206,9 +203,6 @@ nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
 if has('gui_running')
-    nmap ,vr :RestartVim<CR>
-    nmap ,vo :OpenSession<CR>
-
     map  <D-1> :tabn 1<CR>
     imap <D-1> <Esc> :tabn 1<CR>
     map  <D-2> :tabn 2<CR>
@@ -227,98 +221,84 @@ if has('gui_running')
     imap <D-8> <Esc> :tabn 8<CR>
 endif
 
-nmap ,1 :ZoomWin<CR>
-
 " Tabular
-nmap ,a" :Tabularize /"/<CR>
-nmap ,a, :Tabularize /,\zs<CR>
-nmap ,a: :Tabularize /:\zs<CR>
-nmap ,a= :Tabularize /=<CR>
-nmap ,a> :Tabularize /=>\zs<CR>
-vmap ,a" :Tabularize /"/<CR>
-vmap ,a, :Tabularize /,\zs<CR>
-vmap ,a: :Tabularize /:\zs<CR>
-vmap ,a= :Tabularize /=<CR>
-vmap ,a> :Tabularize /=>\zs<CR>
-vmap ,as :Tabularize / [ ]*/l0l0l0<CR>
+nmap <leader>a" :Tabularize /"/<CR>
+nmap <leader>a, :Tabularize /,\zs<CR>
+nmap <leader>a: :Tabularize /:\zs<CR>
+nmap <leader>a= :Tabularize /=<CR>
+nmap <leader>a> :Tabularize /=>\zs<CR>
+vmap <leader>a" :Tabularize /"/<CR>
+vmap <leader>a, :Tabularize /,\zs<CR>
+vmap <leader>a: :Tabularize /:\zs<CR>
+vmap <leader>a= :Tabularize /=<CR>
+vmap <leader>a> :Tabularize /=>\zs<CR>
+vmap <leader>as :Tabularize / [ ]*/l0l0l0<CR>
 
 " Select a buffer
 nnoremap ,, <c-^>
 nnoremap ,bp :bprev<CR>
 nnoremap ,bn :bnext<CR>
 
-nnoremap ,co :copen<CR>
-nnoremap ,cc :cc<CR>
-nnoremap ,cp :cprev<CR>
-nnoremap ,cn :cnext<CR>
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>cc :cc<CR>
+nnoremap <leader>cp :cprev<CR>
+nnoremap <leader>cn :cnext<CR>
 
 " 마지막 변경 선택
 nnoremap gp `[v`]
 
 " Hide search highlight
-nnoremap ,h :nohlsearch<CR>
-
-map ,jm :CloseSingleConque<CR>:CtrlP app/models<CR>
-map ,jc :CloseSingleConque<CR>:CtrlP app/controllers<CR>
-map ,jv :CloseSingleConque<CR>:CtrlP app/views<CR>
-map ,jp :CloseSingleConque<CR>:CtrlP public<CR>
-map ,jC :CloseSingleConque<CR>:CtrlP config<CR>
-map ,jT :CloseSingleConque<CR>:CtrlP test<CR>
+nnoremap <leader>h :nohlsearch<CR>
 
 " fugitive
-nmap ,gs :Gstatus<cr><c-w>20+
-nmap ,gm :Gcommit<cr>
-
-" markdown
-nnoremap ,h1 o<Esc>70i=<Esc>
-nnoremap ,h2 o<Esc>70i-<Esc>
-nnoremap ,h3 3I#<Esc>a <Esc>
+nmap <leader>gs :Gstatus<cr><c-w>20+
+nmap <leader>gm :Gcommit<cr>
 
 " 인코딩 전환
-nnoremap ,k <Esc>:e ++enc=euc-kr<CR>
+nnoremap <leader>k <Esc>:e ++enc=euc-kr<CR>
 
 " Refresh project
-nnoremap ,pr :!/usr/local/bin/ctags --extra=+f -R app/<CR><CR>:CtrlPClearAllCaches<CR>
+nnoremap <leader>pr :!/usr/local/bin/ctags --extra=+f -R app/<CR><CR>
 
 " Use Q for formatting the current paragraph (or selection)
-vmap ,q gq
-nmap ,q gqap
+vmap <leader>q gq
+nmap <leader>q gqap
 
 " surround with double quatation
-nmap ,qq ysiw"
+nmap <leader>qq ysiw"
 
 " 화면꺠졌을 때 다시 그림
-nnoremap ,r :redraw!<CR>
+nnoremap <leader>r :redraw!<CR>
 
 " Move between tabs with t/T
-map  ,1 :tabn 1<CR>
-imap ,1 <Esc> :tabn 1<CR>
-map  ,2 :tabn 2<CR>
-imap ,2 <Esc> :tabn 2<CR>
-map  ,3 :tabn 3<CR>
-imap ,3 <Esc> :tabn 3<CR>
-map  ,4 :tabn 4<CR>
-imap ,4 <Esc> :tabn 4<CR>
-map  ,5 :tabn 5<CR>
-imap ,5 <Esc> :tabn 5<CR>
-map  ,6 :tabn 6<CR>
-imap ,6 <Esc> :tabn 6<CR>
-map  ,7 :tabn 7<CR>
-imap ,7 <Esc> :tabn 7<CR>
-map  ,8 :tabn 8<CR>
-imap ,8 <Esc> :tabn 8<CR>
+map  <leader>1 :tabn 1<CR>
+imap <leader>1 <Esc> :tabn 1<CR>
+map  <leader>2 :tabn 2<CR>
+imap <leader>2 <Esc> :tabn 2<CR>
+map  <leader>3 :tabn 3<CR>
+imap <leader>3 <Esc> :tabn 3<CR>
+map  <leader>4 :tabn 4<CR>
+imap <leader>4 <Esc> :tabn 4<CR>
+map  <leader>5 :tabn 5<CR>
+imap <leader>5 <Esc> :tabn 5<CR>
+map  <leader>6 :tabn 6<CR>
+imap <leader>6 <Esc> :tabn 6<CR>
+map  <leader>7 :tabn 7<CR>
+imap <leader>7 <Esc> :tabn 7<CR>
+map  <leader>8 :tabn 8<CR>
+imap <leader>8 <Esc> :tabn 8<CR>
 
 " W as sudo write
 command! -bar -nargs=0 W silent! exec "write !sudo tee % >/dev/null" | silent! edit!
 
 " Remove trailing white space
-map ,ws <ESC>:%s/\s\+$//e<CR>
+map <leader>ws <ESC>:%s/\s\+$//e<CR>
 
 "(v)im (c)ommand - execute current line as a vim command
-nmap <silent> ,vc yy:<C-f>p<C-c><CR>
+nmap <silent> <leader>vc yy:<C-f>p<C-c><CR>
 
-nmap ,cl :set cul<cr>
-nmap ,cc :set cuc<cr>
+nmap <leader>cl :set cul<cr>
+nmap <leader>cc :set cuc<cr>
 
 cmap <Up> <C-p>
 "}}}
