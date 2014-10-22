@@ -118,24 +118,25 @@ else
         set guioptions-=r
         set guifont=Source\ Code\ Pro:h13
 
-        color hybrid-light
+        color hybrid
     else
         set background=dark
 
         let g:solarized_termtrans = 1
-        let g:solarized_visibility = "high"
+        let g:solarized_visibility = "low"
         let g:solarized_contrast = "high"
-        color solarized
-        hi Normal ctermfg=14
-        hi link xmlCdata Normal
-        hi link SpecialComment MoreMsg
-        hi! link PmenuSel TabLineSel
+        "color solarized
+        "hi Normal ctermfg=14
+        "hi! link PmenuSel TabLineSel
+        "hi link SpecialComment MoreMsg
 
-        "let g:hybrid_use_iTerm_colors = 1
-        "color hybrid
+        let g:hybrid_use_iTerm_colors = 1
+        color hybrid
 
         "color iceberg
         "hi Normal ctermfg=251
+        
+        hi link xmlCdata Normal
     endif
 
     call togglebg#map("<F5>")
