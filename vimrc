@@ -4,7 +4,7 @@
 " ===========================================================
 set nocompatible
 
-let mapleader=" "
+let mapleader=","
 
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
@@ -272,22 +272,14 @@ nmap <leader>qq ysiw"
 nnoremap <leader>r :redraw!<CR>
 
 " Move between tabs with t/T
-map  <leader>1 :tabn 1<CR>
-imap <leader>1 <Esc> :tabn 1<CR>
-map  <leader>2 :tabn 2<CR>
-imap <leader>2 <Esc> :tabn 2<CR>
-map  <leader>3 :tabn 3<CR>
-imap <leader>3 <Esc> :tabn 3<CR>
-map  <leader>4 :tabn 4<CR>
-imap <leader>4 <Esc> :tabn 4<CR>
-map  <leader>5 :tabn 5<CR>
-imap <leader>5 <Esc> :tabn 5<CR>
-map  <leader>6 :tabn 6<CR>
-imap <leader>6 <Esc> :tabn 6<CR>
-map  <leader>7 :tabn 7<CR>
-imap <leader>7 <Esc> :tabn 7<CR>
-map  <leader>8 :tabn 8<CR>
-imap <leader>8 <Esc> :tabn 8<CR>
+nmap  <leader>1 :tabn 1<CR>
+nmap  <leader>2 :tabn 2<CR>
+nmap  <leader>3 :tabn 3<CR>
+nmap  <leader>4 :tabn 4<CR>
+nmap  <leader>5 :tabn 5<CR>
+nmap  <leader>6 :tabn 6<CR>
+nmap  <leader>7 :tabn 7<CR>
+nmap  <leader>8 :tabn 8<CR>
 
 " W as sudo write
 command! -bar -nargs=0 W silent! exec "write !sudo tee % >/dev/null" | silent! edit!
