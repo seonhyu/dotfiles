@@ -160,7 +160,7 @@ endif
 
 " }}}
 " Mappings {{{
-
+nnoremap <Space> za
 nnoremap <leader>mp :InstantMarkdownPreview<CR>
 
 " Don't move to next

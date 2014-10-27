@@ -167,6 +167,9 @@ augroup vimrc-taskpaper
     autocmd!
     autocmd FileType taskpaper call s:taskpaper_setup()
 augroup END
+
+hi link taskpaperDone       Comment
+hi link taskpaperComment    SpecialComment
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
