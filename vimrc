@@ -116,9 +116,9 @@ else
         " Hide Toolbar in MacVim
         set guioptions=egmrt
         set guioptions-=r
-        set guifont=Source\ Code\ Pro:h13
+        set guifont=Source\ Code\ Pro \Light:h13
 
-        color hybrid
+        color iceberg
     else
         set background=dark
 
@@ -130,10 +130,10 @@ else
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        let g:hybrid_use_iTerm_colors = 1
-        color hybrid
+        "let g:hybrid_use_iTerm_colors = 1
+        "color hybrid
 
-        "color iceberg
+        color iceberg
         "hi Normal ctermfg=251
         
         hi link xmlCdata Normal
