@@ -23,6 +23,7 @@ let g:unite_source_history_yank_enable = 1
 nnoremap <leader>y :Unite history/yank<CR>
 nnoremap <leader>um :Unite mapping<CR>
 call unite#custom#source('buffer,file_rec', 'sorters', 'sorter_rank')
+call unite#custom#source('file_rec', 'ignore_globs', split(&wildignore, ','))
 " }}}
 "-------------------------------------------------- DelimitMate {{{
 let delimitMate_expand_cr = 0

@@ -2,10 +2,15 @@
 " Use Macvim as terminal vim
 " alias vim='mvim -V'
 " ===========================================================
-set nocompatible
 
+" Default settings {{{
+set nocompatible
 let mapleader=","
 
+set wildignore+=.git,.DS_Store,tags,logs/**,img/**,*.log,*.zip,*.jpg,*.gif,*.png
+set wildignore+=target/**,.target/**,.idea/**,.settings/**,*.class,*.jar,dist/**
+set wildignore+=node-modules/**
+" }}}
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
 if filereadable(expand("~/dotfiles/neobundle.vimrc"))
@@ -14,16 +19,6 @@ endif
 
 " 기본설정 적용
 runtime! plugin/sensible.vim
-" }}}
-" Vimrc files {{{
-if filereadable(expand("~/dotfiles/plugins.vimrc"))
-    source ~/dotfiles/plugins.vimrc
-endif
-
-" Parse local vimrc (useful for per-settings)
-if filereadable(".lvimrc")
-    source .lvimrc
-endif
 " }}}
 " Set :: Indentation {{{
 " Tab키 동작 설정
@@ -40,8 +35,6 @@ set number
 set showmode		" show current mode
 set nocursorline
 set wildmode=full
-set wildignore+=.git,target,.DS_Store,.settings,*.class,*.jar,dist,logs,img,*.log,*.zip,*.jpg,*.gif,*.png
-set wildignore+=*/.target/*,.target,.idea,tags,*/node-modules/*
 " TODO Ubuntu에서 에러 발생함
 set fillchars=vert:│,fold:┄,diff:╱
 set listchars=tab:│\ ,trail:⌴,eol:·,precedes:◂,extends:▸
@@ -116,7 +109,7 @@ else
         " Hide Toolbar in MacVim
         set guioptions=egmrt
         set guioptions-=r
-        set guifont=Source\ Code\ Pro \Light:h13
+        set guifont=Source\ Code\ Pro\ Light:h13
 
         color iceberg
     else
@@ -359,6 +352,16 @@ set statusline+=%=      " right align
 set statusline+=[%{strlen(&filetype)?&filetype:'unknown'}]
 set statusline+=[%{strlen(&fileencoding)?&fileencoding:&encoding}:%{strlen(&fileformat)?&fileformat:'unknown'}]
 set statusline+=\ %-14.(%l,%c%V%)\ %<%P
+" }}}
+" Vimrc files {{{
+if filereadable(expand("~/dotfiles/plugins.vimrc"))
+    source ~/dotfiles/plugins.vimrc
+endif
+
+" Parse local vimrc (useful for per-settings)
+if filereadable(".lvimrc")
+    source .lvimrc
+endif
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
