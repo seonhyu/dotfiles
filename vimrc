@@ -126,7 +126,7 @@ else
         "let g:hybrid_use_iTerm_colors = 1
         "color hybrid
 
-        color iceberg
+        color cobalt2
         "hi Normal ctermfg=251
         
         hi link xmlCdata Normal
