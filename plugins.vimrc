@@ -84,7 +84,7 @@ endif
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+"let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 "let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>","\<C-x>\<C-p>","\<C-x>\<C-n>"]
 

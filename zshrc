@@ -59,7 +59,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/texbin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -117,8 +117,7 @@ export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
     alias pgrep='pgrep -ilf'
     alias pkill='pkill -ilf'
 
-    alias pip='pip --cert ~/work/snnc/SNNC.pem'
-    alias python=/usr/local/bin/python3
+    #alias pip='pip --cert ~/work/snnc/SNNC.pem'
 # }}}
 # Bind keys {{{
     zmodload zsh/terminfo

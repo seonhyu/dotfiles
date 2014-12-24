@@ -30,13 +30,13 @@ NeoBundle "tpope/vim-fugitive"
 
 " General text editing improvements...
 "===========================================================
-NeoBundle "Raimondi/delimitMate"
 NeoBundle "Shougo/neocomplete.git"
 NeoBundle "Shougo/neosnippet.git"
-"NeoBundle "Valloric/YouCompleteMe"
 NeoBundle "godlygeek/tabular"
-NeoBundle "skwp/vim-easymotion"
 NeoBundle "scrooloose/nerdcommenter"
+NeoBundle "tpope/vim-surround.git"
+NeoBundle 'jiangmiao/auto-pairs'
+NeoBundle 'matchit.zip'
 
 " General vim improvements
 "===========================================================
@@ -48,7 +48,6 @@ NeoBundle "rking/ag.vim"
 NeoBundle "scrooloose/nerdtree.git"
 NeoBundle "scrooloose/syntastic.git"
 NeoBundle "tomtom/tlib_vim.git"
-NeoBundle "tpope/vim-surround.git"
 " repeat plugin은 surround 기능을 .으로 반복할 수 있게한다.
 NeoBundle "tpope/vim-repeat.git"
 
@@ -58,6 +57,7 @@ NeoBundle "seonhyu/vim-colors-solarized"
 NeoBundle "seonhyu/vim-hybrid"
 NeoBundle "cocopon/iceberg.vim"
 NeoBundle "nathanaelkane/vim-indent-guides"
+NeoBundle 'gertjanreynaert/cobalt2-vim-theme'
 
 "  Dev tools
 "===========================================================

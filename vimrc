@@ -126,7 +126,7 @@ else
         "let g:hybrid_use_iTerm_colors = 1
         "color hybrid
 
-        color cobalt2
+        color mycobalt2
         "hi Normal ctermfg=251
         
         hi link xmlCdata Normal
@@ -176,7 +176,7 @@ nnoremap <silent> <F3> :set spell!<CR>
 " 마지막 입력한 부분을 선택
 nnoremap gV `[v`]
 nnoremap Y y$
-imap ;; <ESC>A;
+imap ;; <ESC>A
 imap ,, <ESC>wa,
 " 이전 입력한 문자열 Complete
 inoremap <C-l> <C-x><C-p>
@@ -221,12 +221,16 @@ nmap <leader>a, :Tabularize /,\zs<CR>
 nmap <leader>a: :Tabularize /:\zs<CR>
 nmap <leader>a= :Tabularize /=<CR>
 nmap <leader>a> :Tabularize /=>\zs<CR>
-vmap <leader>a" :Tabularize /"/<CR>
-vmap <leader>a, :Tabularize /,\zs<CR>
-vmap <leader>a: :Tabularize /:\zs<CR>
-vmap <leader>a= :Tabularize /=<CR>
-vmap <leader>a> :Tabularize /=>\zs<CR>
-vmap <leader>as :Tabularize / [ ]*/l0l0l0<CR>
+
+vmap a" :Tabularize /"/<CR>
+vmap a, :Tabularize /,\zs<CR>
+vmap a: :Tabularize /:\zs<CR>
+vmap a= :Tabularize /=<CR>
+vmap a> :Tabularize /=>\zs<CR>
+vmap as :Tabularize / [ ]*/l0l0l0<CR>
+vmap at :Tabularize /\|/<CR>
+vmap ac :Tabularize /\/\//<CR>
+nmap f- :s/ /\-/g \| :nohlsearch<CR>
 
 " Select a buffer
 nnoremap ,, <c-^>
@@ -308,12 +312,12 @@ augroup configgroup
 
     autocmd BufNewFile,BufRead *.markdown,*.md,*.txt,*.rst setlocal wrap linebreak
     autocmd BufNewFile,BufRead *.xfdl setlocal noexpandtab
+    autocmd BufNewFile,BufRead *.xfdl setlocal ft=javascript
 
     " FileType 지정
     autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=ghmarkdown
     autocmd BufNewFile,BufRead *.json set ft=javascript
 
-    set completeopt=menu,menuone,longest
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown,play2-html setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
