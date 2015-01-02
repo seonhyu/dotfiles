@@ -40,9 +40,9 @@ NeoBundle 'matchit.zip'
 
 " General vim improvements
 "===========================================================
-NeoBundle "Shougo/unite.vim"
+"NeoBundle "Shougo/unite.vim"
 NeoBundle "MarcWeber/vim-addon-mw-utils.git"
-"NeoBundle "kien/ctrlp.vim"
+NeoBundle "kien/ctrlp.vim"
 NeoBundle "majutsushi/tagbar.git"
 NeoBundle "rking/ag.vim"
 NeoBundle "scrooloose/nerdtree.git"

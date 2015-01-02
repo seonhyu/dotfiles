@@ -7,9 +7,10 @@
 set nocompatible
 let mapleader=","
 
-set wildignore+=.git,.DS_Store,tags,logs/**,img/**,*.log,*.zip,*.jpg,*.gif,*.png
-set wildignore+=target/**,.target/**,.idea/**,.settings/**,*.class,*.jar,dist/**
-set wildignore+=node-modules/**
+set wildignore+=.idea/**,.idea_modules/**,.settings/**
+set wildignore+=_public/**,*/node_modules/**,logs/**,dist/**,target/**,.target/**
+set wildignore+=.git/**,.DS_Store/**,tags
+set wildignore+=*.log,*.zip,*.jpg,*.gif,*.png,*.jar,*.class
 " }}}
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins

@@ -11,19 +11,18 @@ let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|tags$|\.target|\.idea$'
 " 속도 빠르게
 let g:ctrlp_user_command='ag %s -l --nocolor --hidden -g ""'
 
-nnoremap <silent> <Leader>t   :CtrlP<CR>
-"nnoremap <silent> <Leader>f   :CtrlP<CR>
-"nnoremap <silent> <Leader>b  :CtrlPBuffer<CR>
-"nnoremap <silent> <Leader>m  :CtrlPMRUFiles<CR>
+nnoremap <silent> <Leader>f  :CtrlP<CR>
+nnoremap <silent> <Leader>b  :CtrlPBuffer<CR>
+nnoremap <silent> <Leader>m  :CtrlPMRUFiles<CR>
 " }}}
 "-------------------------------------------------- Unite {{{
-nnoremap <leader>f :Unite -start-insert file_rec<CR>
-nnoremap <leader>b :Unite buffer<CR>
-let g:unite_source_history_yank_enable = 1
-nnoremap <leader>y :Unite history/yank<CR>
-nnoremap <leader>um :Unite mapping<CR>
-call unite#custom#source('buffer,file_rec', 'sorters', 'sorter_rank')
+"let g:unite_source_history_yank_enable = 1
+"call unite#custom#source('buffer,file_rec', 'sorters', 'sorter_rank')
 "call unite#custom#source('file_rec', 'ignore_globs', split(&wildignore, ','))
+"nnoremap <leader>f :Unite -start-insert file_rec<CR>
+"nnoremap <leader>b :Unite buffer<CR>
+"nnoremap <leader>y :Unite history/yank<CR>
+"nnoremap <leader>um :Unite mapping<CR>
 " }}}
 "-------------------------------------------------- DelimitMate {{{
 let delimitMate_expand_cr = 0
