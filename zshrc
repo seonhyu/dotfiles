@@ -8,8 +8,13 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+<<<<<<< HEAD
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="af-magic"
+=======
+ZSH_THEME="af-magic"
+#ZSH_THEME="gentoo"
+>>>>>>> c67fd49474c172dbb5bc8f325bf27ed77fed7f4a
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -99,7 +104,8 @@ export PATH=.:$HOME/.rbenv/shims:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
     alias gs='git status'
     alias gl='git l'
     alias ga='git add -A'
-    alias gca='git add -A; git commit -v'
+    alias gac='git add -A; git commit -v'
+    alias gd='git difftool'
 
     alias pg='ps -ef | grep'
     alias vg='vagrant'

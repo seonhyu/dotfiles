@@ -2,10 +2,16 @@
 " Use Macvim as terminal vim
 " alias vim='mvim -V'
 " ===========================================================
-set nocompatible
 
+" Default settings {{{
+set nocompatible
 let mapleader=","
 
+set wildignore+=.idea/**,.idea_modules/**,.settings/**
+set wildignore+=_public/**,*/node_modules/**,logs/**,dist/**,target/**,.target/**
+set wildignore+=.git/**,.DS_Store/**,tags
+set wildignore+=*.log,*.zip,*.jpg,*.gif,*.png,*.jar,*.class
+" }}}
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
 if filereadable(expand("~/dotfiles/neobundle.vimrc"))
@@ -14,16 +20,6 @@ endif
 
 " 기본설정 적용
 runtime! plugin/sensible.vim
-" }}}
-" Vimrc files {{{
-if filereadable(expand("~/dotfiles/plugins.vimrc"))
-    source ~/dotfiles/plugins.vimrc
-endif
-
-" Parse local vimrc (useful for per-settings)
-if filereadable(".lvimrc")
-    source .lvimrc
-endif
 " }}}
 " Set :: Indentation {{{
 " Tab키 동작 설정
@@ -40,8 +36,6 @@ set number
 set showmode		" show current mode
 set nocursorline
 set wildmode=full
-set wildignore+=.git,target,.DS_Store,.settings,*.class,*.jar,dist,logs,img,*.log,*.zip,*.jpg,*.gif,*.png
-set wildignore+=*/.target/*,.target,.idea,tags,*/node-modules/*
 " TODO Ubuntu에서 에러 발생함
 set fillchars=vert:│,fold:┄,diff:╱
 set listchars=tab:│\ ,trail:⌴,eol:·,precedes:◂,extends:▸
@@ -116,9 +110,9 @@ else
         " Hide Toolbar in MacVim
         set guioptions=egmrt
         set guioptions-=r
-        set guifont=Source\ Code\ Pro:h13
+        set guifont=Source\ Code\ Pro\ Light:h13
 
-        color hybrid
+        color iceberg
     else
         set background=dark
 
@@ -130,10 +124,10 @@ else
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        let g:hybrid_use_iTerm_colors = 1
-        color iceberg
+        "let g:hybrid_use_iTerm_colors = 1
+        "color hybrid
 
-        "color iceberg
+        color mycobalt2
         "hi Normal ctermfg=251
         
         hi link xmlCdata Normal
@@ -183,7 +177,7 @@ nnoremap <silent> <F3> :set spell!<CR>
 " 마지막 입력한 부분을 선택
 nnoremap gV `[v`]
 nnoremap Y y$
-imap ;; <ESC>A;
+imap ;; <ESC>A
 imap ,, <ESC>wa,
 " 이전 입력한 문자열 Complete
 inoremap <C-l> <C-x><C-p>
@@ -228,12 +222,16 @@ nmap <leader>a, :Tabularize /,\zs<CR>
 nmap <leader>a: :Tabularize /:\zs<CR>
 nmap <leader>a= :Tabularize /=<CR>
 nmap <leader>a> :Tabularize /=>\zs<CR>
-vmap <leader>a" :Tabularize /"/<CR>
-vmap <leader>a, :Tabularize /,\zs<CR>
-vmap <leader>a: :Tabularize /:\zs<CR>
-vmap <leader>a= :Tabularize /=<CR>
-vmap <leader>a> :Tabularize /=>\zs<CR>
-vmap <leader>as :Tabularize / [ ]*/l0l0l0<CR>
+
+vmap a" :Tabularize /"/<CR>
+vmap a, :Tabularize /,\zs<CR>
+vmap a: :Tabularize /:\zs<CR>
+vmap a= :Tabularize /=<CR>
+vmap a> :Tabularize /=>\zs<CR>
+vmap as :Tabularize / [ ]*/l0l0l0<CR>
+vmap at :Tabularize /\|/<CR>
+vmap ac :Tabularize /\/\//<CR>
+nmap f- :s/ /\-/g \| :nohlsearch<CR>
 
 " Select a buffer
 nnoremap ,, <c-^>
@@ -315,12 +313,12 @@ augroup configgroup
 
     autocmd BufNewFile,BufRead *.markdown,*.md,*.txt,*.rst setlocal wrap linebreak
     autocmd BufNewFile,BufRead *.xfdl setlocal noexpandtab
+    autocmd BufNewFile,BufRead *.xfdl setlocal ft=javascript
 
     " FileType 지정
     autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=ghmarkdown
     autocmd BufNewFile,BufRead *.json set ft=javascript
 
-    set completeopt=menu,menuone,longest
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown,play2-html setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -359,6 +357,16 @@ set statusline+=%=      " right align
 set statusline+=[%{strlen(&filetype)?&filetype:'unknown'}]
 set statusline+=[%{strlen(&fileencoding)?&fileencoding:&encoding}:%{strlen(&fileformat)?&fileformat:'unknown'}]
 set statusline+=\ %-14.(%l,%c%V%)\ %<%P
+" }}}
+" Vimrc files {{{
+if filereadable(expand("~/dotfiles/plugins.vimrc"))
+    source ~/dotfiles/plugins.vimrc
+endif
+
+" Parse local vimrc (useful for per-settings)
+if filereadable(".lvimrc")
+    source .lvimrc
+endif
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
