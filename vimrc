@@ -131,7 +131,7 @@ else
         "hi link SpecialComment MoreMsg
 
         let g:hybrid_use_iTerm_colors = 1
-        color hybrid
+        color iceberg
 
         "color iceberg
         "hi Normal ctermfg=251

@@ -58,6 +58,7 @@ NeoBundle "seonhyu/vim-colors-solarized"
 NeoBundle "seonhyu/vim-hybrid"
 NeoBundle "cocopon/iceberg.vim"
 NeoBundle "nathanaelkane/vim-indent-guides"
+NeoBundle "sfsekaran/cobalt.vim"
 
 "  Dev tools
 "===========================================================

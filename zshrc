@@ -9,7 +9,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="gentoo"
+ZSH_THEME="af-magic"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -52,14 +52,14 @@ ZSH_THEME="gentoo"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow-avh brew autojump vi-mode zsh-syntax-highlighting zsh-history-substring-search)
+plugins=(git git-flow-avh brew autojump vi-mode zsh-syntax-highlighting zsh-history-substring-search django)
 
 export LANG="en_US.UTF-8"
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=.:$HOME/.rbenv/shims:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -115,9 +115,6 @@ export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
     alias pgrep='pgrep -ilf'
     alias pkill='pkill -ilf'
-
-    alias python='python3'
-    alias pip='pip3'
 # }}}
 # Bind keys {{{
     zmodload zsh/terminfo
