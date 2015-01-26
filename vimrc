@@ -125,13 +125,10 @@ else
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        "let g:hybrid_use_iTerm_colors = 1
-        "color hybrid
+        color hybrid
 
         "color mycobalt2
         "hi Normal ctermfg=251
-
-        color base16-ocean
         
         hi link xmlCdata Normal
     endif

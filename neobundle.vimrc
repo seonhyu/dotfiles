@@ -58,7 +58,6 @@ NeoBundle "seonhyu/vim-hybrid"
 NeoBundle "cocopon/iceberg.vim"
 NeoBundle "nathanaelkane/vim-indent-guides"
 NeoBundle 'gertjanreynaert/cobalt2-vim-theme'
-NeoBundle 'chriskempson/base16-vim'
 
 "  Dev tools
 "===========================================================
