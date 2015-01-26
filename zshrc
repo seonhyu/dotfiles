@@ -52,7 +52,7 @@ ZSH_THEME="af-magic"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow-avh brew autojump vi-mode zsh-syntax-highlighting zsh-history-substring-search)
+plugins=(git git-flow-avh brew autojump vi-mode zsh-syntax-highlighting zsh-history-substring-search pip)
 
 export LANG="en_US.UTF-8"
 source $ZSH/oh-my-zsh.sh
@@ -93,9 +93,6 @@ export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/texbin
     alias l='ls -AlGh'
     alias du='du -h -d 2'
 
-    alias vi='mvim -v'
-    alias vim='mvim -v'
-
     alias gs='git status'
     alias gl='git l'
     alias ga='git add -A'
@@ -116,6 +113,8 @@ export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/texbin
 
     alias pgrep='pgrep -ilf'
     alias pkill='pkill -ilf'
+
+    alias vi='/usr/local/bin/vim'
 
     #alias pip='pip --cert ~/work/snnc/SNNC.pem'
 # }}}

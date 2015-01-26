@@ -112,7 +112,8 @@ else
         set guioptions-=r
         set guifont=Source\ Code\ Pro\ Light:h13
 
-        color iceberg
+        "color iceberg
+        color base16-ocean
     else
         set background=dark
 
@@ -127,8 +128,10 @@ else
         "let g:hybrid_use_iTerm_colors = 1
         "color hybrid
 
-        color mycobalt2
+        "color mycobalt2
         "hi Normal ctermfg=251
+
+        color base16-ocean
         
         hi link xmlCdata Normal
     endif
