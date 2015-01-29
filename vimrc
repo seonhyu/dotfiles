@@ -112,8 +112,7 @@ else
         set guioptions-=r
         set guifont=Source\ Code\ Pro\ Light:h13
 
-        "color iceberg
-        color base16-ocean
+        color iceberg
     else
         set background=dark
 
@@ -128,7 +127,7 @@ else
         color hybrid
 
         "color mycobalt2
-        "hi Normal ctermfg=251
+        hi Normal ctermfg=251
         
         hi link xmlCdata Normal
     endif
