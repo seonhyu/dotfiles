@@ -32,6 +32,7 @@ NeoBundle "tpope/vim-fugitive"
 "===========================================================
 NeoBundle "Shougo/neocomplete.git"
 NeoBundle "Shougo/neosnippet.git"
+NeoBundle "Shougo/neosnippet-snippets.git"
 NeoBundle "godlygeek/tabular"
 NeoBundle "scrooloose/nerdcommenter"
 NeoBundle "tpope/vim-surround.git"
