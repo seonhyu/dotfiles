@@ -96,7 +96,7 @@ let g:jedi#popup_select_first = 1
 " }}}
 "-------------------------------------------------- Neosnippet {{{
 " Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
+"let g:neosnippet#enable_snipmate_compatibility = 1
 
 " enter 키 동작을 단순 선택에서 끝내기.
 imap <expr><CR> neosnippet#expandable_or_jumpable() ?

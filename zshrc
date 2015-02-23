@@ -11,10 +11,6 @@ export ZSH=$HOME/.oh-my-zsh
 <<<<<<< HEAD
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="af-magic"
-=======
-ZSH_THEME="af-magic"
-#ZSH_THEME="gentoo"
->>>>>>> c67fd49474c172dbb5bc8f325bf27ed77fed7f4a
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -57,7 +53,11 @@ ZSH_THEME="af-magic"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
+<<<<<<< HEAD
 plugins=(git git-flow-avh brew autojump vi-mode zsh-syntax-highlighting zsh-history-substring-search django)
+=======
+plugins=(git git-flow-avh brew autojump vi-mode zsh-syntax-highlighting zsh-history-substring-search pip)
+>>>>>>> 4cd2911c5b5fa2807f84436e51c1a286a834ae83
 
 export LANG="en_US.UTF-8"
 source $ZSH/oh-my-zsh.sh
@@ -98,9 +98,6 @@ export PATH=.:$HOME/.rbenv/shims:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
     alias l='ls -AlGh'
     alias du='du -h -d 2'
 
-    alias vi='mvim -v'
-    alias vim='mvim -v'
-
     alias gs='git status'
     alias gl='git l'
     alias ga='git add -A'
@@ -121,6 +118,13 @@ export PATH=.:$HOME/.rbenv/shims:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
     alias pgrep='pgrep -ilf'
     alias pkill='pkill -ilf'
+<<<<<<< HEAD
+=======
+
+    alias vi='/usr/local/bin/vim'
+
+    #alias pip='pip --cert ~/work/snnc/SNNC.pem'
+>>>>>>> 4cd2911c5b5fa2807f84436e51c1a286a834ae83
 # }}}
 # Bind keys {{{
     zmodload zsh/terminfo
@@ -133,7 +137,9 @@ export PATH=.:$HOME/.rbenv/shims:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
     bindkey -M vicmd 'j' history-substring-search-down
 # }}}
 
-setjdk17
+#setjdk17
 eval "$(rbenv init -)"
+
+source /usr/local/opt/autoenv/activate.sh
 
 # vim:foldmethod=marker:foldlevel=0
