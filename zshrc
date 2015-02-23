@@ -8,7 +8,6 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-<<<<<<< HEAD
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="af-magic"
 
@@ -53,11 +52,7 @@ ZSH_THEME="af-magic"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-<<<<<<< HEAD
-plugins=(git git-flow-avh brew autojump vi-mode zsh-syntax-highlighting zsh-history-substring-search django)
-=======
 plugins=(git git-flow-avh brew autojump vi-mode zsh-syntax-highlighting zsh-history-substring-search pip)
->>>>>>> 4cd2911c5b5fa2807f84436e51c1a286a834ae83
 
 export LANG="en_US.UTF-8"
 source $ZSH/oh-my-zsh.sh
