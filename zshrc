@@ -113,13 +113,6 @@ export PATH=.:$HOME/.rbenv/shims:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
     alias pgrep='pgrep -ilf'
     alias pkill='pkill -ilf'
-<<<<<<< HEAD
-=======
-
-    alias vi='/usr/local/bin/vim'
-
-    #alias pip='pip --cert ~/work/snnc/SNNC.pem'
->>>>>>> 4cd2911c5b5fa2807f84436e51c1a286a834ae83
 # }}}
 # Bind keys {{{
     zmodload zsh/terminfo
