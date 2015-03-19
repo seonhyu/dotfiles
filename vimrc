@@ -15,10 +15,10 @@ set wildignore+=*.log,*.zip,*.jpg,*.gif,*.png,*.jar,*.class
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
 if filereadable(expand("~/dotfiles/neobundle.vimrc"))
-    source ~/dotfiles/neobundle.vimrc
+   source ~/dotfiles/neobundle.vimrc
 endif
-
-" 기본설정 적용
+" }}}
+" 기본설정 적용 {{{
 runtime! plugin/sensible.vim
 " }}}
 " Set :: Indentation {{{
@@ -32,7 +32,7 @@ nnoremap <Leader>t2 :setlocal ts=2 sw=2 sts=2<CR>
 nnoremap <Leader>t4 :setlocal ts=4 sw=4 sts=4<CR>
 " }}}
 " Set :: UI {{{
-set number
+set nonumber
 set showmode		" show current mode
 set nocursorline
 set wildmode=full
@@ -124,15 +124,16 @@ else
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        color hybrid
+        color base16-ocean
+
+        "let g:hybrid_use_Xresources = 1
+        "color hybrid
 
         "color mycobalt2
-        hi Normal ctermfg=251
+        "hi Normal ctermfg=251
         
-        hi link xmlCdata Normal
+        "hi link xmlCdata Normal
     endif
-
-    call togglebg#map("<F5>")
 endif
 
 if !has('gui_running')
@@ -222,14 +223,14 @@ nmap <leader>a: :Tabularize /:\zs<CR>
 nmap <leader>a= :Tabularize /=<CR>
 nmap <leader>a> :Tabularize /=>\zs<CR>
 
-vmap a" :Tabularize /"/<CR>
-vmap a, :Tabularize /,\zs<CR>
-vmap a: :Tabularize /:\zs<CR>
-vmap a= :Tabularize /=<CR>
-vmap a> :Tabularize /=>\zs<CR>
-vmap as :Tabularize / [ ]*/l0l0l0<CR>
-vmap at :Tabularize /\|/<CR>
-vmap ac :Tabularize /\/\//<CR>
+vmap <leader>a" :Tabularize /"/<CR>
+vmap <leader>a, :Tabularize /,\zs<CR>
+vmap <leader>a: :Tabularize /:\zs<CR>
+vmap <leader>a= :Tabularize /=<CR>
+vmap <leader>a> :Tabularize /=>\zs<CR>
+vmap <leader>as :Tabularize / [ ]*/l0l0l0<CR>
+vmap <leader>at :Tabularize /\|/<CR>
+vmap <leader>ac :Tabularize /\/\//<CR>
 nmap f- :s/ /\-/g \| :nohlsearch<CR>
 
 " Select a buffer
@@ -326,7 +327,7 @@ augroup configgroup
     autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
     autocmd FileType snippet setlocal noexpandtab
-    autocmd FileType scala,jade,html,css,json,less setlocal sw=2 sts=2 ts=2
+    autocmd FileType scala,jade,html,htmldjango,css,json,less setlocal sw=2 sts=2 ts=2
 
     " 외부에서 변경된 파일 자동 다시 읽기.
     " set autoread 에 의존한다. autoread는 키입력 다음 또는 checktime에의해 실행된다.

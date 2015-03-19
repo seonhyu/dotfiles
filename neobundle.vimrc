@@ -3,78 +3,31 @@ if has('vim_starting')
 endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
-
 NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Extend vim
 "===========================================================
+
+" 필수
+"--------------------------------
 NeoBundle "tpope/vim-sensible"
-
-" languages
-"===========================================================
-NeoBundle "pangloss/vim-javascript"
-"NeoBundle "derekwyatt/vim-scala"
-NeoBundle "davidhalter/jedi-vim"
-
-" Html, Xml, Css, Markdown...
-"===========================================================
-NeoBundle "groenewege/vim-less.git"
-NeoBundle "itspriddle/vim-jquery.git"
-NeoBundle "kchmck/vim-coffee-script"
-NeoBundle "jtratner/vim-flavored-markdown"
-NeoBundle "suan/vim-instant-markdown"
-
-" Git related...
-"===========================================================
 NeoBundle "tpope/vim-fugitive"
-
-" General text editing improvements...
-"===========================================================
+NeoBundle "scrooloose/nerdtree.git"
+NeoBundle "kien/ctrlp.vim"
 NeoBundle "Shougo/neocomplete.git"
 NeoBundle "Shougo/neosnippet.git"
-NeoBundle "Shougo/neosnippet-snippets.git"
-NeoBundle "godlygeek/tabular"
-NeoBundle "scrooloose/nerdcommenter"
-NeoBundle "tpope/vim-surround.git"
-NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'matchit.zip'
+NeoBundle "mattn/emmet-vim"
 
-" General vim improvements
-"===========================================================
-"NeoBundle "Shougo/unite.vim"
-NeoBundle "MarcWeber/vim-addon-mw-utils.git"
-NeoBundle "kien/ctrlp.vim"
-NeoBundle "majutsushi/tagbar.git"
-NeoBundle "rking/ag.vim"
-NeoBundle "scrooloose/nerdtree.git"
+" 개발지원
+"--------------------------------
 NeoBundle "scrooloose/syntastic.git"
-NeoBundle "tomtom/tlib_vim.git"
-" repeat plugin은 surround 기능을 .으로 반복할 수 있게한다.
-NeoBundle "tpope/vim-repeat.git"
+
+" Vim 확장
+"--------------------------------
+NeoBundle 'bling/vim-airline'
 
 " Cosmetics, color scheme, Powerline...
+NeoBundle 'chriskempson/base16-vim'
+
 "===========================================================
-NeoBundle "seonhyu/vim-colors-solarized"
-NeoBundle "seonhyu/vim-hybrid"
-NeoBundle "cocopon/iceberg.vim"
-NeoBundle "nathanaelkane/vim-indent-guides"
-NeoBundle 'gertjanreynaert/cobalt2-vim-theme'
-
-"  Dev tools
-"===========================================================
-NeoBundle "rizzatti/dash.vim"
-NeoBundle "Shougo/vimshell.vim"
-NeoBundle "davidoc/taskpaper.vim"
-
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-
 call neobundle#end()
+filetype plugin indent on
 NeoBundleCheck

@@ -1,7 +1,15 @@
 "-------------------------------------------------- Syntastic {{{
-let g:syntastic_mode_map = { 'mode': 'active',
-                        \ 'active_filetypes': [],
-                        \ 'passive_filetypes': ['java', 'scala', 'html'] }
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+nmap ,ln :lnext<CR>
+nmap ,lp :lprevious<CR>
 " }}}
 "-------------------------------------------------- CtrlP {{{
 let g:ctrlp_working_path_mode = 0
@@ -100,9 +108,11 @@ let g:jedi#popup_select_first = 1
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory='~/.vim/snippets'
 
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+    \ emmet#isExpandable() ? "\<C-y>," :
+    \ pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
     \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
@@ -151,7 +161,23 @@ let g:showmarks_textother="\t"
 let g:used_javascript_libs = 'underscore,backbone'
 "}}}--
 "-------------------------------------------------- airline {{{
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = '»'
+let g:airline_left_sep = ''
+let g:airline_right_sep = '«'
+let g:airline_right_sep = ''
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
 "}}}
 "-------------------------------------------------- vim-instant-markdown {{{
 let g:instant_markdown_autostart = 0
@@ -170,5 +196,9 @@ augroup END
 hi link taskpaperDone       Comment
 hi link taskpaperComment    SpecialComment
 " }}}
+"-------------------------------------------------- Emmet {{{
+" neosnippet 참조
+" }}}
+"-------------------------------------------------- Emmet {{{
 
 " vim:foldmethod=marker:foldlevel=0
