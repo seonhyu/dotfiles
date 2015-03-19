@@ -95,12 +95,11 @@ let g:jedi#popup_select_first = 1
 "let g:jedi#auto_vim_configuration = 0
 " }}}
 "-------------------------------------------------- Neosnippet {{{
-" Enable snipMate compatibility feature.
-"let g:neosnippet#enable_snipmate_compatibility = 1
+" .vim/snippets 사용
+"let g:neosnippet#disable_runtime_snippets = 1
 
-" enter 키 동작을 단순 선택에서 끝내기.
-imap <expr><CR> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? neocomplete#close_popup() : "\<CR>"
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
 
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
     \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
