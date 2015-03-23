@@ -17,7 +17,15 @@ let g:ctrlp_match_window_reversed = 0
 " user command를 사용하면 적용되지 않는다
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|tags$|\.target|\.idea$'
 " 속도 빠르게
-let g:ctrlp_user_command='ag %s -l --nocolor --hidden -g ""'
+"let g:ctrlp_user_command='ag %s -l --nocolor --hidden -g ""'
+
+unlet g:ctrlp_custom_ignore
+let g:ctrlp_custom_ignore = {
+  \ 'hiddendir':  '\v[\/]\.(git|hg|svn|bower_components)$',
+  \ 'dir':  '\v[\/](bower_components|webassets-external|__pycache__)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
 nnoremap <silent> <Leader>f  :CtrlP<CR>
 nnoremap <silent> <Leader>b  :CtrlPBuffer<CR>
@@ -108,7 +116,7 @@ let g:jedi#popup_select_first = 1
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory='~/.vim/snippets'
+"let g:neosnippet#snippets_directory='~/.vim/snippets'
 
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
     \ emmet#isExpandable() ? "\<C-y>," :
@@ -199,6 +207,13 @@ hi link taskpaperComment    SpecialComment
 "-------------------------------------------------- Emmet {{{
 " neosnippet 참조
 " }}}
-"-------------------------------------------------- Emmet {{{
+"-------------------------------------------------- YCM {{{
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+
+let g:ycm_key_list_select_completion = ['<TAB>', '<Enter>']
+
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0
+"

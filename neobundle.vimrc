@@ -12,9 +12,12 @@ NeoBundle "tpope/vim-sensible"
 NeoBundle "tpope/vim-fugitive"
 NeoBundle "scrooloose/nerdtree.git"
 NeoBundle "kien/ctrlp.vim"
-NeoBundle "Shougo/neocomplete.git"
-NeoBundle "Shougo/neosnippet.git"
+"NeoBundle "Shougo/neocomplete.git"
+"NeoBundle "Shougo/neosnippet.git"
 NeoBundle "mattn/emmet-vim"
+
+NeoBundle "SirVer/ultisnips"
+NeoBundle "Valloric/YouCompleteMe"
 
 " 개발지원
 "--------------------------------

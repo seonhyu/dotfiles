@@ -1,3 +1,11 @@
+snippet icon
+	<i class="fa fa-${1}"></i>${2}
+
+snippet assetjs
+	{% assets filters='uglifyjs', output='scripts/$1.min.js', '${1}.js' %}
+		<script src="{{ ASSET_URL }}" type="text/javascript"></script>
+	{% endassets %}${2}
+
 snippet ibox
 	<div class="ibox">
 		<div class="ibox-title"></div>

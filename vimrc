@@ -318,6 +318,7 @@ augroup configgroup
     " FileType 지정
     autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=ghmarkdown
     autocmd BufNewFile,BufRead *.json set ft=javascript
+    autocmd BufNewFile,BufRead *.html set ft=htmldjango
 
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown,play2-html setlocal omnifunc=htmlcomplete#CompleteTags
@@ -326,8 +327,8 @@ augroup configgroup
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
-    autocmd FileType snippet setlocal noexpandtab
-    autocmd FileType scala,jade,html,htmldjango,css,json,less setlocal sw=2 sts=2 ts=2
+    autocmd FileType snippet,neosnippet setlocal noexpandtab
+    autocmd FileType scala,jade,html,htmldjango,json,less setlocal sw=2 sts=2 ts=2
 
     " 외부에서 변경된 파일 자동 다시 읽기.
     " set autoread 에 의존한다. autoread는 키입력 다음 또는 checktime에의해 실행된다.
