@@ -1,7 +1,15 @@
 "-------------------------------------------------- Syntastic {{{
-let g:syntastic_mode_map = { 'mode': 'active',
-                        \ 'active_filetypes': [],
-                        \ 'passive_filetypes': ['java', 'scala', 'html'] }
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+nmap ,ln :lnext<CR>
+nmap ,lp :lprevious<CR>
 " }}}
 "-------------------------------------------------- CtrlP {{{
 let g:ctrlp_working_path_mode = 0
@@ -9,7 +17,15 @@ let g:ctrlp_match_window_reversed = 0
 " user command를 사용하면 적용되지 않는다
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|tags$|\.target|\.idea$'
 " 속도 빠르게
-let g:ctrlp_user_command='ag %s -l --nocolor --hidden -g ""'
+"let g:ctrlp_user_command='ag %s -l --nocolor --hidden -g ""'
+
+unlet g:ctrlp_custom_ignore
+let g:ctrlp_custom_ignore = {
+  \ 'hiddendir':  '\v[\/]\.(git|hg|svn|bower_components)$',
+  \ 'dir':  '\v[\/](bower_components|webassets-external|__pycache__)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
 nnoremap <silent> <Leader>f  :CtrlP<CR>
 nnoremap <silent> <Leader>b  :CtrlPBuffer<CR>
@@ -95,15 +111,16 @@ let g:jedi#popup_select_first = 1
 "let g:jedi#auto_vim_configuration = 0
 " }}}
 "-------------------------------------------------- Neosnippet {{{
+" .vim/snippets 사용
+"let g:neosnippet#disable_runtime_snippets = 1
+
 " Enable snipMate compatibility feature.
-"let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#enable_snipmate_compatibility = 1
+"let g:neosnippet#snippets_directory='~/.vim/snippets'
 
-" enter 키 동작을 단순 선택에서 끝내기.
-imap <expr><CR> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? neocomplete#close_popup() : "\<CR>"
-
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+    \ emmet#isExpandable() ? "\<C-y>," :
+    \ pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
     \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
@@ -152,7 +169,23 @@ let g:showmarks_textother="\t"
 let g:used_javascript_libs = 'underscore,backbone'
 "}}}--
 "-------------------------------------------------- airline {{{
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = '»'
+let g:airline_left_sep = ''
+let g:airline_right_sep = '«'
+let g:airline_right_sep = ''
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
 "}}}
 "-------------------------------------------------- vim-instant-markdown {{{
 let g:instant_markdown_autostart = 0
@@ -171,5 +204,16 @@ augroup END
 hi link taskpaperDone       Comment
 hi link taskpaperComment    SpecialComment
 " }}}
+"-------------------------------------------------- Emmet {{{
+" neosnippet 참조
+" }}}
+"-------------------------------------------------- YCM {{{
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+
+let g:ycm_key_list_select_completion = ['<TAB>', '<Enter>']
+
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0
+"
