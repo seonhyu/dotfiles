@@ -8,6 +8,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+# ZSH_THEME="robbyrussell"
 ZSH_THEME="af-magic"
 #ZSH_THEME="robbyrussell"
 
@@ -59,7 +60,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/texbin
+export PATH=.:$HOME/.rbenv/shims:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -113,15 +114,11 @@ export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/texbin
 
     alias pgrep='pgrep -ilf'
     alias pkill='pkill -ilf'
-
-    alias vi='/usr/local/bin/vim'
-
-    #alias pip='pip --cert ~/work/snnc/SNNC.pem'
 # }}}
 # Bind keys {{{
     zmodload zsh/terminfo
-    bindkey "$terminfo[kcuu1]" history-substring-search-up
-    bindkey "$terminfo[kcud1]" history-substring-search-down
+    #bindkey "$terminfo[kcuu1]" history-substring-search-up
+    #bindkey "$terminfo[kcud1]" history-substring-search-down
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
     # bind k and j for VI mode

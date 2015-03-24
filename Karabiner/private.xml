@@ -23,7 +23,7 @@
             <autogen>
                 __KeyToKey__
                 KeyCode::ESCAPE,
-                KeyCode::SPACE, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L,
+                KeyCode::SPACE, ModifierFlag::SHIFT_L,
                 KeyCode::VK_WAIT_50MS,
                 KeyCode::ESCAPE,
             </autogen>
@@ -36,7 +36,7 @@
             <autogen>
                 __KeyToKey__
                 KeyCode::SPACE, ModifierFlag::SHIFT_L,
-                KeyCode::SPACE,  ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L,
+                KeyCode::SPACE,  ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
             </autogen>
         </item>
         <item>

@@ -124,7 +124,7 @@ else
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        color base16-ocean
+        color hybrid
 
         "let g:hybrid_use_Xresources = 1
         "color hybrid
@@ -146,11 +146,6 @@ if !has('gui_running')
         let &t_EI = "\<Esc>]50;CursorShape=0\x7"
     endif
 endif
-
-" Italic font 지원
-"highlight Comment cterm=italic
-"highlight Comment gui=italic
-"highlight Comment ctermfg=240 guifg=#aaaaaa
 
 " }}}
 " Mappings {{{
