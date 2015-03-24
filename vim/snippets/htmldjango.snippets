@@ -1,13 +1,16 @@
-snippet icon
-	<i class="fa fa-${1}"></i>${2}
+snippet icon "font awesome icon" i
+<i class="fa fa-${1}"></i>${2}
+endsnippet
 
 snippet assetjs
-	{% assets filters='uglifyjs', output='scripts/$1.min.js', '${1}.js' %}
-		<script src="{{ ASSET_URL }}" type="text/javascript"></script>
-	{% endassets %}${2}
+{% assets filters='uglifyjs', output='scripts/$1.min.js', '${1}.js' %}
+	<script src="{{ ASSET_URL }}" type="text/javascript"></script>
+{% endassets %}${2}
+endsnippet
 
 snippet ibox
-	<div class="ibox">
-		<div class="ibox-title"></div>
-		<div class="ibox-content"></div>
-	</div>
+<div class="ibox">
+	<div class="ibox-title"></div>
+	<div class="ibox-content"></div>
+</div>
+endsnippet

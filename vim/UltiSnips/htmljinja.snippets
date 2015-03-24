@@ -1,0 +1,49 @@
+priority -40
+
+extends html, jinja2
+
+###########################################################################
+#                            방문예약                                     #
+###########################################################################
+
+snippet page
+<div class="page-header">
+	<h1>$1
+		<small>$2</small>
+	</h1>
+</div>
+
+<div class="page-body">
+$3
+</div>
+endsnippet
+
+snippet panel
+<div class="panel panel-default">
+	<div class="panel-heading">
+	</div>
+</div>
+endsnippet
+
+snippet table
+<table class="table table-hover">
+endsnippet
+
+###########################################################################
+#                            Flask & Jinja                                #
+###########################################################################
+
+snippet assetjs
+{% assets filters='uglifyjs', output='scripts/$1.min.js', '$1.js' %}
+	<script src="{{ ASSET_URL }}" type="text/javascript"></script>
+{% endassets %}
+endsnippet
+
+###########################################################################
+#                            Bootstrap, font-awesome                      #
+###########################################################################
+
+snippet icon "font-awesome icon" i
+<i class="fa fa-$1"></i>$2
+endsnippet
+

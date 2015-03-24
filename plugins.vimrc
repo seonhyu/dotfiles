@@ -110,24 +110,6 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 1
 "let g:jedi#auto_vim_configuration = 0
 " }}}
-"-------------------------------------------------- Neosnippet {{{
-" .vim/snippets 사용
-"let g:neosnippet#disable_runtime_snippets = 1
-
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-"let g:neosnippet#snippets_directory='~/.vim/snippets'
-
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-    \ emmet#isExpandable() ? "\<C-y>," :
-    \ pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-if has('conceal')
-    set conceallevel=2 concealcursor=i
-endif
-" }}}
 "-------------------------------------------------- Tagbar {{{
 if executable('coffeetags')
     let g:tagbar_type_coffee = {
@@ -153,13 +135,6 @@ let NERDTreeHighlightCursorline=0
 " NerdTree
 nnoremap <leader>n :NERDTreeToggle<CR>
 "}}}
-"-------------------------------------------------- SnipMate {{{
-nnoremap ,se :SnipMateOpenSnippetFilescr>
-" }}}
-"-------------------------------------------------- ZenCoding {{{
-let g:user_zen_expandabbr_key="<c-e>"
-let g:user_zen_mode='inv'
-" }}}
 "-------------------------------------------------- ShowMarks {{{
 let g:showmarks_enable=0
 let g:showmarks_textlower="\t"
@@ -207,12 +182,39 @@ hi link taskpaperComment    SpecialComment
 "-------------------------------------------------- Emmet {{{
 " neosnippet 참조
 " }}}
-"-------------------------------------------------- YCM {{{
-let g:ycm_server_keep_logfiles = 1
+"-------------------------------------------------- youcompleteme {{{
+let g:ycm_server_keep_logfiles = 0
 let g:ycm_server_log_level = 'debug'
 
-let g:ycm_key_list_select_completion = ['<TAB>', '<Enter>']
+" tab을 ultisnips에 양보
+let g:ycm_key_list_select_completion=['<C-j>', '<CR>']
+let g:ycm_key_list_previous_completion=['<C-k>']
+" }}}
+"-------------------------------------------------- UltiSnips {{{
+" emmet과 tab키 충돌 해결
+function! g:smart_tab()
+  if (matchstr(getline("."), '^\s*#') != "") || (matchstr(getline("."), '^\s*\.') != "")
+    call emmet#expandAbbr(3, "")
+    return "\<esc>cit\<cr>\<esc>O"
+  else
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+      if pumvisible()
+        return "\<C-n>"
+      else
+        call UltiSnips#JumpForwards()
+        if g:ulti_jump_forwards_res == 0
+          return "\<tab>"
+        endif
+      endif
+    endif
+    return ""
+  endif
+endfunction
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+autocmd BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:smart_tab()<cr>"
 
+nnoremap ,se :UltiSnipsEdit<CR>
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

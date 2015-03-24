@@ -318,7 +318,7 @@ augroup configgroup
     " FileType 지정
     autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=ghmarkdown
     autocmd BufNewFile,BufRead *.json set ft=javascript
-    autocmd BufNewFile,BufRead *.html set ft=htmldjango
+    "autocmd BufNewFile,BufRead *.html set ft=htmldjango
 
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown,play2-html setlocal omnifunc=htmlcomplete#CompleteTags

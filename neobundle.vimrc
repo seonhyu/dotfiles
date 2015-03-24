@@ -22,6 +22,7 @@ NeoBundle "Valloric/YouCompleteMe"
 " 개발지원
 "--------------------------------
 NeoBundle "scrooloose/syntastic.git"
+NeoBundle "mitsuhiko/vim-jinja"
 
 " Vim 확장
 "--------------------------------
