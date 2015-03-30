@@ -1,5 +1,74 @@
-priority -50
+priority -40
 
+#######################################################
+# visit
+#######################################################
+
+snippet app "get app module" b
+angular.module('app').
+endsnippet
+
+snippet ctrl "define controller" b
+angular.module('app').controller('$1', $1);
+
+$1.$inject = []
+function $1() {
+	var vm = this;
+
+	activate();
+
+	function activate() {
+	}
+}
+endsnippet
+
+snippet factory "define service as factory" b
+angular.module('app').factory('$1', $1);
+
+$1.$inject = ['$http', '$log'];
+function $1($http, $log) {
+	return {
+	};
+
+	////////////////////
+
+}
+endsnippet
+
+snippet directive "Directive 생서" b
+angular.module('app').directive('$1', $1);
+
+function $1() {
+	var directive = {
+		link: link,
+		templateUrl: '/static/partials/',
+		restrict: 'EA'
+	};
+	return directive;
+
+	function link(scope, el, attrs) {
+	}
+}
+endsnippet
+
+snippet $http "$http Ajax call" b
+return $http.${1:get}('/api/$2')
+	.then(onSuccess)
+	.catch(onFailure);
+
+function onSuccess(response) {
+	$log.debug('/api/$2', response.data);
+	return response;
+}
+
+function onFailure(error) {
+	$log.error('XHR failed for "/api/$2"', error.data);
+}
+endsnippet
+
+#######################################################
+# original
+#######################################################
 snippet iti "it (js, inject)" b
 it('${1:description}', inject(function($2) {
 	$0

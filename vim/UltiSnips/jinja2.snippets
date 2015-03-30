@@ -121,9 +121,9 @@ endsnippet
 
 
 snippet macro "macro" b
-{% macro ${1:name}(${2:args}) %}
+{% macro ${1:name}(${2:args}) -%}
 	$3
-{% endmacro %}
+{%- endmacro %}
 endsnippet
 
 

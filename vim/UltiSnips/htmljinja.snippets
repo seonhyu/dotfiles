@@ -6,6 +6,10 @@ extends html, jinja2
 #                            방문예약                                     #
 ###########################################################################
 
+snippet sbind "span을 이용한 ng-bind 출력" i
+<span ng-bind="$1"></span>
+endsnippet
+
 snippet page
 <div class="page-header">
 	<h1>$1
@@ -26,7 +30,7 @@ snippet panel
 endsnippet
 
 snippet table
-<table class="table table-hover">
+<table class="table table-hover table-bordered">
 endsnippet
 
 ###########################################################################
