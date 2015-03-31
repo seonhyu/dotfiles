@@ -31,6 +31,7 @@ NeoBundle 'bling/vim-airline'
 " Cosmetics, color scheme, Powerline...
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'cocopon/iceberg.vim'
 
 "===========================================================
 call neobundle#end()

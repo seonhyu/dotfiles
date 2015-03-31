@@ -114,6 +114,8 @@ export PATH=.:$HOME/.rbenv/shims:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
     alias pgrep='pgrep -ilf'
     alias pkill='pkill -ilf'
+
+    alias nvim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 # }}}
 # Bind keys {{{
     zmodload zsh/terminfo

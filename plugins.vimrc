@@ -10,6 +10,7 @@ let g:syntastic_check_on_wq = 0
 
 nmap ,ln :lnext<CR>
 nmap ,lp :lprevious<CR>
+nmap ,sr :SyntasticReset<CR>
 " }}}
 "-------------------------------------------------- CtrlP {{{
 let g:ctrlp_working_path_mode = 0

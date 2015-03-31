@@ -73,7 +73,7 @@ set undofile
 " }}}
 " Set :: Peformance {{{
 set lazyredraw
-set timeoutlen=150  " 기본값은 1000(1초)
+set timeoutlen=200  " 기본값은 1000(1초)
 set synmaxcol=200   " 200자 넘는 라인은 syntax highlight 하지 않는다.
 " }}}
 " Set :: Overwrite default {{{
@@ -124,7 +124,7 @@ else
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        color hybrid
+        color iceberg
 
         "let g:hybrid_use_Xresources = 1
         "color hybrid
@@ -181,10 +181,15 @@ inoremap ÷ <C-x><C-n>
 nnoremap <leader>a :Ag
 
 " Window Movement
-nmap <silent> <C-h> :wincmd h<CR>
-nmap <silent> <C-j> :wincmd j<CR>
-nmap <silent> <C-k> :wincmd k<CR>
-nmap <silent> <C-l> :wincmd l<CR>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+
 " Close window
 nnoremap Q :close<cr>
 " Create window splits easier.
