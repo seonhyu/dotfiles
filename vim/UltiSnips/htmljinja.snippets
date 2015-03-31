@@ -6,19 +6,31 @@ extends html, jinja2
 #                            방문예약                                     #
 ###########################################################################
 
+snippet ngb "ng-bind" i
+ng-bind="$1"
+endsnippet
+
 snippet sbind "span을 이용한 ng-bind 출력" i
 <span ng-bind="$1"></span>
 endsnippet
 
 snippet page
-<div class="page-header">
-	<h1>$1
-		<small>$2</small>
-	</h1>
-</div>
+<div id="page-wrapper" ng-controller="$1Controller as vm">
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="page-header">
+				<h1>
+					<small></small>
+				</h1>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="page-tools"></div>
+		</div>
+	</div>
 
-<div class="page-body">
-$3
+	<div class="page-body">
+	</div>
 </div>
 endsnippet
 
@@ -26,11 +38,23 @@ snippet panel
 <div class="panel panel-default">
 	<div class="panel-heading">
 	</div>
+	<div class="panel-body">
+	</div>
+	<div class="panel-footer">
+	</div>
 </div>
 endsnippet
 
 snippet table
 <table class="table table-hover table-bordered">
+endsnippet
+
+snippet mhe "modal has-error class" i
+ng-class="{'has-error':vm.formModal.errors.$1}"
+endsnippet
+
+snippet mhb "modal help-block" b
+<span class="help-block" ng-bind="vm.formModal.errors.$1"></span>
 endsnippet
 
 ###########################################################################

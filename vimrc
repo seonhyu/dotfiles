@@ -73,7 +73,7 @@ set undofile
 " }}}
 " Set :: Peformance {{{
 set lazyredraw
-set timeoutlen=500  " 기본값은 1000(1초)
+set timeoutlen=150  " 기본값은 1000(1초)
 set synmaxcol=200   " 200자 넘는 라인은 syntax highlight 하지 않는다.
 " }}}
 " Set :: Overwrite default {{{
@@ -175,9 +175,8 @@ nnoremap Y y$
 imap ;; <ESC>A
 imap ,, <ESC>wa,
 " 이전 입력한 문자열 Complete
-inoremap <C-l> <C-x><C-p>
-inoremap <M-/> <C-x><C-p>
-inoremap <leader>/ <C-x><C-p>
+inoremap <C-l> <C-x><C-n>
+inoremap ÷ <C-x><C-n>
 
 nnoremap <leader>a :Ag
 
@@ -252,7 +251,7 @@ nmap <leader>gm :Gcommit<cr>
 nnoremap <leader>k <Esc>:e ++enc=euc-kr<CR>
 
 " Refresh project
-nnoremap <leader>pr :!/usr/local/bin/ctags --extra=+f -R app/<CR><CR>
+nnoremap <leader>pr :!/usr/local/bin/ctags --exclude=.git --exclude=app/static --exclude=app/_static --extra=+f -R app/<CR><CR>
 
 " Use Q for formatting the current paragraph (or selection)
 vmap <leader>q gq
