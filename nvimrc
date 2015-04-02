@@ -74,6 +74,7 @@ set undofile
 " Set :: Peformance {{{
 set lazyredraw
 set timeoutlen=200  " 기본값은 1000(1초)
+set ttimeoutlen=-1  " 100 -> -1 : neovim에서 <esc>j 입력하면 ê 입력되는 문제 때문.
 set synmaxcol=200   " 200자 넘는 라인은 syntax highlight 하지 않는다.
 " }}}
 " Set :: Overwrite default {{{
@@ -136,16 +137,16 @@ else
     endif
 endif
 
-if !has('gui_running')
-    "모드에 따라 cursor 모양 바꾸기
-    if exists('$TMUX')
-        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-    else
-        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-    endif
-endif
+"if !has('gui_running')
+"    "모드에 따라 cursor 모양 바꾸기
+"    if exists('$TMUX')
+"        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+"    else
+"        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"    endif
+"endif
 
 " }}}
 " Mappings {{{
@@ -176,11 +177,12 @@ imap ;; <ESC>A
 imap ,, <ESC>wa,
 " 이전 입력한 문자열 Complete
 inoremap <C-l> <C-x><C-n>
-inoremap ÷ <C-x><C-n>
+inoremap <A-/> <C-x><C-n>
 
 nnoremap <leader>a :Ag
 
 " Window Movement
+nnoremap <A-TAB> <C-w>w
 nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
@@ -190,7 +192,11 @@ tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
 
-
+nnoremap <leader>w <C-w>w
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
 
 " Close window
 nnoremap Q :close<cr>
@@ -248,7 +254,7 @@ nnoremap <leader>cn :cnext<CR>
 nnoremap gp `[v`]
 
 " Hide search highlight
-nnoremap <leader>h :nohlsearch<CR>
+nnoremap <leader>nh :nohlsearch<CR>
 
 " fugitive
 nmap <leader>gs :Gstatus<cr><c-w>20+

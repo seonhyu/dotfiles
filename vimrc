@@ -343,16 +343,16 @@ endpython
 endfunction
 " }}}
 " Status line {{{
-set statusline=
-set statusline+=%<
-set statusline+=%{strlen(fugitive#head())?fugitive#head():''}
-set statusline+=%{strlen(fugitive#head())?'\ ⚡︎\ ':''}
-set statusline+=%f
-set statusline+=\ %h%m%r%w
-set statusline+=%=      " right align
-set statusline+=[%{strlen(&filetype)?&filetype:'unknown'}]
-set statusline+=[%{strlen(&fileencoding)?&fileencoding:&encoding}:%{strlen(&fileformat)?&fileformat:'unknown'}]
-set statusline+=\ %-14.(%l,%c%V%)\ %<%P
+"set statusline=
+"set statusline+=%<
+"set statusline+=%{strlen(fugitive#head())?fugitive#head():''}
+"set statusline+=%{strlen(fugitive#head())?'\ ⚡︎\ ':''}
+"set statusline+=%f
+"set statusline+=\ %h%m%r%w
+"set statusline+=%=      " right align
+"set statusline+=[%{strlen(&filetype)?&filetype:'unknown'}]
+"set statusline+=[%{strlen(&fileencoding)?&fileencoding:&encoding}:%{strlen(&fileformat)?&fileformat:'unknown'}]
+"set statusline+=\ %-14.(%l,%c%V%)\ %<%P
 " }}}
 " Vimrc files {{{
 if filereadable(expand("~/dotfiles/plugins.vimrc"))
