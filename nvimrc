@@ -32,7 +32,8 @@ nnoremap <Leader>t2 :setlocal ts=2 sw=2 sts=2<CR>
 nnoremap <Leader>t4 :setlocal ts=4 sw=4 sts=4<CR>
 " }}}
 " Set :: UI {{{
-set nonumber
+set relativenumber
+set number
 set showmode		" show current mode
 set nocursorline
 set wildmode=full
@@ -40,7 +41,8 @@ set wildmode=full
 set fillchars=vert:│,fold:┄,diff:╱
 set listchars=tab:│\ ,trail:⌴,eol:·,precedes:◂,extends:▸
 set showbreak=↪
-set showmatch       " Show matching brackets.
+"set showmatch       " Show matching brackets. insert mode에서 커서가 
+"이동한다.
 set mousehide       " Hide mouse after chars typed
 set mouse=a         " Mouse in all modes
 set nowrap          " Line wrapping off
@@ -73,7 +75,7 @@ set undofile
 " }}}
 " Set :: Peformance {{{
 set lazyredraw
-set timeoutlen=200  " 기본값은 1000(1초)
+set timeoutlen=250  " 기본값은 1000(1초)
 set ttimeoutlen=-1  " 100 -> -1 : neovim에서 <esc>j 입력하면 ê 입력되는 문제 때문.
 set synmaxcol=200   " 200자 넘는 라인은 syntax highlight 하지 않는다.
 " }}}
@@ -254,7 +256,7 @@ nnoremap <leader>cn :cnext<CR>
 nnoremap gp `[v`]
 
 " Hide search highlight
-nnoremap <leader>nh :nohlsearch<CR>
+nnoremap <leader><ESC> :nohlsearch<CR>
 
 " fugitive
 nmap <leader>gs :Gstatus<cr><c-w>20+
