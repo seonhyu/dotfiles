@@ -124,14 +124,14 @@ else
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        color iceberg
+        color hybrid
 
         "let g:hybrid_use_Xresources = 1
         "color hybrid
 
         "color mycobalt2
         "hi Normal ctermfg=251
-        
+
         "hi link xmlCdata Normal
     endif
 endif

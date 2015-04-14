@@ -94,63 +94,6 @@ set complete=.,w,b,t    " Scan current buffer, other windows buffer, loaded buff
 set completeopt=menuone,preview
 set tags=tags;/
 "}}}
-" Theme {{{
-if has('win32') || has('win64')
-    " Windows
-    source $VIMRUNTIME/mswin.vim
-    set guifont=Consolas:h10:cANSI
-    set guioptions-=T " Toolbar
-    set guioptions-=m " Menubar
-
-    " Set height and width on Windows
-    set lines=60
-    set columns=120
-
-    " Windows has a nasty habit of launching gVim in the wrong working directory
-    cd ~
-else
-    if has('gui_running')
-        " Hide Toolbar in MacVim
-        set guioptions=egmrt
-        set guioptions-=r
-        set guifont=Source\ Code\ Pro\ Light:h13
-
-        color iceberg
-    else
-        set background=dark
-
-        let g:solarized_termtrans = 1
-        let g:solarized_visibility = "low"
-        let g:solarized_contrast = "high"
-        "color solarized
-        "hi Normal ctermfg=14
-        "hi! link PmenuSel TabLineSel
-        "hi link SpecialComment MoreMsg
-
-        color iceberg
-
-        "let g:hybrid_use_Xresources = 1
-        "color hybrid
-
-        "color mycobalt2
-        "hi Normal ctermfg=251
-        
-        "hi link xmlCdata Normal
-    endif
-endif
-
-"if !has('gui_running')
-"    "모드에 따라 cursor 모양 바꾸기
-"    if exists('$TMUX')
-"        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-"        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-"    else
-"        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-"    endif
-"endif
-
-" }}}
 " Mappings {{{
 nnoremap <Space> za
 nnoremap <leader>mp :InstantMarkdownPreview<CR>
@@ -195,10 +138,6 @@ tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
 
 nnoremap <leader>w <C-w>w
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
 
 " Close window
 nnoremap Q :close<cr>
@@ -256,7 +195,7 @@ nnoremap <leader>cn :cnext<CR>
 nnoremap gp `[v`]
 
 " Hide search highlight
-nnoremap <leader><ESC> :nohlsearch<CR>
+nnoremap <leader>h :nohlsearch<CR>
 
 " fugitive
 nmap <leader>gs :Gstatus<cr><c-w>20+
@@ -377,6 +316,61 @@ endif
 if filereadable(".lvimrc")
     source .lvimrc
 endif
+" }}}
+" Theme {{{
+if has('win32') || has('win64')
+    " Windows
+    source $VIMRUNTIME/mswin.vim
+    set guifont=Consolas:h10:cANSI
+    set guioptions-=T " Toolbar
+    set guioptions-=m " Menubar
+
+    " Set height and width on Windows
+    set lines=60
+    set columns=120
+
+    " Windows has a nasty habit of launching gVim in the wrong working directory
+    cd ~
+else
+    if has('gui_running')
+        " Hide Toolbar in MacVim
+        set guioptions=egmrt
+        set guioptions-=r
+        set guifont=Source\ Code\ Pro\ Light:h13
+
+        set background=dark
+        color hybrid
+    else
+        set background=dark
+
+        "let g:solarized_termtrans = 1
+        "let g:solarized_visibility = "low"
+        "let g:solarized_contrast = "high"
+        "color solarized
+        "hi Normal ctermfg=14
+        "hi! link PmenuSel TabLineSel
+        "hi link SpecialComment MoreMsg
+
+        color iceberg
+
+        let g:indent_guides_auto_colors = 0
+        hi IndentGuidesOdd   guibg=#1e2132   ctermbg=black
+        hi IndentGuidesEven  guibg=#161821   ctermbg=darkgray
+
+    endif
+endif
+
+"if !has('gui_running')
+"    "모드에 따라 cursor 모양 바꾸기
+"    if exists('$TMUX')
+"        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+"    else
+"        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"    endif
+"endif
+
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

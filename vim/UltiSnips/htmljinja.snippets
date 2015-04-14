@@ -6,6 +6,16 @@ extends html, jinja2
 #                            방문예약                                     #
 ###########################################################################
 
+snippet sm3 "col-sm-3" i
+col-sm-3
+endsnippet
+
+
+snippet sm9 "col-sm-9" i
+col-sm-9
+endsnippet
+
+
 snippet tc "text align center" i
 class="tc"
 endsnippet
@@ -69,11 +79,19 @@ endsnippet
 #                            Flask & Jinja                                #
 ###########################################################################
 
-snippet assetjs
+snippet asset "flask-assets js" b
 {% assets filters='uglifyjs', output='scripts/$1.min.js', '$1.js' %}
 	<script src="{{ ASSET_URL }}" type="text/javascript"></script>
 {% endassets %}
 endsnippet
+
+
+snippet asset "flask-assets css" b
+{% assets output='', '' %}
+	<link rel="stylesheet" href="{{ ASSET_URL }}">
+{% endassets %}
+endsnippet
+
 
 ###########################################################################
 #                            Bootstrap, font-awesome                      #

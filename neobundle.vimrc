@@ -23,6 +23,7 @@ NeoBundle "Valloric/YouCompleteMe"
 "--------------------------------
 NeoBundle "scrooloose/syntastic.git"
 NeoBundle "mitsuhiko/vim-jinja"
+NeoBundle "groenewege/vim-less"
 
 " Vim 확장
 "--------------------------------
@@ -32,6 +33,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'cocopon/iceberg.vim'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 "===========================================================
 call neobundle#end()

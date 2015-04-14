@@ -87,13 +87,13 @@
   pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
 [mergetool]
   prompt = false
-[mergetool "mvimdiff"]
-  cmd="mvim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
+[mergetool "vimdiff"]
+  cmd="vim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
   keepbackup=false
 [merge]
   summary = true
   verbosity = 1
-  tool = mvimdiff
+  tool = vimdiff
 [apply]
   whitespace = nowarn
 [branch]
@@ -104,7 +104,7 @@
   default = tracking
 [core]
 	autocrlf = input
-  editor = "mvim -v"
+  editor = "vim"
 	excludesfile = /Users/moomoo/.gitignore_global
 [advice]
   statusHints = false
@@ -122,9 +122,9 @@
 [user]
 	name = Seonhyu Kim
 	email = seonhyu@gmail.com
-[difftool "mvimdiff"]
+[difftool "vimdiff"]
 	prompt = false
-    cmd = mvim -f -d \"$LOCAL\" \"$REMOTE\"
+    cmd = vim -f -d \"$LOCAL\" \"$REMOTE\"
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
