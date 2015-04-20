@@ -124,10 +124,7 @@ else
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        color hybrid
-
-        "let g:hybrid_use_Xresources = 1
-        "color hybrid
+        color iceberg
 
         "color mycobalt2
         "hi Normal ctermfg=251

@@ -354,8 +354,8 @@ else
         color iceberg
 
         let g:indent_guides_auto_colors = 0
-        hi IndentGuidesOdd   guibg=#1e2132   ctermbg=black
-        hi IndentGuidesEven  guibg=#161821   ctermbg=darkgray
+        hi IndentGuidesEven   guibg=#1e2132   ctermbg=black
+        hi IndentGuidesOdd  guibg=#161821   ctermbg=darkgray
 
     endif
 endif

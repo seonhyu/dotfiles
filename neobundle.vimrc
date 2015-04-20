@@ -33,6 +33,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'cocopon/iceberg.vim'
+NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
 "===========================================================
