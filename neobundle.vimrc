@@ -24,6 +24,7 @@ NeoBundle "Valloric/YouCompleteMe"
 NeoBundle "scrooloose/syntastic.git"
 NeoBundle "mitsuhiko/vim-jinja"
 NeoBundle "groenewege/vim-less"
+"NeoBundle "klen/python-mode"
 
 " Vim 확장
 "--------------------------------

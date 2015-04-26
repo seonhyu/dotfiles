@@ -120,7 +120,7 @@ hi link taskpaperComment    SpecialComment
 "-------------------------------------------------- youcompleteme {{{
 let g:ycm_server_keep_logfiles = 0
 let g:ycm_server_log_level = 'debug'
-le
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 " tab을 ultisnips에 양보
 let g:ycm_key_list_select_completion=['<C-j>', '<CR>']
 let g:ycm_key_list_previous_completion=['<C-k>']

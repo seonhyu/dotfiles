@@ -262,6 +262,7 @@ augroup configgroup
     autocmd BufNewFile,BufRead *.markdown,*.md,*.txt,*.rst setlocal wrap linebreak
     autocmd BufNewFile,BufRead *.xfdl setlocal noexpandtab
     autocmd BufNewFile,BufRead *.xfdl setlocal ft=javascript
+    autocmd BufNewFile,BufRead *.html setlocal ft=htmljinja
 
     " FileType 지정
     autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=ghmarkdown
@@ -372,5 +373,7 @@ endif
 "endif
 
 " }}}
+
+let g:python_host_prog='/usr/bin/python'
 
 " vim:foldmethod=marker:foldlevel=0
