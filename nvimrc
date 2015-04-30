@@ -75,7 +75,7 @@ set undofile
 " }}}
 " Set :: Peformance {{{
 set lazyredraw
-set timeoutlen=250  " 기본값은 1000(1초)
+set timeoutlen=300  " 기본값은 1000(1초)
 set ttimeoutlen=-1  " 100 -> -1 : neovim에서 <esc>j 입력하면 ê 입력되는 문제 때문.
 set synmaxcol=200   " 200자 넘는 라인은 syntax highlight 하지 않는다.
 " }}}

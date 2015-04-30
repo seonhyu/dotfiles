@@ -40,7 +40,7 @@ set wildmode=full
 set fillchars=vert:│,fold:┄,diff:╱
 set listchars=tab:│\ ,trail:⌴,eol:·,precedes:◂,extends:▸
 set showbreak=↪
-set showmatch       " Show matching brackets.
+"set showmatch       " Show matching brackets.
 set mousehide       " Hide mouse after chars typed
 set mouse=a         " Mouse in all modes
 set nowrap          " Line wrapping off
@@ -73,7 +73,7 @@ set undofile
 " }}}
 " Set :: Peformance {{{
 set lazyredraw
-set timeoutlen=200  " 기본값은 1000(1초)
+set timeoutlen=300  " 기본값은 1000(1초)
 set synmaxcol=200   " 200자 넘는 라인은 syntax highlight 하지 않는다.
 " }}}
 " Set :: Overwrite default {{{
@@ -116,15 +116,15 @@ else
     else
         set background=dark
 
-        let g:solarized_termtrans = 1
-        let g:solarized_visibility = "low"
-        let g:solarized_contrast = "high"
+        "let g:solarized_termtrans = 1
+        "let g:solarized_visibility = "low"
+        "let g:solarized_contrast = "high"
         "color solarized
         "hi Normal ctermfg=14
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        color iceberg
+        color hybrid
 
         "color mycobalt2
         "hi Normal ctermfg=251

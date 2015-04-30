@@ -29,9 +29,9 @@ NeoBundle "groenewege/vim-less"
 " Vim 확장
 "--------------------------------
 NeoBundle 'bling/vim-airline'
+NeoBundle 'rking/ag.vim'
 
 " Cosmetics, color scheme, Powerline...
-NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'cocopon/iceberg.vim'
 NeoBundle 'altercation/vim-colors-solarized'
