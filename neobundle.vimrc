@@ -25,11 +25,16 @@ NeoBundle "scrooloose/syntastic.git"
 NeoBundle "mitsuhiko/vim-jinja"
 NeoBundle "groenewege/vim-less"
 "NeoBundle "klen/python-mode"
+NeoBundle "Valloric/MatchTagAlways"
+NeoBundle "tomtom/tcomment_vim"
+NeoBundle "majutsushi/tagbar"
 
 " Vim 확장
 "--------------------------------
 NeoBundle 'bling/vim-airline'
 NeoBundle 'rking/ag.vim'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-repeat'
 
 " Cosmetics, color scheme, Powerline...
 NeoBundle 'w0ng/vim-hybrid'

@@ -53,7 +53,7 @@ ZSH_THEME="af-magic"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git history-substring-search git-flow-avh brew fasd vi-mode zsh-syntax-highlighting zsh-history-substring-search pip)
+plugins=(git history-substring-search git-flow-avh brew fasd vi-mode zsh-syntax-highlighting zsh-history-substring-search pip fabric)
 
 export LANG="en_US.UTF-8"
 source $ZSH/oh-my-zsh.sh
@@ -79,6 +79,12 @@ export PATH=.:$HOME/.rbenv/shims:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 # Lines configured by zsh-newuser-install
+
+# =========================================
+#   virtualenvwrapper
+# =========================================
+export WORKON_HOME=~/.pyenvs
+source /usr/local/bin/virtualenvwrapper.sh
 
 # =========================================
 #   It's mine

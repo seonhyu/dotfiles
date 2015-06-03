@@ -32,7 +32,7 @@ nnoremap <Leader>t2 :setlocal ts=2 sw=2 sts=2<CR>
 nnoremap <Leader>t4 :setlocal ts=4 sw=4 sts=4<CR>
 " }}}
 " Set :: UI {{{
-set relativenumber
+" set relativenumber
 set number
 set showmode		" show current mode
 set nocursorline
@@ -98,6 +98,10 @@ set tags=tags;/
 nnoremap <Space> za
 nnoremap <leader>mp :InstantMarkdownPreview<CR>
 
+" 마지막 pasted text 선택
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+nnoremap <leader>p :put<CR>`[v`]o<ESC>==
+
 " Don't move to next
 nnoremap * *N
 " Indent
@@ -140,7 +144,8 @@ tnoremap <A-l> <C-\><C-n><C-w>l
 nnoremap <leader>w <C-w>w
 
 " Close window
-nnoremap Q :close<cr>
+nnoremap Q :bw<cr>
+nnoremap QQ <C-w>j:bw<CR>
 " Create window splits easier.
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
@@ -182,7 +187,15 @@ vmap <leader>ac :Tabularize /\/\//<CR>
 nmap f- :s/ /\-/g \| :nohlsearch<CR>
 
 " Select a buffer
-nnoremap ,, <c-^>
+function! BufferToggle()
+    let next = bufnr("#")
+    if(next > -1)
+        execute ":buffer ".next
+    else
+        execute ":bprev"
+    endif
+endfunction
+nnoremap ,, :call BufferToggle()<CR>
 nnoremap ,bp :bprev<CR>
 nnoremap ,bn :bnext<CR>
 
@@ -277,7 +290,7 @@ augroup configgroup
     autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
     autocmd FileType snippet,neosnippet setlocal noexpandtab
-    autocmd FileType scala,jade,html,htmldjango,json,less setlocal sw=2 sts=2 ts=2
+    autocmd FileType scala,jade,html,htmldjango,json,css,less setlocal sw=2 sts=2 ts=2
 
     " 외부에서 변경된 파일 자동 다시 읽기.
     " set autoread 에 의존한다. autoread는 키입력 다음 또는 checktime에의해 실행된다.
