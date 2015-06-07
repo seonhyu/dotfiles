@@ -352,8 +352,8 @@ else
         set guioptions-=r
         set guifont=Source\ Code\ Pro\ Light:h13
 
-        set background=dark
-        color hybrid
+        set background=light
+        color solarized
     else
         set background=dark
 
@@ -365,12 +365,12 @@ else
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        color iceberg
+        colorscheme kalisi
 
-        let g:indent_guides_auto_colors = 0
-        hi IndentGuidesEven   guibg=#1e2132   ctermbg=black
-        hi IndentGuidesOdd  guibg=#161821   ctermbg=darkgray
-
+        " color iceberg
+        "let g:indent_guides_auto_colors = 0
+        "hi IndentGuidesEven   guibg=#1e2132   ctermbg=black
+        "hi IndentGuidesOdd  guibg=#161821   ctermbg=darkgray
     endif
 endif
 
