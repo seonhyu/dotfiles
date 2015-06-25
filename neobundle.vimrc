@@ -32,6 +32,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
+NeoBundle 'christoomey/vim-tmux-navigator'
 
 " Cosmetics, color scheme, Powerline...
 NeoBundle 'w0ng/vim-hybrid'

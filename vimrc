@@ -19,7 +19,7 @@ if filereadable(expand("~/dotfiles/neobundle.vimrc"))
 endif
 " }}}
 " 기본설정 적용 {{{
-runtime! plugin/sensible.vim
+"runtime! plugin/sensible.vim
 " }}}
 " Set :: Indentation {{{
 " Tab키 동작 설정

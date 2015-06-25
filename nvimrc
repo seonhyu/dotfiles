@@ -5,7 +5,7 @@
 
 " Default settings {{{
 set nocompatible
-let mapleader=","
+let mapleader="\<Space>"
 
 set wildignore+=.idea/**,.idea_modules/**,.settings/**
 set wildignore+=_public/**,*/node_modules/**,logs/**,dist/**,target/**,.target/**
@@ -75,7 +75,7 @@ set undofile
 " }}}
 " Set :: Peformance {{{
 set lazyredraw
-set timeoutlen=300  " 기본값은 1000(1초)
+set timeoutlen=200  " 기본값은 1000(1초)
 set ttimeoutlen=-1  " 100 -> -1 : neovim에서 <esc>j 입력하면 ê 입력되는 문제 때문.
 set synmaxcol=200   " 200자 넘는 라인은 syntax highlight 하지 않는다.
 " }}}
@@ -95,7 +95,8 @@ set completeopt=menuone,preview
 set tags=tags;/
 "}}}
 " Mappings {{{
-nnoremap <Space> za
+" nnoremap <space> za
+nnoremap <leader>w :w<CR>
 nnoremap <leader>mp :InstantMarkdownPreview<CR>
 
 " 마지막 pasted text 선택
@@ -128,20 +129,22 @@ imap ,, <ESC>wa,
 inoremap <C-l> <C-x><C-n>
 inoremap <A-/> <C-x><C-n>
 
-nnoremap <leader>a :Ag
+nnoremap <leader>a :Ag 
 
 " Window Movement
 nnoremap <A-TAB> <C-w>w
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+if has('nvim')
+  nmap <bs> :TmuxNavigateLeft<cr>
+endif
+
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
-
-nnoremap <leader>w <C-w>w
 
 " Close window
 nnoremap Q :bw<cr>
