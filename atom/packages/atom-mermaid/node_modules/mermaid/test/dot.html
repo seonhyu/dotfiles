@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <script src="../dist/mermaid.js"></script>
+    <script>
+        var mermaid_config = {
+            startOnLoad:true,
+            htmlLabels:true
+        }
+        mermaid.startOnLoad=true;
+        mermaid.flowchartConfig = {width:'100%'};
+    </script>
+    <script>
+        function coolAction(){
+            console.log('Got callback in user defiend function');
+        }
+    </script>
+    <style>
+        .cluster {
+            fill: #fcac93;
+            rx:4px;
+            stroke: grey;
+        }
+    </style>
+    <lnk rel="stylesheet" href="seq.css"/>
+    <lnk rel="stylesheet" href="https://raw.githubusercontent.com/knsv/mermaid/master/dist/mermaid.forest.css"/>
+    <link rel="stylesheet" href="../dist/mermaid.css"/>
+</head>
+    <body>
+    <h1>Dot syntax (experimental)</h1>
+    <pre>
+        digraph
+        {
+        a -> b -> c -- d -> e;
+        a -- e;
+        }
+    </pre>
+    <div class="mermaid">
+        digraph
+        {
+        a -> b -> c -- d -> e;
+        a -- e;
+        }
+    </div>
+
+
+    </body>
+</html>

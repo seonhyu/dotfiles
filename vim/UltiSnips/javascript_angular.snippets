@@ -4,19 +4,19 @@ priority -40
 # visit
 #######################################################
 
-snippet debug "$log.debug" b
-$log.debug($1);
+snippet app "Get module app" b
+app = app || angular.module('app');
 endsnippet
 
-snippet app "get app module" b
-angular.module('app').
+snippet debug "$log.debug" b
+$log.debug($1);
 endsnippet
 
 snippet ctrl "define controller" b
 angular.module('app').controller('$1', $1);
 
-$1.$inject = []
-function $1() {
+$1.$inject = ['$log'];
+function $1('$log') {
 	var vm = this;
 
 	activate();
@@ -39,7 +39,7 @@ function $1($http, $log) {
 }
 endsnippet
 
-snippet directive "Directive 생서" b
+snippet directive "Directive 생성" b
 angular.module('app').directive('$1', $1);
 
 function $1() {

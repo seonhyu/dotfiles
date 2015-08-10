@@ -14,8 +14,8 @@ set wildignore+=*.log,*.zip,*.jpg,*.gif,*.png,*.jar,*.class
 " }}}
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
-if filereadable(expand("~/dotfiles/neobundle.vimrc"))
-   source ~/dotfiles/neobundle.vimrc
+if filereadable(expand("~/Dropbox/dotfiles/neobundle.vimrc"))
+   source ~/Dropbox/dotfiles/neobundle.vimrc
 endif
 " }}}
 " 기본설정 적용 {{{
@@ -124,7 +124,7 @@ else
         "hi! link PmenuSel TabLineSel
         "hi link SpecialComment MoreMsg
 
-        color hybrid
+        color kalisi
 
         "color mycobalt2
         "hi Normal ctermfg=251
@@ -352,8 +352,8 @@ endfunction
 "set statusline+=\ %-14.(%l,%c%V%)\ %<%P
 " }}}
 " Vimrc files {{{
-if filereadable(expand("~/dotfiles/plugins.vimrc"))
-    source ~/dotfiles/plugins.vimrc
+if filereadable(expand("~/Dropbox/dotfiles/plugins.vimrc"))
+    source ~/Dropbox/dotfiles/plugins.vimrc
 endif
 
 " Parse local vimrc (useful for per-settings)

@@ -32,13 +32,15 @@ let g:ctrlp_custom_ignore = {
 
 nnoremap <silent> <Leader>f  :CtrlP<CR>
 nnoremap <silent> <Leader>b  :CtrlPBuffer<CR>
+nnoremap <silent> <Leader><leader>  :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>m  :CtrlPMRUFiles<CR>
 " }}}
 "-------------------------------------------------- DelimitMate {{{
-let delimitMate_expand_cr = 0
+let delimitMate_expand_space = 1
+let delimitMate_expand_cr = 1
 let delimitMate_smart_quotes = 0
 let delimitMate_smart_matchpairs = 0
-let delimitMate_matchpairs= "(:),[:],<:>,<%:%>,<%=:%>"
+let delimitMate_matchpairs= "(:),[:],<:>,{:}"
 
 " 적용하지 않을 filetype. ,로 구분.
 let delimitMate_excluded_ft = "vim"
@@ -71,7 +73,7 @@ if executable('coffeetags')
             \ }
 endif
 
-map <leader>t :TagbarToggle<CR>
+map <leader>t :TagbarToggle<CR><C-l>
 " }}}
 "-------------------------------------------------- NERDTree {{{
 let NERDTreeHighlightCursorline=0
@@ -97,10 +99,11 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
+" let g:airline_theme = 'base16'
 "}}}
-"-------------------------------------------------- vim-instant-markdown {{{
-let g:instant_markdown_autostart = 0
-let g:instant_markdown_slow = 0
+"-------------------------------------------------- vim-livedown {{{
+let g:livedown_autorun = 0
+let g:livedown_open=1
 " }}}
 "-------------------------------------------------- taskpaper {{{
 function! s:taskpaper_setup()
@@ -122,34 +125,45 @@ let g:ycm_server_keep_logfiles = 0
 let g:ycm_server_log_level = 'debug'
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 " tab을 ultisnips에 양보
-let g:ycm_key_list_select_completion=['<C-j>', '<CR>']
-let g:ycm_key_list_previous_completion=['<C-k>']
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+let g:ycm_autoclose_preview_window_after_completion=1
+
+function! Smart_CR()
+    if pumvisible() == 1
+        call feedkeys("\<c-n>\<c-y>", "i")
+        return ""
+    else
+        return "\<cr>"
+    endif
+endfunction
+"inoremap <expr> <CR> Smart_CR()
 " }}}
 "-------------------------------------------------- UltiSnips {{{
 " emmet과 tab키 충돌 해결
-function! Smart_tab()
-  if (matchstr(getline("."), '^\s*#') != "") || (matchstr(getline("."), '^\s*\.') != "")
-    call emmet#expandAbbr(3, "")
-    return "\<esc>cit\<cr>\<esc>O"
-  else
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-      if pumvisible()
-        return "\<C-n>"
-      else
-        call UltiSnips#JumpForwards()
-        if g:ulti_jump_forwards_res == 0
-          return "\<tab>"
-        endif
-      endif
-    endif
-    return ""
-  endif
-endfunction
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-autocmd BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=Smart_tab()<cr>"
+"function! Smart_tab()
+"  if (matchstr(getline("."), '^\s*#') != "") || (matchstr(getline("."), '^\s*\.') != "")
+"    call emmet#expandAbbr(3, "")
+"    return "\<esc>cit\<cr>\<esc>O"
+"  else
+"    call UltiSnips#ExpandSnippet()
+"    if g:ulti_expand_res == 0
+"      if pumvisible()
+"        return "\<C-n>"
+"      else
+"        call UltiSnips#JumpForwards()
+"        if g:ulti_jump_forwards_res == 0
+"          return "\<tab>"
+"        endif
+"      endif
+"    endif
+"    return ""
+"  endif
+"endfunction
+"let g:UltiSnipsJumpForwardTrigger="<C-tab>"
+"autocmd BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=Smart_tab()<cr>"
 
-nnoremap ,se :UltiSnipsEdit<CR>
+nnoremap <leader>se :UltiSnipsEdit<CR>
 " }}}
 "-------------------------------------------------- MatchTagAlways {{{
 let g:mta_use_matchparen_group = 1

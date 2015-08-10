@@ -1,0 +1,12 @@
+-R
+--extra=+f
+--python-kinds=-iv
+--exclude=.git
+--exclude=front/bower_components
+--exclude=frontapp/bower_components
+--exclude='front/node_modules'
+--exclude='frontapp/node_modules'
+--exclude=*.min.js
+--exclude=runtime
+--exclude=static
+--exclude=__pycache__

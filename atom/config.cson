@@ -1,0 +1,21 @@
+"*":
+  "exception-reporting":
+    userId: "d279a641-6fd5-7943-8b8e-ec60f7a4817f"
+  welcome:
+    showOnStartup: false
+  core:
+    themes: [
+      "one-dark-ui"
+      "solarized-dark-syntax"
+    ]
+  editor:
+    invisibles: {}
+    showIndentGuide: true
+    fontSize: 13
+  "vim-mode":
+    useClipboardAsDefaultRegister: true
+    useSmartcaseForSearch: true
+  "vim-mode-next":
+    useClipboardAsDefaultRegister: true
+    useSmartcaseForSearch: true
+  term2: {}

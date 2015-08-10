@@ -1,0 +1,886 @@
+Processing grammar.
+$accept(0)
+$end(1)
+error(2)
+mermaidDoc(3)
+graphConfig(4)
+lineEnd(5)
+document(6)
+GRAPH(7)
+DIR(8)
+TAGEND(9)
+TAGSTART(10)
+UP(11)
+DOWN(12)
+line(13)
+statement(14)
+lineEnd2(15)
+NEWLINE(16)
+EOF(17)
+SEMI(18)
+verticeStatement(19)
+styleStatement(20)
+vertex(21)
+linkStatement(22)
+alphaNum(23)
+vertexType(24)
+SQUARE(25)
+ROUND(26)
+CIRCLE(27)
+DIAMOND(28)
+ODD(29)
+link(30)
+arrowText(31)
+--(32)
+text(33)
+ARROW_POINT(34)
+ARROW_CIRCLE(35)
+ARROW_CROSS(36)
+ARROW_OPEN(37)
+-.(38)
+DOTTED_ARROW_POINT(39)
+DOTTED_ARROW_CIRCLE(40)
+DOTTED_ARROW_CROSS(41)
+DOTTED_ARROW_OPEN(42)
+==(43)
+THICK_ARROW_POINT(44)
+THICK_ARROW_CIRCLE(45)
+THICK_ARROW_CROSS(46)
+THICK_ARROW_OPEN(47)
+alphaNumToken(48)
+alphaNum2(49)
+MINUS(50)
+PIPE(51)
+textToken(52)
+TESTSTR(53)
+commentText(54)
+commentToken(55)
+keywords(56)
+STYLE(57)
+LINKSTYLE(58)
+CLASSDEF(59)
+CLASS(60)
+CLICK(61)
+subgraph(62)
+end(63)
+textNoTags(64)
+textNoTagsToken(65)
+classDefStatement(66)
+SPACE(67)
+DEFAULT(68)
+stylesOpt(69)
+classStatement(70)
+clickStatement(71)
+HEX(72)
+linkStyleStatement(73)
+NUM(74)
+commentStatement(75)
+PCT(76)
+style(77)
+COMMA(78)
+styleComponent(79)
+ALPHA(80)
+COLON(81)
+UNIT(82)
+BRKT(83)
+DOT(84)
+graphCodeTokens(85)
+PLUS(86)
+EQUALS(87)
+MULT(88)
+PS(89)
+PE(90)
+SQS(91)
+SQE(92)
+DIAMOND_START(93)
+DIAMOND_STOP(94)
+TAG_START(95)
+TAG_END(96)
+QUOTE(97)
+
+Item sets
+------
+
+item set 0 
+$accept -> .mermaidDoc $end #lookaheads= $end
+mermaidDoc -> .graphConfig lineEnd document
+graphConfig -> .GRAPH DIR
+graphConfig -> .GRAPH TAGEND
+graphConfig -> .GRAPH TAGSTART
+graphConfig -> .GRAPH UP
+graphConfig -> .GRAPH DOWN 
+transitions ->  {"mermaidDoc":1,"graphConfig":2,"GRAPH":3}
+
+item set 1 
+$accept -> mermaidDoc .$end #lookaheads= $end 
+transitions ->  {}
+
+item set 2 
+mermaidDoc -> graphConfig .lineEnd document
+lineEnd -> .lineEnd2
+lineEnd -> .lineEnd2 lineEnd
+lineEnd2 -> .NEWLINE
+lineEnd2 -> .EOF
+lineEnd2 -> .SEMI 
+transitions ->  {"lineEnd":4,"lineEnd2":5,"NEWLINE":6,"EOF":7,"SEMI":8}
+
+item set 3 
+graphConfig -> GRAPH .DIR
+graphConfig -> GRAPH .TAGEND
+graphConfig -> GRAPH .TAGSTART
+graphConfig -> GRAPH .UP
+graphConfig -> GRAPH .DOWN 
+transitions ->  {"DIR":9,"TAGEND":10,"TAGSTART":11,"UP":12,"DOWN":13}
+
+item set 4 
+mermaidDoc -> graphConfig lineEnd .document
+document -> .
+document -> .document line 
+transitions ->  {"document":14}
+
+item set 5 
+lineEnd -> lineEnd2 .
+lineEnd -> lineEnd2 .lineEnd
+lineEnd -> .lineEnd2
+lineEnd -> .lineEnd2 lineEnd
+lineEnd2 -> .NEWLINE
+lineEnd2 -> .EOF
+lineEnd2 -> .SEMI 
+transitions ->  {"lineEnd":15,"lineEnd2":5,"NEWLINE":6,"EOF":7,"SEMI":8}
+
+item set 6 
+lineEnd2 -> NEWLINE . 
+transitions ->  {}
+
+item set 7 
+lineEnd2 -> EOF . 
+transitions ->  {}
+
+item set 8 
+lineEnd2 -> SEMI . 
+transitions ->  {}
+
+item set 9 
+graphConfig -> GRAPH DIR . 
+transitions ->  {}
+
+item set 10 
+graphConfig -> GRAPH TAGEND . 
+transitions ->  {}
+
+item set 11 
+graphConfig -> GRAPH TAGSTART . 
+transitions ->  {}
+
+item set 12 
+graphConfig -> GRAPH UP . 
+transitions ->  {}
+
+item set 13 
+graphConfig -> GRAPH DOWN . 
+transitions ->  {}
+
+item set 14 
+mermaidDoc -> graphConfig lineEnd document .
+document -> document .line
+line -> .statement lineEnd
+statement -> .verticeStatement
+statement -> .styleStatement
+verticeStatement -> .vertex linkStatement vertex
+verticeStatement -> .vertex
+styleStatement -> .STYLE alphaNum stylesOpt
+styleStatement -> .STYLE HEX stylesOpt
+vertex -> .alphaNum vertexType
+vertex -> .alphaNum
+alphaNum -> .alphaNumToken
+alphaNum -> .alphaNum alphaNumToken
+alphaNumToken -> .ALPHA
+alphaNumToken -> .NUM
+alphaNumToken -> .COLON
+alphaNumToken -> .COMMA
+alphaNumToken -> .PLUS
+alphaNumToken -> .EQUALS
+alphaNumToken -> .MULT
+alphaNumToken -> .DOT
+alphaNumToken -> .BRKT 
+transitions ->  {"line":16,"statement":17,"verticeStatement":18,"styleStatement":19,"vertex":20,"STYLE":21,"alphaNum":22,"alphaNumToken":23,"ALPHA":24,"NUM":25,"COLON":26,"COMMA":27,"PLUS":28,"EQUALS":29,"MULT":30,"DOT":31,"BRKT":32}
+
+item set 15 
+lineEnd -> lineEnd2 lineEnd . 
+transitions ->  {}
+
+item set 16 
+document -> document line . 
+transitions ->  {}
+
+item set 17 
+line -> statement .lineEnd
+lineEnd -> .lineEnd2
+lineEnd -> .lineEnd2 lineEnd
+lineEnd2 -> .NEWLINE
+lineEnd2 -> .EOF
+lineEnd2 -> .SEMI 
+transitions ->  {"lineEnd":33,"lineEnd2":5,"NEWLINE":6,"EOF":7,"SEMI":8}
+
+item set 18 
+statement -> verticeStatement . 
+transitions ->  {}
+
+item set 19 
+statement -> styleStatement . 
+transitions ->  {}
+
+item set 20 
+verticeStatement -> vertex .linkStatement vertex
+verticeStatement -> vertex .
+linkStatement -> .ARROW_POINT
+linkStatement -> .ARROW_CIRCLE
+linkStatement -> .ARROW_CROSS
+linkStatement -> .ARROW_OPEN
+linkStatement -> .DOTTED_ARROW_POINT
+linkStatement -> .DOTTED_ARROW_CIRCLE
+linkStatement -> .DOTTED_ARROW_CROSS
+linkStatement -> .DOTTED_ARROW_OPEN
+linkStatement -> .THICK_ARROW_POINT
+linkStatement -> .THICK_ARROW_CIRCLE
+linkStatement -> .THICK_ARROW_CROSS
+linkStatement -> .THICK_ARROW_OPEN 
+transitions ->  {"linkStatement":34,"ARROW_POINT":35,"ARROW_CIRCLE":36,"ARROW_CROSS":37,"ARROW_OPEN":38,"DOTTED_ARROW_POINT":39,"DOTTED_ARROW_CIRCLE":40,"DOTTED_ARROW_CROSS":41,"DOTTED_ARROW_OPEN":42,"THICK_ARROW_POINT":43,"THICK_ARROW_CIRCLE":44,"THICK_ARROW_CROSS":45,"THICK_ARROW_OPEN":46}
+
+item set 21 
+styleStatement -> STYLE .alphaNum stylesOpt
+styleStatement -> STYLE .HEX stylesOpt
+alphaNum -> .alphaNumToken
+alphaNum -> .alphaNum alphaNumToken
+alphaNumToken -> .ALPHA
+alphaNumToken -> .NUM
+alphaNumToken -> .COLON
+alphaNumToken -> .COMMA
+alphaNumToken -> .PLUS
+alphaNumToken -> .EQUALS
+alphaNumToken -> .MULT
+alphaNumToken -> .DOT
+alphaNumToken -> .BRKT 
+transitions ->  {"alphaNum":47,"HEX":48,"alphaNumToken":23,"ALPHA":24,"NUM":25,"COLON":26,"COMMA":27,"PLUS":28,"EQUALS":29,"MULT":30,"DOT":31,"BRKT":32}
+
+item set 22 
+vertex -> alphaNum .vertexType
+vertex -> alphaNum .
+alphaNum -> alphaNum .alphaNumToken
+vertexType -> .SQUARE
+vertexType -> .ROUND
+vertexType -> .CIRCLE
+vertexType -> .DIAMOND
+vertexType -> .ODD
+alphaNumToken -> .ALPHA
+alphaNumToken -> .NUM
+alphaNumToken -> .COLON
+alphaNumToken -> .COMMA
+alphaNumToken -> .PLUS
+alphaNumToken -> .EQUALS
+alphaNumToken -> .MULT
+alphaNumToken -> .DOT
+alphaNumToken -> .BRKT 
+transitions ->  {"vertexType":49,"alphaNumToken":50,"SQUARE":51,"ROUND":52,"CIRCLE":53,"DIAMOND":54,"ODD":55,"ALPHA":24,"NUM":25,"COLON":26,"COMMA":27,"PLUS":28,"EQUALS":29,"MULT":30,"DOT":31,"BRKT":32}
+
+item set 23 
+alphaNum -> alphaNumToken . 
+transitions ->  {}
+
+item set 24 
+alphaNumToken -> ALPHA . 
+transitions ->  {}
+
+item set 25 
+alphaNumToken -> NUM . 
+transitions ->  {}
+
+item set 26 
+alphaNumToken -> COLON . 
+transitions ->  {}
+
+item set 27 
+alphaNumToken -> COMMA . 
+transitions ->  {}
+
+item set 28 
+alphaNumToken -> PLUS . 
+transitions ->  {}
+
+item set 29 
+alphaNumToken -> EQUALS . 
+transitions ->  {}
+
+item set 30 
+alphaNumToken -> MULT . 
+transitions ->  {}
+
+item set 31 
+alphaNumToken -> DOT . 
+transitions ->  {}
+
+item set 32 
+alphaNumToken -> BRKT . 
+transitions ->  {}
+
+item set 33 
+line -> statement lineEnd . 
+transitions ->  {}
+
+item set 34 
+verticeStatement -> vertex linkStatement .vertex
+vertex -> .alphaNum vertexType
+vertex -> .alphaNum
+alphaNum -> .alphaNumToken
+alphaNum -> .alphaNum alphaNumToken
+alphaNumToken -> .ALPHA
+alphaNumToken -> .NUM
+alphaNumToken -> .COLON
+alphaNumToken -> .COMMA
+alphaNumToken -> .PLUS
+alphaNumToken -> .EQUALS
+alphaNumToken -> .MULT
+alphaNumToken -> .DOT
+alphaNumToken -> .BRKT 
+transitions ->  {"vertex":56,"alphaNum":22,"alphaNumToken":23,"ALPHA":24,"NUM":25,"COLON":26,"COMMA":27,"PLUS":28,"EQUALS":29,"MULT":30,"DOT":31,"BRKT":32}
+
+item set 35 
+linkStatement -> ARROW_POINT . 
+transitions ->  {}
+
+item set 36 
+linkStatement -> ARROW_CIRCLE . 
+transitions ->  {}
+
+item set 37 
+linkStatement -> ARROW_CROSS . 
+transitions ->  {}
+
+item set 38 
+linkStatement -> ARROW_OPEN . 
+transitions ->  {}
+
+item set 39 
+linkStatement -> DOTTED_ARROW_POINT . 
+transitions ->  {}
+
+item set 40 
+linkStatement -> DOTTED_ARROW_CIRCLE . 
+transitions ->  {}
+
+item set 41 
+linkStatement -> DOTTED_ARROW_CROSS . 
+transitions ->  {}
+
+item set 42 
+linkStatement -> DOTTED_ARROW_OPEN . 
+transitions ->  {}
+
+item set 43 
+linkStatement -> THICK_ARROW_POINT . 
+transitions ->  {}
+
+item set 44 
+linkStatement -> THICK_ARROW_CIRCLE . 
+transitions ->  {}
+
+item set 45 
+linkStatement -> THICK_ARROW_CROSS . 
+transitions ->  {}
+
+item set 46 
+linkStatement -> THICK_ARROW_OPEN . 
+transitions ->  {}
+
+item set 47 
+styleStatement -> STYLE alphaNum .stylesOpt
+alphaNum -> alphaNum .alphaNumToken
+stylesOpt -> .style
+stylesOpt -> .stylesOpt COMMA style
+alphaNumToken -> .ALPHA
+alphaNumToken -> .NUM
+alphaNumToken -> .COLON
+alphaNumToken -> .COMMA
+alphaNumToken -> .PLUS
+alphaNumToken -> .EQUALS
+alphaNumToken -> .MULT
+alphaNumToken -> .DOT
+alphaNumToken -> .BRKT
+style -> .styleComponent
+style -> .style styleComponent
+styleComponent -> .ALPHA
+styleComponent -> .COLON
+styleComponent -> .MINUS
+styleComponent -> .NUM
+styleComponent -> .UNIT
+styleComponent -> .SPACE
+styleComponent -> .HEX
+styleComponent -> .BRKT
+styleComponent -> .DOT
+styleComponent -> .STYLE
+styleComponent -> .PCT 
+transitions ->  {"stylesOpt":57,"alphaNumToken":50,"style":58,"ALPHA":59,"NUM":60,"COLON":61,"COMMA":27,"PLUS":28,"EQUALS":29,"MULT":30,"DOT":62,"BRKT":63,"styleComponent":64,"MINUS":65,"UNIT":66,"SPACE":67,"HEX":68,"STYLE":69,"PCT":70}
+
+item set 48 
+styleStatement -> STYLE HEX .stylesOpt
+stylesOpt -> .style
+stylesOpt -> .stylesOpt COMMA style
+style -> .styleComponent
+style -> .style styleComponent
+styleComponent -> .ALPHA
+styleComponent -> .COLON
+styleComponent -> .MINUS
+styleComponent -> .NUM
+styleComponent -> .UNIT
+styleComponent -> .SPACE
+styleComponent -> .HEX
+styleComponent -> .BRKT
+styleComponent -> .DOT
+styleComponent -> .STYLE
+styleComponent -> .PCT 
+transitions ->  {"stylesOpt":71,"style":58,"styleComponent":64,"ALPHA":72,"COLON":73,"MINUS":65,"NUM":74,"UNIT":66,"SPACE":67,"HEX":68,"BRKT":75,"DOT":76,"STYLE":69,"PCT":70}
+
+item set 49 
+vertex -> alphaNum vertexType . 
+transitions ->  {}
+
+item set 50 
+alphaNum -> alphaNum alphaNumToken . 
+transitions ->  {}
+
+item set 51 
+vertexType -> SQUARE . 
+transitions ->  {}
+
+item set 52 
+vertexType -> ROUND . 
+transitions ->  {}
+
+item set 53 
+vertexType -> CIRCLE . 
+transitions ->  {}
+
+item set 54 
+vertexType -> DIAMOND . 
+transitions ->  {}
+
+item set 55 
+vertexType -> ODD . 
+transitions ->  {}
+
+item set 56 
+verticeStatement -> vertex linkStatement vertex . 
+transitions ->  {}
+
+item set 57 
+styleStatement -> STYLE alphaNum stylesOpt .
+stylesOpt -> stylesOpt .COMMA style 
+transitions ->  {"COMMA":77}
+
+item set 58 
+stylesOpt -> style .
+style -> style .styleComponent
+styleComponent -> .ALPHA
+styleComponent -> .COLON
+styleComponent -> .MINUS
+styleComponent -> .NUM
+styleComponent -> .UNIT
+styleComponent -> .SPACE
+styleComponent -> .HEX
+styleComponent -> .BRKT
+styleComponent -> .DOT
+styleComponent -> .STYLE
+styleComponent -> .PCT 
+transitions ->  {"styleComponent":78,"ALPHA":72,"COLON":73,"MINUS":65,"NUM":74,"UNIT":66,"SPACE":67,"HEX":68,"BRKT":75,"DOT":76,"STYLE":69,"PCT":70}
+
+item set 59 
+alphaNumToken -> ALPHA .
+styleComponent -> ALPHA . 
+transitions ->  {}
+
+item set 60 
+alphaNumToken -> NUM .
+styleComponent -> NUM . 
+transitions ->  {}
+
+item set 61 
+alphaNumToken -> COLON .
+styleComponent -> COLON . 
+transitions ->  {}
+
+item set 62 
+alphaNumToken -> DOT .
+styleComponent -> DOT . 
+transitions ->  {}
+
+item set 63 
+alphaNumToken -> BRKT .
+styleComponent -> BRKT . 
+transitions ->  {}
+
+item set 64 
+style -> styleComponent . 
+transitions ->  {}
+
+item set 65 
+styleComponent -> MINUS . 
+transitions ->  {}
+
+item set 66 
+styleComponent -> UNIT . 
+transitions ->  {}
+
+item set 67 
+styleComponent -> SPACE . 
+transitions ->  {}
+
+item set 68 
+styleComponent -> HEX . 
+transitions ->  {}
+
+item set 69 
+styleComponent -> STYLE . 
+transitions ->  {}
+
+item set 70 
+styleComponent -> PCT . 
+transitions ->  {}
+
+item set 71 
+styleStatement -> STYLE HEX stylesOpt .
+stylesOpt -> stylesOpt .COMMA style 
+transitions ->  {"COMMA":77}
+
+item set 72 
+styleComponent -> ALPHA . 
+transitions ->  {}
+
+item set 73 
+styleComponent -> COLON . 
+transitions ->  {}
+
+item set 74 
+styleComponent -> NUM . 
+transitions ->  {}
+
+item set 75 
+styleComponent -> BRKT . 
+transitions ->  {}
+
+item set 76 
+styleComponent -> DOT . 
+transitions ->  {}
+
+item set 77 
+stylesOpt -> stylesOpt COMMA .style
+style -> .styleComponent
+style -> .style styleComponent
+styleComponent -> .ALPHA
+styleComponent -> .COLON
+styleComponent -> .MINUS
+styleComponent -> .NUM
+styleComponent -> .UNIT
+styleComponent -> .SPACE
+styleComponent -> .HEX
+styleComponent -> .BRKT
+styleComponent -> .DOT
+styleComponent -> .STYLE
+styleComponent -> .PCT 
+transitions ->  {"style":79,"styleComponent":64,"ALPHA":72,"COLON":73,"MINUS":65,"NUM":74,"UNIT":66,"SPACE":67,"HEX":68,"BRKT":75,"DOT":76,"STYLE":69,"PCT":70}
+
+item set 78 
+style -> style styleComponent . 
+transitions ->  {}
+
+item set 79 
+stylesOpt -> stylesOpt COMMA style .
+style -> style .styleComponent
+styleComponent -> .ALPHA
+styleComponent -> .COLON
+styleComponent -> .MINUS
+styleComponent -> .NUM
+styleComponent -> .UNIT
+styleComponent -> .SPACE
+styleComponent -> .HEX
+styleComponent -> .BRKT
+styleComponent -> .DOT
+styleComponent -> .STYLE
+styleComponent -> .PCT 
+transitions ->  {"styleComponent":78,"ALPHA":72,"COLON":73,"MINUS":65,"NUM":74,"UNIT":66,"SPACE":67,"HEX":68,"BRKT":75,"DOT":76,"STYLE":69,"PCT":70}
+80 states.
+Building lookahead grammar.
+Computing lookaheads.
+Building parse table.
+Conflict at state: 59, token: MULT
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: EQUALS
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: PLUS
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: COMMA
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: PCT
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: STYLE
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: DOT
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: BRKT
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: HEX
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: SPACE
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: UNIT
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: NUM
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: MINUS
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: COLON
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: ALPHA
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: NEWLINE
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: EOF
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 59, token: SEMI
+  reduce by rule: styleComponent -> ALPHA
+  reduce by rule: alphaNumToken -> ALPHA
+Conflict at state: 60, token: MULT
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: EQUALS
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: PLUS
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: COMMA
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: PCT
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: STYLE
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: DOT
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: BRKT
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: HEX
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: SPACE
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: UNIT
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: NUM
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: MINUS
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: COLON
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: ALPHA
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: NEWLINE
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: EOF
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 60, token: SEMI
+  reduce by rule: styleComponent -> NUM
+  reduce by rule: alphaNumToken -> NUM
+Conflict at state: 61, token: MULT
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: EQUALS
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: PLUS
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: COMMA
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: PCT
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: STYLE
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: DOT
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: BRKT
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: HEX
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: SPACE
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: UNIT
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: NUM
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: MINUS
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: COLON
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: ALPHA
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: NEWLINE
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: EOF
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 61, token: SEMI
+  reduce by rule: styleComponent -> COLON
+  reduce by rule: alphaNumToken -> COLON
+Conflict at state: 62, token: MULT
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: EQUALS
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: PLUS
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: COMMA
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: PCT
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: STYLE
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: DOT
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: BRKT
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: HEX
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: SPACE
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: UNIT
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: NUM
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: MINUS
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: COLON
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: ALPHA
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: NEWLINE
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: EOF
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 62, token: SEMI
+  reduce by rule: styleComponent -> DOT
+  reduce by rule: alphaNumToken -> DOT
+Conflict at state: 63, token: MULT
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: EQUALS
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: PLUS
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: COMMA
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: PCT
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: STYLE
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: DOT
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: BRKT
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: HEX
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: SPACE
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: UNIT
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: NUM
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: MINUS
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: COLON
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: ALPHA
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: NEWLINE
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: EOF
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+Conflict at state: 63, token: SEMI
+  reduce by rule: styleComponent -> BRKT
+  reduce by rule: alphaNumToken -> BRKT
+
+90 Conflict(s) found in grammar.
+Done.

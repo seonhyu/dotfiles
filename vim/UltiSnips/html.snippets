@@ -1,6 +1,26 @@
 priority -50
 
 ###########################################################################
+#                            Bootstrap                                    #
+###########################################################################
+
+snippet label "Bootstrap labels" i
+<span class="label label-${1:default}">$2</span>
+endsnippet
+
+snippet btnnew "추가 버튼" b
+<button class="btn btn-primary btn-sm" ng-click="${1:vm.openNewModal()}"><i class="fa fa-plus-square"></i> $2추가</button>
+endsnippet
+
+snippet btnsearch "검색 버튼" b
+<button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> 검색</button>
+endsnippet
+
+snippet btnsearchreset "검색 초기화 버튼" b
+<button type="button" ng-click="vm.resetSearchForm()" class="btn btn-default btn-sm reset" title="검색조건 초기화"><i class="fa fa-eraser"></i></button>
+endsnippet
+
+###########################################################################
 #                            TextMate Snippets                            #
 ###########################################################################
 

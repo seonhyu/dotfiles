@@ -14,8 +14,8 @@ set wildignore+=*.log,*.zip,*.jpg,*.gif,*.png,*.jar,*.class
 " }}}
 " NeoBundle {{{
 " Use Vundle plugin to manage all other plugins
-if filereadable(expand("~/dotfiles/neobundle.vimrc"))
-   source ~/dotfiles/neobundle.vimrc
+if filereadable(expand("~/Dropbox/dotfiles/neobundle.vimrc"))
+   source ~/Dropbox/dotfiles/neobundle.vimrc
 endif
 " }}}
 " 기본설정 적용 {{{
@@ -75,7 +75,7 @@ set undofile
 " }}}
 " Set :: Peformance {{{
 set lazyredraw
-set timeoutlen=200  " 기본값은 1000(1초)
+set timeoutlen=300  " 기본값은 1000(1초)
 set ttimeoutlen=-1  " 100 -> -1 : neovim에서 <esc>j 입력하면 ê 입력되는 문제 때문.
 set synmaxcol=200   " 200자 넘는 라인은 syntax highlight 하지 않는다.
 " }}}
@@ -97,7 +97,9 @@ set tags=tags;/
 " Mappings {{{
 " nnoremap <space> za
 nnoremap <leader>w :w<CR>
-nnoremap <leader>mp :InstantMarkdownPreview<CR>
+nnoremap <C-s> <ESC>:w<CR>
+inoremap <C-s> <ESC>:w<CR>i
+nnoremap <leader>mp :!tmux split-window -l 5 "livedown start %:p --verbose"<CR><CR>
 
 " 마지막 pasted text 선택
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
@@ -115,16 +117,18 @@ nnoremap k gk
 "Go to last edit location
 nnoremap <leader>. '.
 
-" toggle
+" 각종 toggle
 nnoremap <silent> <F1> :set number!<CR>
 nnoremap <silent> <F2> :set paste!<CR>
 nnoremap <silent> <F3> :set spell!<CR>
+nmap <leader>ts :SyntasticToggleMode<CR>
 
 " 마지막 입력한 부분을 선택
-nnoremap gV `[v`]
+nnoremap gV `[V`]
 nnoremap Y y$
 imap ;; <ESC>A
-imap ,, <ESC>wa,
+imap ;;; <ESC>A;<ESC>
+imap ,, <ESC>wa
 " 이전 입력한 문자열 Complete
 inoremap <C-l> <C-x><C-n>
 inoremap <A-/> <C-x><C-n>
@@ -147,8 +151,8 @@ tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
 
 " Close window
-nnoremap Q :bw<cr>
-nnoremap QQ <C-w>j:bw<CR>
+nnoremap <leader>x :bw<cr>
+nnoremap <leader>xx <C-w>j:bw<CR>
 " Create window splits easier.
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
@@ -173,20 +177,25 @@ if has('gui_running')
 endif
 
 " Tabular
-nmap <leader>a" :Tabularize /"/<CR>
-nmap <leader>a, :Tabularize /,\zs<CR>
-nmap <leader>a: :Tabularize /:\zs<CR>
-nmap <leader>a= :Tabularize /=<CR>
-nmap <leader>a> :Tabularize /=>\zs<CR>
+" nmap <leader>a" :Tabularize /"/<CR>
+" nmap <leader>a, :Tabularize /,\zs<CR>
+" nmap <leader>a: :Tabularize /:\zs<CR>
+" nmap <leader>a= :Tabularize /=<CR>
+" nmap <leader>a> :Tabularize /=>\zs<CR>
+"
+" vmap <leader>a" :Tabularize /"/<CR>
+" vmap <leader>a, :Tabularize /,\zs<CR>
+" vmap <leader>a: :Tabularize /:\zs<CR>
+" vmap <leader>a= :Tabularize /=<CR>
+" vmap <leader>a> :Tabularize /=>\zs<CR>
+" vmap <leader>as :Tabularize / [ ]*/l0l0l0<CR>
+" vmap <leader>at :Tabularize /\|/<CR>
+" vmap <leader>ac :Tabularize /\/\//<CR>
 
-vmap <leader>a" :Tabularize /"/<CR>
-vmap <leader>a, :Tabularize /,\zs<CR>
-vmap <leader>a: :Tabularize /:\zs<CR>
-vmap <leader>a= :Tabularize /=<CR>
-vmap <leader>a> :Tabularize /=>\zs<CR>
-vmap <leader>as :Tabularize / [ ]*/l0l0l0<CR>
-vmap <leader>at :Tabularize /\|/<CR>
-vmap <leader>ac :Tabularize /\/\//<CR>
+" Tabular 대신에 vim-easy-plugin 사용
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 nmap f- :s/ /\-/g \| :nohlsearch<CR>
 
 " Select a buffer
@@ -199,8 +208,8 @@ function! BufferToggle()
     endif
 endfunction
 nnoremap ,, :call BufferToggle()<CR>
-nnoremap ,bp :bprev<CR>
-nnoremap ,bn :bnext<CR>
+nnoremap <leader>bp :bprev<CR>
+nnoremap <leader>bn :bnext<CR>
 
 nnoremap <leader>co :copen<CR>
 nnoremap <leader>cc :cc<CR>
@@ -221,7 +230,10 @@ nmap <leader>gm :Gcommit<cr>
 nnoremap <leader>k <Esc>:e ++enc=euc-kr<CR>
 
 " Refresh project
-nnoremap <leader>pr :!/usr/local/bin/ctags --exclude=.git --exclude=app/static --exclude=app/_static --extra=+f -R app/<CR><CR>
+" play project
+"nnoremap <leader>pr :!/usr/local/bin/ctags --exclude=.git --exclude=app/static --exclude=app/_static --extra=+f -R app/<CR><CR>
+" flask project
+nnoremap <leader>pr :!/usr/local/bin/ctags<CR><CR>
 
 " Use Q for formatting the current paragraph (or selection)
 vmap <leader>q gq
@@ -293,7 +305,9 @@ augroup configgroup
     autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
     autocmd FileType snippet,neosnippet setlocal noexpandtab
-    autocmd FileType scala,jade,html,htmldjango,json,css,less setlocal sw=2 sts=2 ts=2
+    autocmd FileType scala,jade,html,htmldjango,json,css,less,javascript,javascript.jsx setlocal sw=2 sts=2 ts=2
+
+    autocmd BufWritePost *.mmd,*.mermaid !mermaid -t /usr/local/lib/node_modules/mermaid/dist/mermaid.forest.css -p '%:t' -v
 
     " 외부에서 변경된 파일 자동 다시 읽기.
     " set autoread 에 의존한다. autoread는 키입력 다음 또는 checktime에의해 실행된다.
@@ -325,8 +339,8 @@ set statusline+=[%{strlen(&fileencoding)?&fileencoding:&encoding}:%{strlen(&file
 set statusline+=\ %-14.(%l,%c%V%)\ %<%P
 " }}}
 " Vimrc files {{{
-if filereadable(expand("~/dotfiles/plugins.vimrc"))
-    source ~/dotfiles/plugins.vimrc
+if filereadable(expand("~/Dropbox/dotfiles/plugins.vimrc"))
+    source ~/Dropbox/dotfiles/plugins.vimrc
 endif
 
 " Parse local vimrc (useful for per-settings)
@@ -360,20 +374,29 @@ else
     else
         set background=dark
 
-        "let g:solarized_termtrans = 1
-        "let g:solarized_visibility = "low"
-        "let g:solarized_contrast = "high"
-        "color solarized
-        "hi Normal ctermfg=14
-        "hi! link PmenuSel TabLineSel
-        "hi link SpecialComment MoreMsg
+        let g:indent_guides_auto_colors = 0
+        color solarized
+        autocmd VimEnter * :color solarized
+        autocmd VimEnter * :hi! Folded gui=bold
+        autocmd VimEnter * :hi MatchParen guibg=None
+        autocmd VimEnter,Colorscheme * :hi! IndentGuidesOdd  guibg=#002b36 ctermbg=darkgray
+        "autocmd VimEnter,Colorscheme * :hi! IndentGuidesEven guibg=#002731 ctermbg=black
+        autocmd VimEnter,Colorscheme * :hi! IndentGuidesEven guibg=#073642 ctermbg=black
 
-        colorscheme kalisi
+        "let g:indent_guides_auto_colors = 0
+        "autocmd VimEnter,Colorscheme * :hi! IndentGuidesOdd  guibg=#404042   ctermbg=black
+        "autocmd VimEnter,Colorscheme * :hi! IndentGuidesEven guibg=#373739   ctermbg=darkgray
+        "colorscheme kalisi
+        
+        " let g:indent_guides_auto_colors = 0
+        " autocmd VimEnter,Colorscheme * :hi! IndentGuidesEven  guibg=#22262e   ctermbg=black
+        " colorscheme spacegray
+        " hi! Normal guibg=#262b34
 
         " color iceberg
         "let g:indent_guides_auto_colors = 0
-        "hi IndentGuidesEven   guibg=#1e2132   ctermbg=black
-        "hi IndentGuidesOdd  guibg=#161821   ctermbg=darkgray
+        " hi IndentGuidesEven   guibg=#1e2132   ctermbg=black
+        " hi IndentGuidesOdd  guibg=#161821   ctermbg=darkgray
     endif
 endif
 

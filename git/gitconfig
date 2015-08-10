@@ -88,7 +88,7 @@
 [mergetool]
   prompt = false
 [mergetool "vimdiff"]
-  cmd="vim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
+  cmd="nvim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
   keepbackup=false
 [merge]
   summary = true
@@ -103,8 +103,8 @@
   # the usual default is to push all branches
   default = tracking
 [core]
-	autocrlf = input
-  editor = "vim"
+    autocrlf = input
+    editor = "vim"
 	excludesfile = /Users/moomoo/.gitignore_global
 [advice]
   statusHints = false

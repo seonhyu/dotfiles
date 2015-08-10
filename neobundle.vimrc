@@ -1,8 +1,8 @@
 if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    set runtimepath+=~/.nvim/bundle/neobundle.vim/
 endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.nvim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 "===========================================================
 
@@ -25,6 +25,9 @@ NeoBundle "groenewege/vim-less"
 NeoBundle "Valloric/MatchTagAlways"
 NeoBundle "tomtom/tcomment_vim"
 NeoBundle "majutsushi/tagbar"
+NeoBundle "mxw/vim-jsx"
+NeoBundle "pangloss/vim-javascript"
+NeoBundle "jtratner/vim-flavored-markdown"
 
 " Vim 확장
 "--------------------------------
@@ -33,6 +36,9 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'christoomey/vim-tmux-navigator'
+NeoBundle 'ajh17/Spacegray.vim'
+NeoBundle "Raimondi/delimitMate"
+NeoBundle 'junegunn/vim-easy-align'
 
 " Cosmetics, color scheme, Powerline...
 NeoBundle 'w0ng/vim-hybrid'

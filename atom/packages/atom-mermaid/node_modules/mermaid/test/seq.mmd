@@ -1,0 +1,17 @@
+        sequenceDiagram
+        participant Alice
+        participant Bob
+        participant John the Long
+        Alice->Bob: Hello Bob, alt loop how else are you?
+        loop Outer loop
+        Note left of Alice: Bob thinks about <br> things <br> to think about
+        Bob-->Alice: I am good thanks!
+        loop Inner loop
+        Bob-->John the Long: How about you John?
+        Note right of John the Long: Bob thinks a long long time, so long that the text does not fit.
+        end
+        end
+
+        Bob-->Alice: Checking with John...
+        Alice->John the Long: Yes... John, how are you?
+        John the Long-->Alice: Better then you!

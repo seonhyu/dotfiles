@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <script src="../dist/mermaid.js"></script>
+    <link rel="stylesheet" href="seq.css"/>
+    <script>
+        var mermaid_config = {
+            startOnLoad:true,
+            mermaid:{
+                cloneCssStyles: false
+            },
+            sequenceDiagram:{
+                mirrorActors:true,
+                height:35
+                
+            }
+        };
+        //mermaid.sequenceConfig = '{"diagramMarginX":50,"diagramMarginY":10,"actorMargin":50,"width":150,"height":45,"boxMargin":10,"boxTextMargin":5,"noteMargin":10,"messageMargin":35, "mirrorActors":true}';
+        //mermaid.sequenceConfig = JSON.parse('{"diagramMarginX":50,"diagramMarginY":10,"actorMargin":50,"width":150,"height":165,"boxMargin":10,"boxTextMargin":5,"noteMargin":10,"messageMargin":35}');
+
+    </script>
+    <script>
+        function apa(){
+            console.log('CLICKED');
+        }
+    </script>
+
+</head>
+    <body>
+
+<div class="mermaid" data-processed="true"><svg id="mermaidChart0" width="1200" xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 1200 484"><style type="text/css" title="mermaid-svg-internal-css">/*  */
+.section { stroke: none; opacity: 0.2;  }
+.section0 { fill: #6eaa49;  }
+.section2 { fill: #6eaa49;  }
+.section1, .section3 { fill: #ffffff; opacity: 0.2;  }
+.sectiontitle0 { fill: #333333;  }
+.sectiontitle1 { fill: #333333;  }
+.sectiontitle2 { fill: #333333;  }
+.sectiontitle { text-anchor: start; font-size: 11px;  }
+.grid .tick { stroke: #d3d3d3; opacity: 0.3; shape-rendering: crispedges;  }
+.grid path { stroke-width: 0px;  }
+.today { fill: none; stroke: #ff0000; stroke-width: 2px;  }
+.task { stroke-width: 2px;  }
+.tasktext { text-anchor: middle; font-size: 11px;  }
+.tasktextoutsideright { fill: #000000; text-anchor: start; font-size: 11px;  }
+.tasktext0, .tasktext1, .tasktext2, .tasktext3 { fill: #ffffff;  }
+.task0, .task1, .task2, .task3 { fill: #487e3a; stroke: #13540c;  }
+.tasktextoutside0, .tasktextoutside2 { fill: #000000;  }
+.tasktextoutside1, .tasktextoutside3 { fill: #000000;  }
+.active0, .active1, .active2, .active3 { fill: #cde498; stroke: #13540c;  }
+.activetext0, .activetext1, .activetext2, .activetext3 { fill: #000000 !important;  }
+.done0, .done1, .done2, .done3 { stroke: #808080; fill: #d3d3d3; stroke-width: 2px;  }
+.donetext0, .donetext1, .donetext2, .donetext3 { fill: #000000 !important;  }
+.crit0, .crit1, .crit2, .crit3 { stroke: #ff8888; fill: #ff0000; stroke-width: 2px;  }
+.activecrit0, .activecrit1, .activecrit2, .activecrit3 { stroke: #ff8888; fill: #cde498; stroke-width: 2px;  }
+.donecrit0, .donecrit1, .donecrit2, .donecrit3 { stroke: #ff8888; fill: #d3d3d3; stroke-width: 2px; cursor: pointer; shape-rendering: crispedges;  }
+.donecrittext0, .donecrittext1, .donecrittext2, .donecrittext3 { fill: #000000 !important;  }
+.activecrittext0, .activecrittext1, .activecrittext2, .activecrittext3 { fill: #000000 !important;  }
+.titletext { text-anchor: middle; font-size: 18px; fill: #000000;  }
+text { font-family: 'trebuchet ms', verdana, arial; font-size: 14px;  }
+/*  */
+</style><g></g><g class="grid" transform="translate(75, 434)"><g class="tick" style="opacity: 1; " transform="translate(0,0)"><line y2="-399" x2="0"></line><text dy="1em" style="text-anchor: middle; " y="3" x="0" fill="#000" stroke="none" font-size="10">w. 01</text></g><g class="tick" style="opacity: 1; " transform="translate(459,0)"><line y2="-399" x2="0"></line><text dy="1em" style="text-anchor: middle; " y="3" x="0" fill="#000" stroke="none" font-size="10">w. 02</text></g><g class="tick" style="opacity: 1; " transform="translate(919,0)"><line y2="-399" x2="0"></line><text dy="1em" style="text-anchor: middle; " y="3" x="0" fill="#000" stroke="none" font-size="10">w. 03</text></g><path class="domain" d="M0,0V0H1050V0"></path></g><g><rect x="0" y="48" width="1162.5" height="24" class="section section0"></rect><rect x="0" y="72" width="1162.5" height="24" class="section section0"></rect><rect x="0" y="96" width="1162.5" height="24" class="section section0"></rect><rect x="0" y="120" width="1162.5" height="24" class="section section0"></rect><rect x="0" y="144" width="1162.5" height="24" class="section section1"></rect><rect x="0" y="168" width="1162.5" height="24" class="section section1"></rect><rect x="0" y="192" width="1162.5" height="24" class="section section1"></rect><rect x="0" y="216" width="1162.5" height="24" class="section section1"></rect><rect x="0" y="240" width="1162.5" height="24" class="section section1"></rect><rect x="0" y="264" width="1162.5" height="24" class="section section1"></rect><rect x="0" y="288" width="1162.5" height="24" class="section section2"></rect><rect x="0" y="312" width="1162.5" height="24" class="section section2"></rect><rect x="0" y="336" width="1162.5" height="24" class="section section2"></rect><rect x="0" y="360" width="1162.5" height="24" class="section section0"></rect><rect x="0" y="384" width="1162.5" height="24" class="section section0"></rect><rect x="0" y="408" width="1162.5" height="24" class="section section0"></rect></g><g><rect rx="3" ry="3" x="75" y="50" width="131" height="20" class="task  done0"></rect><rect rx="3" ry="3" x="272" y="74" width="197" height="20" class="task  active0"></rect><rect rx="3" ry="3" x="469" y="98" width="328" height="20" class="task  task0"></rect><rect rx="3" ry="3" x="797" y="122" width="328" height="20" class="task  task0"></rect><rect rx="3" ry="3" x="75" y="146" width="66" height="20" class="task  doneCrit1"></rect><rect rx="3" ry="3" x="206" y="170" width="132" height="20" class="task  doneCrit1"></rect><rect rx="3" ry="3" x="338" y="194" width="196" height="20" class="task  activeCrit1"></rect><rect rx="3" ry="3" x="534" y="218" width="329" height="20" class="task  crit1"></rect><rect rx="3" ry="3" x="863" y="242" width="131" height="20" class="task  task1"></rect><rect rx="3" ry="3" x="994" y="266" width="65" height="20" class="task  task1"></rect><rect rx="3" ry="3" x="206" y="290" width="197" height="20" class="task  active2"></rect><rect rx="3" ry="3" x="403" y="314" width="55" height="20" class="task  task2"></rect><rect rx="3" ry="3" x="403" y="338" width="131" height="20" class="task  task2"></rect><rect rx="3" ry="3" x="534" y="362" width="197" height="20" class="task  task0"></rect><rect rx="3" ry="3" x="731" y="386" width="55" height="20" class="task  task0"></rect><rect rx="3" ry="3" x="786" y="410" width="131" height="20" class="task  task0"></rect><text font-size="11" x="140.5" y="63.5" text-height="20" class="taskText taskText0  doneText0">Completed task            </text><text font-size="11" x="370.5" y="87.5" text-height="20" class="taskText taskText0 activeText0">Active task               </text><text font-size="11" x="633" y="111.5" text-height="20" class="taskText taskText0 ">Future task               </text><text font-size="11" x="961" y="135.5" text-height="20" class="taskText taskText0 ">Future task2               </text><text font-size="11" x="146" y="159.5" text-height="20" class="taskTextOutsideRight taskTextOutside1  doneCritText1">Completed task in the critical line </text><text font-size="11" x="343" y="183.5" text-height="20" class="taskTextOutsideRight taskTextOutside1  doneCritText1">Implement parser and jison          </text><text font-size="11" x="436" y="207.5" text-height="20" class="taskText taskText1 activeCritText1 critText1">Create tests for parser             </text><text font-size="11" x="698.5" y="231.5" text-height="20" class="taskText taskText1  critText1">Future task in critical line        </text><text font-size="11" x="999" y="255.5" text-height="20" class="taskTextOutsideRight taskTextOutside1 ">Create tests for renderer           </text><text font-size="11" x="1064" y="279.5" text-height="20" class="taskTextOutsideRight taskTextOutside1 ">Add to mermaid                      </text><text font-size="11" x="304.5" y="303.5" text-height="20" class="taskText taskText2 activeText2">Describe gantt syntax               </text><text font-size="11" x="463" y="327.5" text-height="20" class="taskTextOutsideRight taskTextOutside2 ">Add gantt diagram to demo page      </text><text font-size="11" x="539" y="351.5" text-height="20" class="taskTextOutsideRight taskTextOutside2 ">Add another diagram to demo page    </text><text font-size="11" x="632.5" y="375.5" text-height="20" class="taskText taskText0 ">Describe gantt syntax               </text><text font-size="11" x="791" y="399.5" text-height="20" class="taskTextOutsideRight taskTextOutside0 ">Add gantt diagram to demo page      </text><text font-size="11" x="922" y="423.5" text-height="20" class="taskTextOutsideRight taskTextOutside0 ">Add another diagram to demo page    </text></g><g><text x="10" y="98" class="sectionTitle sectionTitle0">A section</text><text x="10" y="218" class="sectionTitle sectionTitle1">Critical tasks</text><text x="10" y="326" class="sectionTitle sectionTitle2">Documentation</text><text x="10" y="398" class="sectionTitle sectionTitle0">Last section</text></g><g class="today"><line x1="34958" x2="34958" y1="25" y2="459" class="today"></line></g><text x="600" y="25" class="titleText">Adding GANTT diagram functionality to mermaid</text></svg></div><script>mermaid.ganttConfig = {useWidth:1200};</script></body>
+</html>
