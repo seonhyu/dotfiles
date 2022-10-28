@@ -1,0 +1,17 @@
+# key: rfc
+# name: react funtional component
+# --
+import {FC} from "react";
+
+interface Props {}
+
+/**
+ * $0
+ */
+const ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}: FC<Props> = () => {
+  return (
+    <div></div>
+  )
+}
+
+export default $1;

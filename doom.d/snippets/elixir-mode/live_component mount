@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: live_component mount
+# key: lcm
+# --
+@impl true
+def mount(socket) do
+  {:ok, socket}
+end

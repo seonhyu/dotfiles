@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: liveview action
+# key: lva
+# --
+def apply_action(socket, :$1, params) do
+  socket = assign(socket, params: params)
+  {:noreply, socket}
+end

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: live_component
+# key: lvc
+# --
+<%= live_component @socket, YaksanWeb.$1, ${2:assigns} %>

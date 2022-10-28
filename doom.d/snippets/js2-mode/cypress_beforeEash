@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: cypress_beforeEash
+# key: be
+# --
+beforeEach(() => {
+  $0
+});

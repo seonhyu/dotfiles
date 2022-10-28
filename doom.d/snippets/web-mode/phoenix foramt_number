@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: phoenix foramt_number
+# key: |n
+# --
+|> format_number()

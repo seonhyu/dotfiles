@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: live view module template
+# key: liveview
+# --
+defmodule $1.$2.Index do
+  @moduledoc """
+  $3
+  """
+
+  use YaksanWeb, :live_view
+
+  @initial_state [
+    $4: []
+  ]
+
+  @impl true
+  def mount(_params, session, socket) do
+    socket =
+      assign(socket, @initial_state)
+      |> assign_default(session)
+      |> assign(:page_title, "$3")
+
+    {:ok, socket}
+  end
+
+  @doc """
+  router action에 따라 분기한다.
+  """
+  @impl true
+  def handle_params(params, _url, socket) do
+    apply_action(socket, socket.assigns.live_action, params)
+  end
+
+  @doc """
+  목록
+  """
+  defp apply_action(socket, :index, params) do
+    {:noreply, assign(socket, :$4, fetch_list(params))}
+  end
+
+  defp fetch_list(_params) do
+    []
+  end
+end

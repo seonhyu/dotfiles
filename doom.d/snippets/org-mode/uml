@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: uml diagram
+# key: <U
+# --
+#+BEGIN_SRC plantuml :file $1.png :cmdline -charset UTF-8 :cache yes
+$0
+#+END_SRC

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: phoenix html for
+# uuid:
+# key: pfor
+# condition: t
+# --
+<%= for $2 <- @$1 do %>
+  $0
+<% end %>

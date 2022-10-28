@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: dynamic block columnview
+# uuid:
+# key: <cv
+# condition: t
+# --
+#+BEGIN: columnview :hlines 1  :maxlevel 3 :indent t :id "$0"
+
+#+END:

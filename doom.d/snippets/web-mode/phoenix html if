@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: phoenix html if
+# key: pif
+# --
+<%= if $0 do %>
+<% end %>

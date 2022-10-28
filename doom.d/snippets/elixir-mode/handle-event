@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: handle_event/3
+# key: he
+# --
+@impl true
+def handle_event("$1", %{$0} = _params, socket) do
+  {:noreply, socket}
+end

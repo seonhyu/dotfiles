@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: api 호출 후 처리
+# key: resp
+# --
+if (resp.ok) {
+  $0
+} else {
+  self.root.setActionError(resp);
+}

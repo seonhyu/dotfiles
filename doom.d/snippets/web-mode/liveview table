@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: liveview table
+# key: lvtable
+# --
+<div class="table-wrapper">
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>$0</th>
+        </tr>
+      </thead>
+      <tobdy>
+        <%= for $1 <- @$1s do %>
+        <tr>
+          <td></td>
+        </tr>
+        <% end  %>
+      </tobdy>
+    </table>
+  </div>
+</div>

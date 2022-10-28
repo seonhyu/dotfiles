@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: mst store
+# key: model
+# --
+import {
+  types as t,
+  Instance,
+  SnapshotIn,
+  SnapshotOut
+} from 'mobx-state-tree';
+
+const $1 = t.model('$1', {
+  $0
+});
+
+export default $1;
+
+export interface I$1 extends Instance<typeof $1> {}
+export interface I$1In extends SnapshotIn<typeof $1> {}
+export interface I$1Out extends SnapshotOut<typeof $1> {}

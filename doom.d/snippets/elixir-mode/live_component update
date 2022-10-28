@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: live_component update
+# key: lcu
+# --
+@impl true
+def update(assigns, socket) do
+  socket = assign(socket, assigns)
+  {:ok, socket}
+end

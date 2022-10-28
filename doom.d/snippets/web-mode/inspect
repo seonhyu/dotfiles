@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: inspect pre tag
+# key: inspect
+# --
+<pre class="text-sm overflow-auto">
+  <%= inspect $0, pretty: true %>
+</pre>

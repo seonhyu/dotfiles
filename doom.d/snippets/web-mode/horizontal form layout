@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: horizontal form layout
+# key: fl
+# --
+const layout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 20 }
+};

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: edit modal with a form
+# key: modal
+# --
+<Modal title="$1" onOk={form.submit} onCancel={$2Store.clearSelected}>
+  <Form form={form} initialValues={$2Store.selected} {...layout}>
+    <Form.Item
+      label=""
+      name=""
+      rules={[{ required: true, message: '필수 항목입니다.' }]}
+    >
+      <Input />
+    </Form.Item>
+  </Form>
+</Modal>

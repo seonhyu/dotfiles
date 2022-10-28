@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: form.item
+# key: fitem
+# --
+<Form.Item
+  label="$1"
+  name="$2"
+  rules={[{ required: true, message: '필수 항목입니다.' }]}
+>
+  $0
+</Form.Item>

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org columns property
+# key: :c
+# --
+:COLUMNS: "%30ITEM %TODO %3PRIORITY %SCHEDULED %DEADLINE %Status %TAGS %Effort %CLOCKSUM"

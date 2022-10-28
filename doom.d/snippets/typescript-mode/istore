@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: mst store interface
+# key: imodel
+# condition: t
+# --
+export interface I$1 extends Instance<typeof $1> {}
+export interface I$1In extends SnapshotIn<typeof $1> {}
+export interface I$1Out extends SnapshotOut<typeof $1> {}

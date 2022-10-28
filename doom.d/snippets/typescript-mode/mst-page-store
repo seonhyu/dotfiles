@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: mst page store
+# key: pagestore
+# --
+import {
+  types,
+  flow,
+  Instance,
+  SnapshotIn,
+  SnapshotOut
+} from 'mobx-state-tree';
+import api from '../api';
+import { AppStore } from '.';
+
+const $1Store = types
+  .model('$1Store', {
+    globalStore: AppStore,
+    $0
+  })
+  .actions(self => ({
+  }));
+
+export default $1Store;
+
+export interface I$1Store extends Instance<typeof $1Store> {}
+export interface I$1StoreIn extends SnapshotIn<typeof $1Store> {}
+export interface I$1StoreOut extends SnapshotOut<typeof $1Store> {}
