@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Logger.debug
+# key: debug
+# --
+Logger.debug("=======> $1: #{inspect($2, pretty: true)}")

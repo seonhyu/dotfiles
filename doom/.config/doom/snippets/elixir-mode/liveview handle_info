@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: liveview handle_info
+# key: hi
+# --
+@impl true
+def handle_info(${1: msg}, socket) do
+  {:noreply, socket}
+end

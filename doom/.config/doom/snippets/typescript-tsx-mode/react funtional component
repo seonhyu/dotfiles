@@ -1,0 +1,13 @@
+# key: rfc
+# name: react funtional component
+# --
+interface Props {}
+
+/**
+ * $0
+ */
+export function ${1:name}({}: Props) {
+  return (
+    <div></div>
+  )
+}

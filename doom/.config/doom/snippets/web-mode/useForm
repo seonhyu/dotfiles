@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: useForm
+# key: useform
+# --
+const [${1:form}] = Form.useForm();

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: status property
+# key: :s
+# --
+:Status_ALL: "RESEARCH" "DESIGN" "CODE" "STAGE" "REVIEW" "PROD"

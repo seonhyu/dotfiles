@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: mst onPatch
+# key: onpatch
+# --
+// debug
+onPatch(self, patch => {
+  console.dir('SaleStore', patch);
+});

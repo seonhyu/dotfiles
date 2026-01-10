@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: react template
+# key: rt
+# condition: t                   
+# --
+import React from 'react';
+import {observer} from 'mobx-react-lite';
+import { useStore } from 'store';
+
+interface Props {}
+
+const $1 = (_props: Props) => {
+  const { $2 } = useStore();
+
+  return (
+    $0
+  );
+};
+
+export default observer($1);

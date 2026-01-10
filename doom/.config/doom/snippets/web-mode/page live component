@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: liveview page
+# key: lvpage    
+# --
+<div class="page">
+  <%= live_component @socket, Components.PageHeader, title: @page_title %>
+
+  <section>
+    $0
+  </section>
+</div>

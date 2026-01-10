@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: live form
+# key: lvf
+# --
+<%= f = form_for @changeset, "#", phx_submit: "${1:save}", phx_change: "change", phx_target: @myself %>
+  $0
+</form>

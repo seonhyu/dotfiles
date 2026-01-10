@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: LiveView Component
+# key: lvc
+# --
+defmodule YaksanWeb.$1.$2 do
+  @moduledoc """
+  $3
+  """
+
+  use YaksanWeb, :live_component
+
+  def render(assigns) do
+    ~L"""
+    <div>$3</div>
+    """
+  end
+end

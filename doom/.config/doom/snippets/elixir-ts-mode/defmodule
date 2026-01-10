@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: defmodule
+# key: defm
+# --
+defmodule ${1:`(string-inflection-camelcase-function (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`} do
+  @moduledoc """
+  $0
+  """
+end

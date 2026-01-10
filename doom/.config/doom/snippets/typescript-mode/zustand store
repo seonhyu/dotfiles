@@ -1,0 +1,48 @@
+# key: zstore
+# name: zustand store
+# --
+import { create } from 'zustand';
+
+//--------------------------------------------------------
+// Store : client-side state
+//--------------------------------------------------------
+
+type TState = {
+  $0
+};
+
+const initialState: TState = {
+};
+
+const use${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`} = create<TState>(() => ({
+  ...initialState,
+}));
+
+// action을 vanilla code로 작성하기 위해서 필요하다.
+const { setState } = use$1;
+
+//--------------------------------------------------------
+// Actions
+//
+// setState의 parameter는 state의 부분이다. zustand가 병합해준다.
+// 대체하고 싶으면 2번째 parameter로 true를 넘겨주면 된다.
+//--------------------------------------------------------
+
+
+//--------------------------------------------------------
+// export custom hooks
+// Store를 직접 노출하지 않고 custom hooks로 노출한다.
+//--------------------------------------------------------
+
+export const useStoreActions = () => {
+  return {
+  };
+};
+
+
+//--------------------------------------------------------
+// Server-side state
+// react-query
+//
+// Store 값을 구하려면 use$1(state => state.xxx) 사용한다.
+//--------------------------------------------------------

@@ -4,6 +4,7 @@ GNU Stow를 사용한 dotfiles 관리 저장소
 
 ## 패키지
 
+- `nvim/` - Neovim 설정 (LazyVim 스타일 모듈화, Spacemacs 키맵, 한글 NFD 지원)
 - `wezterm/` - WezTerm 터미널 설정
 - `zsh/` - Zsh 설정 (Zinit, Starship, FZF 등)
 

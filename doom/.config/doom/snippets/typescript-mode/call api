@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: call api
+# key: api
+# --
+const resp = yield api.$0;
+if (resp.ok) {
+} else {
+  self.root.setActionError(resp);
+}

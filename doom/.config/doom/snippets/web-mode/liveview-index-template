@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: liveview index template
+# key: liveview
+# --
+<main class="page overflow-hidden">
+  <%= live_component @socket, Components.PageHeader, title: @page_title %>
+
+  <div class="flex-1 relative overflow-hidden">
+    <div class="absolute inset-0 overflow-y-auto sm:overflow-y-hidden sm:flex">
+      <section class="p-0 border-b sm:border bg-white flex-1 sm:m-4 sm:flex flex-col sm:overflow-hidden">
+        <div class="p-4 border-b">
+          <%= live_component @socket, YaksanWeb.$1Live.SearchForm %>
+        </div>
+        <%= live_component @socket, YaksanWeb.$1Live.$1List, $2: @$2 %>
+      </section>
+    </div>
+  </div>
+</main>

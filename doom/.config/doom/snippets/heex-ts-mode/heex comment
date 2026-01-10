@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: heex comment
+# key: hc
+# --
+<%!-- $1 --%>

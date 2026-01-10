@@ -1,3 +1,6 @@
+# Tmux
+brew "tmux"          # Terminal multiplexer
+
 # Zsh dependencies
 brew "starship"      # Prompt
 brew "fzf"           # Fuzzy finder

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: test describe
+# key: tdesc
+# --
+describe('$1', () => {
+  $0
+})

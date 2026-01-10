@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: live menu
+# key: lmenu
+# --
+<%= live_patch "$1", to: Routes.app_path(@socket, :$2_index), class: "block mt-1 p-2 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 trasition ease-in-out duration-150" %>

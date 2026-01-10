@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: ant table
+# key: atable
+# --
+<div className="ant-table ant-table-bordered w-full">
+  <div className="ant-table-content">
+    <div className="ant-table-body">
+      <table>
+        <thead className="ant-table-thead">
+        </thead>
+        <tbody className="ant-table-tbody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

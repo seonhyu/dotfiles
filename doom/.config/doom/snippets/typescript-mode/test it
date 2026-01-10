@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: test it
+# key: tit
+# --
+it('$1', () => {
+  $0
+})

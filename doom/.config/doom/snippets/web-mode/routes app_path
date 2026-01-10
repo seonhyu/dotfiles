@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: routes app_path
+# key: lpath
+# --
+Routes.app_path(@socket, :$0)

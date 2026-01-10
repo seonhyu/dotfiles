@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: text-center
+# uuid:
+# key: tc
+# condition: t
+# --
+<div className="text-center">$1</div>$0

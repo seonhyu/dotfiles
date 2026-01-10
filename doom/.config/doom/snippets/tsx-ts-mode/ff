@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: FormField
+# uuid:
+# key: ff
+# condition: t
+# --
+<FormField
+  control={form.control}
+  name="$1"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>$2</FormLabel>
+      <FormControl>$0</FormControl>
+      <FormDescription />
+      <FormMessage />
+    </FormItem>
+  )}
+/>

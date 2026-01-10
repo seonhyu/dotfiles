@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Routes.static_path
+# key: static
+# --
+<%= Routes.static_path(@conn, "$0") %>
