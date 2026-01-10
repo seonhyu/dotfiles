@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+
+# Editor
+*.swp
+*~
+.vscode/
+.idea/
+
+# Stow
+*.stow-backup*
+
+# Reference (참고용)
+ref/
