@@ -4,7 +4,11 @@ GNU Stow를 사용한 dotfiles 관리 저장소
 
 ## 패키지
 
+- `doom/` - Doom Emacs 설정 (Elixir, TypeScript, Web-mode snippets 포함)
+- `git/` - Git 글로벌 설정 (gitignore)
+- `karabiner/` - Karabiner-Elements 키보드 커스터마이징
 - `nvim/` - Neovim 설정 (LazyVim 스타일 모듈화, Spacemacs 키맵, 한글 NFD 지원)
+- `tmux/` - Tmux 터미널 멀티플렉서 설정
 - `wezterm/` - WezTerm 터미널 설정
 - `zsh/` - Zsh 설정 (Zinit, Starship, FZF 등)
 
