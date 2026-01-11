@@ -131,7 +131,6 @@ return {
 
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua',
         'json-lsp',
       })
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
@@ -139,11 +138,16 @@ return {
       require('mason-lspconfig').setup({
         ensure_installed = {},
         automatic_installation = false,
+        -- stylua는 포매터로만 사용 (LSP 모드 비활성화)
+        exclude = { 'stylua' },
         handlers = {
           function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            -- servers 테이블에 정의된 LSP만 설정
+            local server = servers[server_name]
+            if server then
+              server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+              require('lspconfig')[server_name].setup(server)
+            end
           end,
         },
       })
