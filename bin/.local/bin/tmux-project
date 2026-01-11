@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# ============================================
+# tmux-project: 프로젝트 Session 자동 생성
+# Usage: tmux-project <project-path> [session-name]
+# ============================================
+
+set -euo pipefail
+
+PROJECT_PATH="${1:-.}"
+PROJECT_PATH=$(realpath "$PROJECT_PATH")
+SESSION_NAME="${2:-$(basename "$PROJECT_PATH")}"
+
+# 이미 존재하면 attach
+if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+  echo "Attaching to existing session: $SESSION_NAME"
+  tmux switch-client -t "$SESSION_NAME" 2>/dev/null || tmux attach -t "$SESSION_NAME"
+  exit 0
+fi
+
+echo "Creating new session: $SESSION_NAME"
+
+# ── Session 생성 (Window 0: code) ──
+tmux new-session -d -s "$SESSION_NAME" -n "code" -c "$PROJECT_PATH"
+
+# code window: editor + terminal 분할
+tmux send-keys -t "$SESSION_NAME:code" "nvim ." Enter
+tmux split-window -t "$SESSION_NAME:code" -h -p 30 -c "$PROJECT_PATH"
+
+# ── Window 1: agent (AI 에이전트 전용) ──
+tmux new-window -t "$SESSION_NAME" -n "agent" -c "$PROJECT_PATH"
+# 선택: 자동으로 claude 또는 aider 실행
+# tmux send-keys -t "$SESSION_NAME:agent" "claude" Enter
+
+# ── 초기 Window로 이동 ──
+tmux select-window -t "$SESSION_NAME:code"
+tmux select-pane -t "$SESSION_NAME:code.1"
+
+# ── Attach ──
+tmux switch-client -t "$SESSION_NAME" 2>/dev/null || tmux attach -t "$SESSION_NAME"

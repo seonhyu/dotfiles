@@ -3,6 +3,7 @@ local config = wezterm.config_builder()
 
 config.font = wezterm.font_with_fallback({
 	"PragmataPro Mono",
+	{ family = "Symbols Nerd Font Mono", scale = 1.0 },
 })
 config.font_size = 16
 config.line_height = 1.2
@@ -46,26 +47,5 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
-
-config.macos_window_background_blur = 40
-config.window_background_opacity = 0.9 -- 투명도 조절 필요
-
-wezterm.on("augment-command-palette", function()
-	return {
-		{
-			brief = "Toggle transparency",
-			icon = "md_circle_opacity",
-			action = wezterm.action_callback(function(window)
-				local overrides = window:get_config_overrides() or {}
-				if not overrides.window_background_opacity or overrides.window_background_opacity == 1 then
-					overrides.window_background_opacity = 0.85
-				else
-					overrides.window_background_opacity = 1
-				end
-				window:set_config_overrides(overrides)
-			end),
-		},
-	}
-end)
 
 return config
