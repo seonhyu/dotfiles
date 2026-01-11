@@ -170,8 +170,8 @@ alias python='python3'
 alias ll='ls -alGh --color'
 alias la='ls -A --color'
 alias l='ls -CF --color'
-alias cc='claude'
-alias ccy='claude --allow-dangerously-skip-permissions'
+alias cc='claude --plugin-dir ~/repos/iroi/iroi-dev'
+alias ccy='cc --allow-dangerously-skip-permissions'
 
 # 에디터
 if command -v nvim &> /dev/null; then
