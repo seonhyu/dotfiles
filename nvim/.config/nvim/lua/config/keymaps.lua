@@ -34,7 +34,7 @@ map('n', '<leader>fD', function()
     cwd = vim.fn.expand '%:p:h',
   }
 end, '[F]ind files and [D]irs in current directory')
-map('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>', '[F]ind [R]ecent files')
+map('n', '<leader>fr', '<cmd>Telescope buffers sort_lastused=true<cr>', '[F]ind [R]ecent buffers')
 map('n', '<leader>fs', '<cmd>w<cr>', '[F]ile [S]ave')
 map('n', '<leader>fS', '<cmd>wa<cr>', '[F]ile [S]ave all')
 
@@ -71,7 +71,7 @@ map('n', '<leader>pf', function()
   utils.find_files_nfc()
 end, '[P]roject [F]ind files')
 map('n', '<leader>pg', '<cmd>Telescope live_grep<cr>', '[P]roject [G]rep')
-map('n', '<leader>pr', '<cmd>Telescope oldfiles<cr>', '[P]roject [R]ecent files')
+map('n', '<leader>pr', '<cmd>Telescope buffers sort_lastused=true<cr>', '[P]roject [R]ecent buffers')
 map('n', '<leader>ps', '<cmd>Telescope grep_string<cr>', '[P]roject [S]earch current word')
 
 -- Search operations (SPC s)
@@ -146,6 +146,7 @@ end, '[O]pen [E]macs')
 map('n', '<leader>en', vim.diagnostic.goto_next, '[E]rror [N]ext')
 map('n', '<leader>ep', vim.diagnostic.goto_prev, '[E]rror [P]revious')
 map('n', '<leader>el', '<cmd>Telescope diagnostics<cr>', '[E]rror [L]ist')
+map('n', '<leader>ee', vim.diagnostic.open_float, '[E]rror 상세 보기')
 
 -- Quick access
 map('n', '<leader><leader>', '<cmd>Telescope buffers<cr>', 'Switch buffer')
