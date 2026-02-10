@@ -34,7 +34,7 @@ map('n', '<leader>fD', function()
     cwd = vim.fn.expand '%:p:h',
   }
 end, '[F]ind files and [D]irs in current directory')
-map('n', '<leader>fr', '<cmd>Telescope buffers sort_lastused=true<cr>', '[F]ind [R]ecent buffers')
+map('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>', '[F]ind [R]ecent files')
 map('n', '<leader>fs', '<cmd>w<cr>', '[F]ile [S]ave')
 map('n', '<leader>fS', '<cmd>wa<cr>', '[F]ile [S]ave all')
 
@@ -71,7 +71,7 @@ map('n', '<leader>pf', function()
   utils.find_files_nfc()
 end, '[P]roject [F]ind files')
 map('n', '<leader>pg', '<cmd>Telescope live_grep<cr>', '[P]roject [G]rep')
-map('n', '<leader>pr', '<cmd>Telescope buffers sort_lastused=true<cr>', '[P]roject [R]ecent buffers')
+map('n', '<leader>pr', '<cmd>Telescope oldfiles<cr>', '[P]roject [R]ecent files')
 map('n', '<leader>ps', '<cmd>Telescope grep_string<cr>', '[P]roject [S]earch current word')
 
 -- Search operations (SPC s)
@@ -150,7 +150,21 @@ map('n', '<leader>ee', vim.diagnostic.open_float, '[E]rror 상세 보기')
 
 -- Quick access
 map('n', '<leader><leader>', '<cmd>Telescope buffers<cr>', 'Switch buffer')
-map('n', '<leader><tab>', '<C-^>', 'Toggle between buffers')
+map('n', '<leader><tab>', function()
+  local cur = vim.api.nvim_get_current_buf()
+  local bufs = vim.fn.getbufinfo { buflisted = 1 }
+  local best = nil
+  for _, b in ipairs(bufs) do
+    if b.bufnr ~= cur and (not best or b.lastused > best.lastused) then
+      best = b
+    end
+  end
+  if best then
+    vim.api.nvim_set_current_buf(best.bufnr)
+  else
+    vim.notify('No other buffer', vim.log.levels.INFO)
+  end
+end, 'Switch to last used buffer')
 map('n', '<leader>/', '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Search in current buffer')
 
 -- Quit operations (SPC q)
