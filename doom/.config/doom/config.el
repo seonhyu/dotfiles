@@ -364,6 +364,54 @@
                        "-sound" "default"))))
 
 ;; -------------------------------------------------------------------------------
+;; Markdown
+;; -------------------------------------------------------------------------------
+
+(use-package! ox-gfm
+  :after org)
+
+;; markdown-preview (SPC m p) 를 GitHub 스타일로 개선.
+;; - 로컬 CSS 사용(오프라인/다크모드/버전 고정), CDN 미의존
+;; - 본문을 .markdown-body 에 max-width + margin:auto 로 가운데 정렬
+;; 애셋: doom/etc/{github-markdown.css, github-highlight.css, highlight.min.js}
+;;
+;; `doom upgrade`/`doom sync` 무충돌 설계:
+;;   - Doom stock 모듈(~/.config/emacs)은 건드리지 않고 변수만 오버라이드한다.
+;;   - 애셋은 doom-user-dir 하위 etc/ 에만 두며, 경로는 doom-user-dir 기준
+;;     상대(expand-file-name)로 해석한다. etc/ 에 .el 을 두지 않으므로
+;;     doom sync 의 바이트컴파일 대상에도 포함되지 않는다.
+;;   - 애셋 버전은 upstream pin(파일 상단 주석)으로 고정 — upgrade 와 독립.
+(after! markdown-mode
+  (defvar +my/markdown-etc-dir
+    (expand-file-name "etc/" doom-user-dir)
+    "로컬 마크다운 프리뷰 애셋 디렉터리.")
+
+  (setq markdown-css-paths
+        (list (concat "file://" (expand-file-name "github-markdown.css" +my/markdown-etc-dir))
+              (concat "file://" (expand-file-name "github-highlight.css" +my/markdown-etc-dir)))
+
+        markdown-xhtml-header-content
+        (concat
+         "<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>"
+         "<style>"
+         " body { margin: 0; }"
+         " .markdown-body {"
+         "   box-sizing: border-box;"
+         "   max-width: 1200px;"
+         "   margin: 0 auto;"
+         "   padding: 45px;"
+         " }"
+         " @media (max-width: 767px) { .markdown-body { padding: 15px; } }"
+         "</style>"
+         "<script src='file://" (expand-file-name "highlight.min.js" +my/markdown-etc-dir) "'></script>"
+         "<script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>"
+         "<script>document.addEventListener('DOMContentLoaded', () => {"
+         "  document.body.classList.add('markdown-body');"
+         "  document.querySelectorAll('pre[lang] > code').forEach((c) => c.classList.add(c.parentElement.lang));"
+         "  document.querySelectorAll('pre > code').forEach((c) => hljs.highlightElement(c));"
+         "});</script>")))
+
+;; -------------------------------------------------------------------------------
 ;; Code
 ;; -------------------------------------------------------------------------------
 
