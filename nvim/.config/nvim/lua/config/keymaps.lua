@@ -40,7 +40,7 @@ map('n', '<leader>fS', '<cmd>wa<cr>', '[F]ile [S]ave all')
 
 -- Buffer operations (SPC b)
 map('n', '<leader>bb', '<cmd>Telescope buffers<cr>', '[B]uffer list')
-map('n', '<leader>bd', '<cmd>bd<cr>', '[B]uffer [D]elete')
+map('n', '<leader>bd', '<cmd>bprevious | bdelete #<cr>', '[B]uffer [D]elete')
 map('n', '<leader>bD', '<cmd>bd!<cr>', '[B]uffer [D]elete force')
 map('n', '<leader>bn', '<cmd>bnext<cr>', '[B]uffer [N]ext')
 map('n', '<leader>bp', '<cmd>bprev<cr>', '[B]uffer [P]revious')

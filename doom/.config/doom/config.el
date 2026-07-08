@@ -91,24 +91,46 @@
 ;; UI
 ;; -------------------------------------------------------------------------------
 
-(setq doom-font (font-spec :family "Sarasa Mono K" :size 16 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "Sarasa Mono K" :weight 'normal)
-      doom-big-font (font-spec :family "Sarasa Mono K" :size 20)
-      doom-font-increment 1)
+;; (setq doom-font (font-spec :family "Sarasa Mono K" :size 16 :weight 'normal)
+;;       doom-variable-pitch-font (font-spec :family "Sarasa Mono K" :weight 'normal)
+;;       doom-big-font (font-spec :family "Sarasa Mono K" :size 20)
+;;       doom-font-increment 1)
 
 ;; (setq doom-font (font-spec :family "goorm Sans Code" :size 15 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "goorm Sans Code" :weight 'normal)
 ;;       doom-big-font (font-spec :family "goorm Sans Code" :size 20)
 ;;       doom-font-increment 1)
 
-;; (setq doom-font (font-spec :family "Essential PragmataPro" :size 16 :weight 'normal)
-;;       doom-variable-pitch-font (font-spec :family "Essential PragmataPro" :weight 'normal)
-;;       doom-big-font (font-spec :family "Essential PragmataPro" :size 20)
-;;       doom-font-increment 1)
+(setq doom-font (font-spec :family "PragmataPro Mono" :size 15 :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "PragmataPro Mono" :weight 'normal)
+      doom-big-font (font-spec :family "PragmataPro Mono" :size 20)
+      doom-font-increment 1)
+;; 한글 폰트
+(defun my/set-hangul-font (&rest _)
+  (when (display-graphic-p)
+    (let ((fontset (frame-parameter nil 'font)))
+      (set-fontset-font fontset 'hangul
+                        (font-spec :family "Sarasa Mono K") nil 'prepend)
+      (set-fontset-font fontset '(#x3130 . #x318F)
+                        (font-spec :family "Sarasa Mono K") nil 'prepend))
+    (set-fontset-font "fontset-default" 'hangul
+                      (font-spec :family "Sarasa Mono K") nil 'prepend)))
+;; 초기 적용
+(add-hook! 'doom-init-ui-hook #'my/set-hangul-font)
+;; 폰트 크기 변경 시에도 재적용
+(advice-add 'set-frame-font :after #'my/set-hangul-font)
+(advice-add 'doom/increase-font-size :after #'my/set-hangul-font)
+(advice-add 'doom/decrease-font-size :after #'my/set-hangul-font)
+(advice-add 'doom/reset-font-size :after #'my/set-hangul-font)
+;; big font 모드 전환 시에도
+(advice-add 'doom-big-font-mode :after #'my/set-hangul-font)
+
+;; macOS 폰트 렌더링 힌팅
+(setq ns-use-thin-smoothing t)
 
 ;; 줄간. 기본값은 nil이고 1이면 조금 더 넓다. 소수이면 비율.
 ;; 폰트에 따라 효과는 다르게 보일 수 있다.
-(setq-default line-spacing 0.3)
+(setq-default line-spacing 0.2)
 
 ;; -------------------------------------------------------------------------------
 ;; keymaps
@@ -121,13 +143,12 @@
 (after! evil
   (map! :leader
         (:desc "Switch to last buffer"    :n "TAB" #'evil-switch-to-windows-last-buffer)
-        (:desc "set hangule font"         :n "k"   (λ! (set-fontset-font t 'hangul (font-spec :name "Noto Sans Mono CJK KR"))))
         (:prefix ("z" . "workspace")
          :desc "Switch to last workspace" :n "@"   #'+workspace/other
          :desc "Switch to last workspace" :n "z"   #'+workspace/other
          :desc "Display tab bar"          :n "."   #'+workspace/display
          :desc "New workspace"            :n "n"   #'+workspace/new
-         :desc "Load workspace from file" :n "l"   #'+workspace/load
+         :desc "Load workspace from file" :n "l"   #'+workspace/load  
          :desc "Load last session"        :n "L"   (λ! (+workspace/load-session))
          :desc "Save workspace to file"   :n "s"   #'+workspace/save
          :desc "Autosave current session" :n "S"   #'+workspace/save-session
@@ -157,21 +178,6 @@
 )
 
 (define-key (current-global-map) (kbd "C-;") 'hippie-expand)
-
-
-;; -------------------------------------------------------------------------------
-;; Copilot
-;; -------------------------------------------------------------------------------
-;; (use-package! copilot
-;;   :ensure t
-;;   :hook (prog-mode . copilot-mode)
-;;   :config
-;;   (customize-set-variable 'copilot-enable-predicates '(evil-insert-state-p))
-;;   :bind (("C-TAB" . 'copilot-accept-completion-by-word)
-;;          ("C-<tab>" . 'copilot-accept-completion-by-word)
-;;          :map copilot-completion-map
-;;          ("<tab>" . 'copilot-accept-completion)
-;;          ("TAB" . 'copilot-accept-completion)))
 
 ;; -------------------------------------------------------------------------------
 ;; lang
@@ -314,12 +320,22 @@
                                     (?B . "⛳")
                                     (?C . "🏆"))))
 
-(setq org-agenda-files (apply 'append
-                              (mapcar
-                               (lambda (directory)
-                                 (directory-files-recursively
-                                  directory "\\`[^.].*\\.org\\'"))
-                               '("~/Dropbox/org"))))
+;; org-agenda-files를 동적 스캔 대신 캐싱
+;; 캐시를 수동으로 갱신하고 싶으면 (setq my/org-agenda-files-cache nil)
+(defvar my/org-agenda-files-cache nil)
+(defvar my/org-agenda-files-cache-time nil)
+
+(defun my/org-agenda-files-cached ()
+  "5분간 캐싱된 agenda 파일 목록 반환."
+  (when (or (null my/org-agenda-files-cache)
+            (> (float-time (time-since my/org-agenda-files-cache-time)) 300))
+    (setq my/org-agenda-files-cache
+          (directory-files-recursively "~/Dropbox/org" "\\`[^.].*\\.org\\'")
+          my/org-agenda-files-cache-time (current-time)))
+  my/org-agenda-files-cache)
+
+(setq org-agenda-files #'my/org-agenda-files-cached)
+
 (setq org-agenda-dim-blocked-tasks nil)
 
 (add-to-list
@@ -362,6 +378,26 @@
                        "-title" "Long Break Finished"
                        "-message" "Ready to get back to work?"
                        "-sound" "default"))))
+
+;; SPC k -> org-capture
+;; SPC k를 누르면 캡처 창이 뜨고, r을 선택하면
+;; 코드 리뷰 노트가 현재 파일 링크(%a)와 선택 영역(%i)까지 자동으로 포함됩니다.
+;; 코드 보다가 이슈 발견하면 영역 선택 → SPC k r → 메모 작성 → C-c C-c로 저장. 흐름이 끊기지 않습니다.
+(map! :leader                                                         
+      :desc "Quick capture" "k" #'org-capture)
+
+;; capture 템플릿
+(after! org
+  (setq org-capture-templates
+        '(("t" "TODO" entry
+           (file+headline "~/Dropbox/org/inbox.org" "Inbox")
+           "* TODO %?\n%U\n%a" :prepend t)
+          ("r" "Code Review Note" entry
+           (file+headline "~/Dropbox/org/inbox.org" "Code Review")
+           "* TODO [Review] %?\n%U\n%a\n#+begin_src %^{lang}\n%i\n#+end_src" :prepend t)
+          ("m" "Memo" entry
+           (file+headline "~/Dropbox/org/inbox.org" "Memo")
+           "* %?\n%U" :prepend t))))
 
 ;; -------------------------------------------------------------------------------
 ;; Markdown

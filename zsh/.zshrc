@@ -163,6 +163,14 @@ rgk() {
 }
 
 #==================================================================
+# claude code
+#==================================================================
+export BASH_MAX_OUTPUT_LENGTH=30000
+export CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS=25000
+export CLAUDE_CODE_GLOB_NO_IGNORE=false
+export CLAUDE_CODE_FORK_SUBAGENT=1
+
+#==================================================================
 # Aliases (편의 명령)
 #==================================================================
 alias python='python3'
@@ -170,7 +178,7 @@ alias python='python3'
 alias ll='ls -alGh --color'
 alias la='ls -A --color'
 alias l='ls -CF --color'
-alias cc='claude --plugin-dir ~/repos/iroi/iroi-dev'
+alias cc='CLAUDE_CODE_NO_FLICKER=1 claude'
 alias ccy='cc --allow-dangerously-skip-permissions'
 
 # 에디터
@@ -193,14 +201,24 @@ fi
 
 
 # Git 단축어
-alias g='lazygit'
+alias lg='lazygit'
 # (OMZ git 플러그인과 중복되지 않는 것만)
 alias gs='git status'
-alias gl='git log --oneline --graph --decorate --all'
+alias gl='git log --graph --decorate --date=short --pretty=format:"%C(auto)%h%d %s %C(cyan)(%an, %ad)"'
 alias gv='git msg'
 alias gd='git difftool'
 alias gcm='git commit -m'
 alias gf='git flow'
+
+# emacsclient 경로 (Homebrew)
+alias ec='emacsclient -t'
+
+# GUI로 열고 싶을 때
+alias eg='emacsclient -c -a ""'
+
+# 데몬 수동 관리용
+alias emacs-kill='emacsclient -e "(kill-emacs)"'
+alias emacs-restart='emacs-kill; emacs --daemon'
 
 #==================================================================
 # FZF 유용한 함수들

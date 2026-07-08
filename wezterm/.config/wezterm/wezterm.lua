@@ -24,6 +24,8 @@ config.keys = {
 
 -- 한글 출력 문제
 config.normalize_output_to_unicode_nfc = true
+-- 한글 입력 문제
+config.use_ime = true
 
 -- 성능
 config.max_fps = 120 -- 최대 FPS를 120으로 설정 (기본값: 60)
