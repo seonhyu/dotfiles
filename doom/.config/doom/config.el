@@ -583,15 +583,59 @@ TARGET-DATE should be a string in the format 'YYYY-MM-DD'."
   :config
   (unless (server-running-p) (server-start)))
 
+;; SPC p p 목록에서 현재 프로젝트를 숨기지 않고 원래 순서대로 표시
+(setq projectile-current-project-on-switch 'keep)
+
 ;; emacsclient로 연 파일/디렉터리가 프로젝트에 속하면 그 프로젝트 workspace에서 연다.
 ;; workspace가 이미 있으면 재사용, 없으면 생성. 프로젝트가 아니면 현재 workspace에 연다.
+;; workspace는 이름이 아니라 프로젝트 루트 경로(persp 파라미터 my/project-root)로
+;; 식별한다 — worktree처럼 디렉터리 이름이 같은 다른 프로젝트가 섞이지 않도록.
+(defun my/project-workspace--adoptable-p (persp root)
+  "루트 기록이 없는 PERSP를 ROOT 프로젝트의 workspace로 볼 수 있으면 t.
+파일/디렉터리 버퍼가 하나도 없거나, ROOT 아래의 버퍼를 포함할 때만 인정한다."
+  (let ((paths (delq nil (mapcar
+                          (lambda (b)
+                            (and (buffer-live-p b)
+                                 (or (buffer-file-name b)
+                                     (with-current-buffer b
+                                       (and (derived-mode-p 'dired-mode)
+                                            default-directory)))))
+                          (persp-buffers persp)))))
+    (or (null paths)
+        (cl-some (lambda (p) (file-in-directory-p p root)) paths))))
+
+(defun my/project-workspace-name (root base)
+  "ROOT 프로젝트가 사용할 workspace 이름을 정한다.
+루트가 일치하는 기존 workspace > 재사용 가능한 동명 workspace > 새 이름 순."
+  (or (cl-find-if (lambda (name)
+                    (equal root (persp-parameter
+                                 'my/project-root (+workspace-get name t))))
+                  (+workspace-list-names))
+      (when-let ((persp (+workspace-get base t)))
+        (and (not (persp-parameter 'my/project-root persp))
+             (my/project-workspace--adoptable-p persp root)
+             base))
+      (if (not (+workspace-exists-p base))
+          base
+        ;; 이름이 겹치는 다른 프로젝트 — 부모 디렉터리를 병기해 구분
+        (let* ((parent (file-name-nondirectory
+                        (directory-file-name (file-name-directory root))))
+               (name (format "%s·%s" base parent))
+               (n 2))
+          (while (+workspace-exists-p name)
+            (setq name (format "%s·%s<%d>" base parent n)
+                  n (1+ n)))
+          name))))
+
 (defun my/server-visit-in-project-workspace ()
   (when-let* ((buf (current-buffer))
               (dir (if buffer-file-name
                        (file-name-directory buffer-file-name)
                      default-directory))
               (root (projectile-project-root dir))
-              (name (projectile-project-name root)))
+              (root (directory-file-name (file-truename root)))
+              (name (my/project-workspace-name
+                     root (projectile-project-name root))))
     (unless (equal name (+workspace-current-name))
       (let ((prev (get-current-persp)))
         (+workspace-switch name t)
@@ -599,5 +643,7 @@ TARGET-DATE should be a string in the format 'YYYY-MM-DD'."
         ;; persp-autokill-buffer-on-remove에 의해 kill되기 때문.
         (persp-add-buffer buf)
         (when (and prev (persp-contain-buffer-p buf prev))
-          (persp-remove-buffer buf prev))))))
+          (persp-remove-buffer buf prev))))
+    ;; 이후에는 루트로 바로 식별되도록 현재 workspace에 루트를 기록
+    (set-persp-parameter 'my/project-root root)))
 (add-hook 'server-visit-hook #'my/server-visit-in-project-workspace)
