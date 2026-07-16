@@ -222,6 +222,9 @@
   :config
   (cl-pushnew '((js2-mode typescript-mode typescript-tsx-mode) . ("typescript-language-server" "--stdio"))
               eglot-server-programs
+              :test #'equal)
+  (cl-pushnew '((elixir-mode elixir-ts-mode heex-ts-mode) . ("elixir-ls"))
+              eglot-server-programs
               :test #'equal))
 
 ;; -------------------------------------------------------------------------------
