@@ -577,3 +577,27 @@ TARGET-DATE should be a string in the format 'YYYY-MM-DD'."
 (map! :leader
         :desc "Today's closed TODOs"
         "o a c" #'(lambda () (interactive) (org-agenda nil "c")))
+
+;; CLI에서 emacsclient로 이 Emacs에 파일을 열 수 있도록 서버 자동 시작
+(use-package! server
+  :config
+  (unless (server-running-p) (server-start)))
+
+;; emacsclient로 연 파일/디렉터리가 프로젝트에 속하면 그 프로젝트 workspace에서 연다.
+;; workspace가 이미 있으면 재사용, 없으면 생성. 프로젝트가 아니면 현재 workspace에 연다.
+(defun my/server-visit-in-project-workspace ()
+  (when-let* ((buf (current-buffer))
+              (dir (if buffer-file-name
+                       (file-name-directory buffer-file-name)
+                     default-directory))
+              (root (projectile-project-root dir))
+              (name (projectile-project-name root)))
+    (unless (equal name (+workspace-current-name))
+      (let ((prev (get-current-persp)))
+        (+workspace-switch name t)
+        ;; 반드시 추가 → 제거 순서. 어느 persp에도 없는 버퍼는
+        ;; persp-autokill-buffer-on-remove에 의해 kill되기 때문.
+        (persp-add-buffer buf)
+        (when (and prev (persp-contain-buffer-p buf prev))
+          (persp-remove-buffer buf prev))))))
+(add-hook 'server-visit-hook #'my/server-visit-in-project-workspace)

@@ -210,15 +210,18 @@ alias gd='git difftool'
 alias gcm='git commit -m'
 alias gf='git flow'
 
-# emacsclient 경로 (Homebrew)
-alias ec='emacsclient -t'
-
-# GUI로 열고 싶을 때
-alias eg='emacsclient -c -a ""'
-
-# 데몬 수동 관리용
-alias emacs-kill='emacsclient -e "(kill-emacs)"'
-alias emacs-restart='emacs-kill; emacs --daemon'
+# emacs: 실행 중인 Emacs.app에 열기 (서버 없으면 앱 실행)
+emacs() {
+  if (( $# == 0 )); then
+    open -a Emacs
+    return
+  fi
+  if command emacsclient -n "$@" 2>/dev/null; then
+    osascript -e 'tell application "Emacs" to activate' >/dev/null
+  else
+    open -a Emacs "$@"
+  fi
+}
 
 #==================================================================
 # FZF 유용한 함수들
