@@ -180,6 +180,8 @@ alias la='ls -A --color'
 alias l='ls -CF --color'
 alias cc='CLAUDE_CODE_NO_FLICKER=1 claude'
 alias ccy='cc --allow-dangerously-skip-permissions'
+alias cdx='codex'
+alias cdxy='codex  --dangerously-bypass-approvals-and-sandbox'
 
 # 에디터
 if command -v nvim &> /dev/null; then
