@@ -29,8 +29,13 @@ return {
         unchecked = { icon = '󰄱 ' },
         checked = { icon = '󰱒 ' },
       },
-      -- vim-table-mode로 직접 정렬하므로 표는 원본 유지
-      pipe_table = { enabled = false },
+      -- 표 렌더링 (주 용도)
+      pipe_table = {
+        enabled = true,
+        preset = 'round',
+        -- 셀 너비를 실제 표시폭 기준으로 맞춤 (한글 등 전각 문자 대응)
+        cell = 'padded',
+      },
     },
   },
 
