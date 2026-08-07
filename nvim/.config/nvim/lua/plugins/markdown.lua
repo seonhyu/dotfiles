@@ -29,13 +29,9 @@ return {
         unchecked = { icon = '󰄱 ' },
         checked = { icon = '󰱒 ' },
       },
-      -- 표 렌더링 (주 용도)
-      pipe_table = {
-        enabled = true,
-        preset = 'round',
-        -- 셀 너비를 실제 표시폭 기준으로 맞춤 (한글 등 전각 문자 대응)
-        cell = 'padded',
-      },
+      -- 표는 markdown-table-wrap.nvim이 담당 (긴 셀 줄바꿈 지원).
+      -- 제작자 권장대로 render-markdown 쪽 표 렌더러는 끈다.
+      pipe_table = { enabled = false },
     },
   },
 
@@ -48,11 +44,10 @@ return {
       vim.g.table_mode_corner_corner = '|'
       vim.g.table_mode_header_fillchar = '-'
 
+      -- 기본 off — 표를 편집할 때만 <localleader>t 로 켠다
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'markdown',
         callback = function()
-          vim.cmd('TableModeEnable')
-
           local opts = { buffer = true, silent = true, noremap = false }
           vim.keymap.set('n', '<Tab>', '<Plug>(table-mode-motion-right)', vim.tbl_extend('force', opts, { desc = 'Table: next cell' }))
           vim.keymap.set('n', '<S-Tab>', '<Plug>(table-mode-motion-left)', vim.tbl_extend('force', opts, { desc = 'Table: previous cell' }))
