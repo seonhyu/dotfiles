@@ -1,5 +1,39 @@
 -- Markdown plugins
 return {
+  -- 버퍼 내 마크다운 렌더링 (제목/목록/코드블록/표 시각화)
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    ft = { 'markdown' },
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+    },
+    opts = {
+      file_types = { 'markdown' },
+      -- 커서가 있는 줄은 원본 문법 그대로 보여 편집이 쉽도록
+      render_modes = { 'n', 'c', 't' },
+      anti_conceal = { enabled = true },
+      heading = {
+        icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
+        sign = false,
+      },
+      code = {
+        sign = false,
+        width = 'block',
+        right_pad = 2,
+      },
+      bullet = {
+        icons = { '●', '○', '◆', '◇' },
+      },
+      checkbox = {
+        unchecked = { icon = '󰄱 ' },
+        checked = { icon = '󰱒 ' },
+      },
+      -- vim-table-mode로 직접 정렬하므로 표는 원본 유지
+      pipe_table = { enabled = false },
+    },
+  },
+
   -- Table mode (org-mode style)
   {
     'dhruvasagar/vim-table-mode',
