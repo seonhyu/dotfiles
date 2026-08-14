@@ -55,10 +55,10 @@ shell_mode = "auto"
 prefix = "ctrl+f"
 
 # ── Pane 이동 (tmux: bind h/j/k/l 계열, vi 방향키) ──
-focus_pane_left = ["prefix+h", "ctrl+h"]
-focus_pane_down = ["prefix+j", "ctrl+j"]
-focus_pane_up = ["prefix+k", "ctrl+k"]
-focus_pane_right = ["prefix+l", "ctrl+l"]
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
 
 # ── Pane 분할 ──
 # Herdr: split_vertical = 오른쪽으로 분할(좌우 배치)
