@@ -20,6 +20,10 @@ name = "catppuccin"
 
 auto_switch = false
 
+[theme.custom]
+# catppuccin mocha teal (tmux tokyo-night 의 #73daca 자리)
+accent = "#94e2d5"
+
 # ── 배경색 ──
 # herdr 0.8.0 은 화면 대부분(pane 본문 등)을 SGR 49(배경 기본값)로 그려서
 # 호스트 터미널 배경이 그대로 노출된다. 그래서 herdr 배경색은 herdr 가
@@ -32,7 +36,7 @@ auto_switch = false
 # spaces/agents 의 현재 위치 강조가 배경에 묻혀 사라진다.
 #
 # 테마를 바꿀 때 함께 바꿔야 하는 곳 (자동 연동 안 됨):
-#   1. 이 파일: theme.name / ui.accent
+#   1. 이 파일: theme.name / theme.custom.accent
 #   2. wezterm/.config/wezterm/wezterm.lua: config.color_scheme + colors.background
 #      WezTerm 배경은 테마의 base 가 아니라 mantle 로 둬야 한다.
 #      base 로 두면 선택 행 강조와 배경이 같은 색이 되어 강조가 사라진다.
@@ -57,10 +61,11 @@ focus_pane_up = "prefix+k"
 focus_pane_right = "prefix+l"
 
 # ── Pane 분할 ──
-# tmux: bind v split-window -v  /  bind h split-window -h
-# herdr는 split_vertical = 위아래 분할, split_horizontal = 좌우 분할
-split_vertical = "prefix+v"
-split_horizontal = "prefix+minus"
+# Herdr: split_vertical = 오른쪽으로 분할(좌우 배치)
+#        split_horizontal = 아래로 분할(위아래 배치)
+# tmux에서 쓰던 v/- = 위아래, | = 좌우 분할을 유지
+split_vertical = "prefix+|"
+split_horizontal = ["prefix+v", "prefix+minus"]
 close_pane = "prefix+x"
 
 # tmux: prefix + z 가 없었으나 pane 확대는 자주 쓰므로 herdr 기본 유지
@@ -99,6 +104,11 @@ close_workspace = "prefix+shift+d"
 previous_workspace = "prefix+comma"
 next_workspace = "prefix+period"
 
+# tmux: Alt+1~5 세션 직접 전환
+# Herdr: Alt+1~9 번째 workspace로 직접 전환
+# ('0-sandbox 제외' 필터는 지원하지 않음)
+switch_workspace = "alt+1..9"
+
 # ── 기타 ──
 # tmux: bind '\' set status → herdr는 사이드바 토글이 가장 가까움
 toggle_sidebar = "prefix+b"
@@ -112,20 +122,14 @@ edit_scrollback = "prefix+e"
 # prefix+o 를 last_pane 으로 재할당했으므로 알림 이동은 해제
 open_notification_target = ""
 
-# ── 직접 전환 (prefix 불필요) ──
-# tmux: bind -n M-1~M-5 run-shell "tmux switch-client -t ..."
-# → alt+1~9 로 workspace 즉시 전환
-#   ('0-sandbox 제외' 필터링은 herdr에 대응 기능이 없어 단순 인덱스로 대체)
-[keys.indexed]
-workspaces = "alt"
-
 # ── 커스텀 커맨드 ──
 # tmux: bind g display-popup -d "#{pane_current_path}" -w 80% -h 80% -E
 # → 현재 경로에서 팝업 셸 열기
 [[keys.command]]
-key = "prefix+shift+g"
+key = "prefix+t"
 type = "popup"
-command = "$SHELL"
+command = "exec \"${SHELL:-sh}\""
+description = "open scratch terminal"
 width = "80%"
 height = "80%"
 
@@ -134,8 +138,8 @@ height = "80%"
 pane_borders = true
 pane_gaps = true
 
-# catppuccin mocha teal (tmux tokyo-night 의 #73daca 자리)
-accent = "#94e2d5"
+# 수동 pane 이름이 없을 때 테두리에 Claude/Codex 등 agent 이름 표시
+show_agent_labels_on_pane_borders = true
 
 # tmux: set -g status-position top
 tab_bar_position = "top"
@@ -148,7 +152,7 @@ copy_on_select = true
 # → herdr는 copy_on_select + Ctrl+C 로 시스템 클립보드에 자동 복사
 
 # tmux에는 없던 herdr 기능. 탭이 하나뿐일 때 탭 바를 숨겨 화면 절약
-hide_tab_bar_when_single_tab = false
+hide_tab_bar_when_single_tab = true
 
 # tmux: bind S command-prompt -p "New session:" (세션 생성 시 이름 입력)
 prompt_new_workspace_name = true
