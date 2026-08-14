@@ -55,10 +55,10 @@ shell_mode = "auto"
 prefix = "ctrl+f"
 
 # ── Pane 이동 (tmux: bind h/j/k/l 계열, vi 방향키) ──
-focus_pane_left = "prefix+h"
-focus_pane_down = "prefix+j"
-focus_pane_up = "prefix+k"
-focus_pane_right = "prefix+l"
+focus_pane_left = ["prefix+h", "ctrl+h"]
+focus_pane_down = ["prefix+j", "ctrl+j"]
+focus_pane_up = ["prefix+k", "ctrl+k"]
+focus_pane_right = ["prefix+l", "ctrl+l"]
 
 # ── Pane 분할 ──
 # Herdr: split_vertical = 오른쪽으로 분할(좌우 배치)
@@ -78,10 +78,10 @@ resize_mode = "prefix+r"
 
 # ── Pane 순환 ──
 # last_pane은 workspace/tab을 가로질러 직전에 포커스한 pane으로 전환
-# tmux의 last-window보다 범위가 넓으며, prefix+o로 전역 이전 pane 토글
-cycle_pane_next = "prefix+tab"
-cycle_pane_previous = "prefix+shift+tab"
-last_pane = "prefix+o"
+# prefix+Tab으로 현재 위치와 직전 위치를 왕복하며 prefix+o도 유지
+cycle_pane_next = ""
+cycle_pane_previous = ""
+last_pane = ["prefix+tab", "prefix+o"]
 
 # ── Tab (tmux window) ──
 # tmux: bind c new-window -c "#{pane_current_path}"
@@ -100,7 +100,7 @@ workspace_picker = "prefix+w"
 new_workspace = "prefix+shift+n"
 rename_workspace = "prefix+shift+w"
 close_workspace = "prefix+shift+d"
-# tmux: bind Tab switch-client -l (직전 세션 토글) 의 근사치
+# 순서상 이전/다음 workspace 이동
 previous_workspace = "prefix+comma"
 next_workspace = "prefix+period"
 
