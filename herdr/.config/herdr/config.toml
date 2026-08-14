@@ -77,8 +77,8 @@ zoom = "prefix+z"
 resize_mode = "prefix+r"
 
 # ── Pane 순환 ──
-# tmux: bind 'C-f' last-window → herdr는 last_pane 으로 대응
-# (prefix+ctrl+f 는 prefix 키 자신과 충돌해 사용 불가 — prefix+o 로 대체)
+# last_pane은 workspace/tab을 가로질러 직전에 포커스한 pane으로 전환
+# tmux의 last-window보다 범위가 넓으며, prefix+o로 전역 이전 pane 토글
 cycle_pane_next = "prefix+tab"
 cycle_pane_previous = "prefix+shift+tab"
 last_pane = "prefix+o"
@@ -137,9 +137,14 @@ height = "80%"
 # tmux: set -g pane-border-style / pane-active-border-style / pane-border-lines heavy
 pane_borders = true
 pane_gaps = true
+# 스크롤바 열을 없애 pane 본문 너비를 확보
+pane_scrollbars = false
 
 # 수동 pane 이름이 없을 때 테두리에 Claude/Codex 등 agent 이름 표시
 show_agent_labels_on_pane_borders = true
+
+# agent 패널에서 blocked/done 등 확인이 필요한 항목을 우선 표시
+agent_panel_sort = "priority"
 
 # tmux: set -g status-position top
 tab_bar_position = "top"
@@ -161,6 +166,14 @@ prompt_new_tab_name = true
 # tmux: set-option -g detach-on-destroy off 에 대응하는 안전장치
 confirm_close = true
 
+[ui.sidebar.agents]
+# agent 상태와 위치 아래에 현재 작업 제목을 표시
+rows = [
+  ["state_icon", "workspace", "tab"],
+  ["terminal_title_stripped"],
+  ["agent"],
+]
+
 [session]
 # tmux-resurrect + tmux-continuum → herdr 내장 세션 복원
 # 서버 재시작 후 AI 에이전트 pane을 원래 대화 세션으로 복원
@@ -174,6 +187,10 @@ scrollback_limit_bytes = 10000000
 [experimental]
 # 한글 IME 사용 시 prefix 커맨드가 먹히도록 ASCII 입력 소스로 임시 전환
 switch_ascii_input_source_in_prefix = true
+
+# Claude/Codex가 호스트 커서를 숨겨도 한글 IME 후보창이 입력 위치를 따르도록 보정
+reveal_hidden_cursor_for_cjk_ime = true
+cjk_ime_agents = ["claude", "codex"]
 
 # ================================================================
 # 미이관 항목 (herdr에 대응 기능이 없거나 불필요)
