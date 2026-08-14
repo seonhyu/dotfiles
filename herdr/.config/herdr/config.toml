@@ -1,0 +1,191 @@
+# ================================================================
+# Herdr 설정 — tmux.conf에서 이관 (2026-08-14)
+# ================================================================
+# tmux → herdr 용어 매핑:
+#   tmux session → herdr workspace
+#   tmux window  → herdr tab
+#   tmux pane    → herdr pane
+#
+# 이관되지 않은 tmux 설정은 문서 하단 "미이관 항목" 참조.
+# 설정 검증: herdr config check
+# 런타임 반영: herdr server reload-config  (또는 prefix + shift+r)
+# ================================================================
+
+# 최초 실행 알림 설정 온보딩 비활성화
+onboarding = false
+
+[theme]
+# tokyo-night-tmux 플러그인 → herdr 내장 tokyo-night 테마
+name = "catppuccin"
+
+auto_switch = false
+
+# ── 배경색 ──
+# herdr 0.8.0 은 panel_bg 를 생략하면 배경을 칠하지 않고 호스트 터미널
+# 배경을 그대로 노출한다(= "reset" 이 사실상 기본값). 그래서 name 만
+# 바꾸면 강조색·테두리·텍스트만 바뀌고 배경은 WezTerm 색이 남는다.
+# tmux 는 자기 배경을 직접 칠했기 때문에 테마 배경이 그대로 보였다.
+#
+# 따라서 배경까지 테마를 따르게 하려면 아래처럼 명시해야 한다.
+# name 을 바꿀 때는 이 값도 함께 바꿔야 한다 (자동 연동되지 않음).
+[theme.custom]
+panel_bg = "#1a1b26"  # tokyo-night 배경
+
+[terminal]
+# tmux: bind c new-window -c "#{pane_current_path}"
+#       bind v/h/|/- split-window -c "#{pane_current_path}"
+# → 새 pane/tab/workspace가 현재 경로를 상속
+new_cwd = "follow"
+
+# macOS에서 login shell 사용 (tmux 기본 동작과 동일)
+shell_mode = "auto"
+
+[keys]
+# tmux: unbind C-b / set -g prefix C-f
+prefix = "ctrl+f"
+
+# ── Pane 이동 (tmux: bind h/j/k/l 계열, vi 방향키) ──
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# ── Pane 분할 ──
+# tmux: bind v split-window -v  /  bind h split-window -h
+# herdr는 split_vertical = 위아래 분할, split_horizontal = 좌우 분할
+split_vertical = "prefix+v"
+split_horizontal = "prefix+minus"
+close_pane = "prefix+x"
+
+# tmux: prefix + z 가 없었으나 pane 확대는 자주 쓰므로 herdr 기본 유지
+zoom = "prefix+z"
+
+# ── Pane 리사이즈 ──
+# tmux: bind -r H/J/K/L resize-pane
+# herdr는 리사이즈 모드 진입 후 hjkl 로 조절하는 방식
+resize_mode = "prefix+r"
+
+# ── Pane 순환 ──
+# tmux: bind 'C-f' last-window → herdr는 last_pane 으로 대응
+# (prefix+ctrl+f 는 prefix 키 자신과 충돌해 사용 불가 — prefix+o 로 대체)
+cycle_pane_next = "prefix+tab"
+cycle_pane_previous = "prefix+shift+tab"
+last_pane = "prefix+o"
+
+# ── Tab (tmux window) ──
+# tmux: bind c new-window -c "#{pane_current_path}"
+new_tab = "prefix+c"
+rename_tab = "prefix+shift+t"
+previous_tab = "prefix+p"
+next_tab = "prefix+n"
+close_tab = "prefix+shift+x"
+# tmux: base-index 1 (1부터 시작) — herdr도 1부터
+switch_tab = "prefix+1..9"
+
+# ── Workspace (tmux session) ──
+# tmux: bind s choose-tree -sZ -O name  → herdr workspace picker
+workspace_picker = "prefix+w"
+# tmux: bind S command-prompt -p "New session:"
+new_workspace = "prefix+shift+n"
+rename_workspace = "prefix+shift+w"
+close_workspace = "prefix+shift+d"
+# tmux: bind Tab switch-client -l (직전 세션 토글) 의 근사치
+previous_workspace = "prefix+comma"
+next_workspace = "prefix+period"
+
+# ── 기타 ──
+# tmux: bind '\' set status → herdr는 사이드바 토글이 가장 가까움
+toggle_sidebar = "prefix+b"
+# tmux: bind-key r source-file ~/.config/tmux/tmux.conf
+reload_config = "prefix+shift+r"
+detach = "prefix+q"
+settings = "prefix+s"
+help = "prefix+?"
+goto = "prefix+g"
+edit_scrollback = "prefix+e"
+# prefix+o 를 last_pane 으로 재할당했으므로 알림 이동은 해제
+open_notification_target = ""
+
+# ── 직접 전환 (prefix 불필요) ──
+# tmux: bind -n M-1~M-5 run-shell "tmux switch-client -t ..."
+# → alt+1~9 로 workspace 즉시 전환
+#   ('0-sandbox 제외' 필터링은 herdr에 대응 기능이 없어 단순 인덱스로 대체)
+[keys.indexed]
+workspaces = "alt"
+
+# ── 커스텀 커맨드 ──
+# tmux: bind g display-popup -d "#{pane_current_path}" -w 80% -h 80% -E
+# → 현재 경로에서 팝업 셸 열기
+[[keys.command]]
+key = "prefix+shift+g"
+type = "popup"
+command = "$SHELL"
+width = "80%"
+height = "80%"
+
+[ui]
+# tmux: set -g pane-border-style / pane-active-border-style / pane-border-lines heavy
+pane_borders = true
+pane_gaps = true
+
+# tmux: set -g @tokyo-night-tmux 계열 강조색 (#73daca)
+accent = "#73daca"
+
+# tmux: set -g status-position top
+tab_bar_position = "top"
+
+# tmux: set -g mouse on
+mouse_capture = true
+copy_on_select = true
+
+# tmux: bind-key -T copy-mode-vi y send-keys -X copy-pipe "pbcopy"
+# → herdr는 copy_on_select + Ctrl+C 로 시스템 클립보드에 자동 복사
+
+# tmux에는 없던 herdr 기능. 탭이 하나뿐일 때 탭 바를 숨겨 화면 절약
+hide_tab_bar_when_single_tab = false
+
+# tmux: bind S command-prompt -p "New session:" (세션 생성 시 이름 입력)
+prompt_new_workspace_name = true
+prompt_new_tab_name = true
+
+# tmux: set-option -g detach-on-destroy off 에 대응하는 안전장치
+confirm_close = true
+
+[session]
+# tmux-resurrect + tmux-continuum → herdr 내장 세션 복원
+# 서버 재시작 후 AI 에이전트 pane을 원래 대화 세션으로 복원
+resume_agents_on_restore = true
+
+[advanced]
+# tmux: set -g history-limit 50000
+# herdr는 줄 수가 아닌 바이트 단위. 50000줄 ≈ 10MB (herdr 기본값 유지)
+scrollback_limit_bytes = 10000000
+
+[experimental]
+# 한글 IME 사용 시 prefix 커맨드가 먹히도록 ASCII 입력 소스로 임시 전환
+switch_ascii_input_source_in_prefix = true
+
+# ================================================================
+# 미이관 항목 (herdr에 대응 기능이 없거나 불필요)
+# ----------------------------------------------------------------
+# [플러그인 — herdr는 플러그인 시스템이 없음]
+#   tpm                  : 플러그인 매니저 자체가 불필요
+#   tmux-sensible        : herdr 기본값이 이미 합리적
+#   tokyo-night-tmux     : [theme] name = "tokyo-night" 로 대체
+#   tmux-resurrect       : [session] resume_agents_on_restore 로 대체
+#   tmux-continuum       : herdr 서버가 상시 세션을 유지하므로 불필요
+#   aserowy/tmux.nvim    : herdr-neovim 통합은 아직 없음.
+#                          neovim 안에서의 창 이동은 nvim 자체 키맵 사용
+#
+# [터미널 저수준 설정 — herdr가 자체 터미널 에뮬레이터로 처리]
+#   default-terminal / terminal-features / terminal-overrides
+#   truecolor·undercurl·clipboard(OSC52)·synchronized update 전부 herdr 내장
+#   escape-time 0 / focus-events off 도 herdr가 자체 처리
+#
+# [herdr에 대응 없음]
+#   synchronize-panes (prefix + a) : pane 동시 입력 기능 없음
+#   status-keys vi / mode-keys vi  : herdr 스크롤백은 자체 키 사용
+#   window-status-format 커스터마이징 : 탭 라벨 포맷 지정 불가
+#   window-active-style bg          : 비활성 pane 배경 어둡게 하는 옵션 없음
+#   '0-sandbox 제외' N번째 세션 전환 : shell 필터링 불가 (단순 인덱스로 대체)
+# ================================================================

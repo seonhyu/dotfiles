@@ -34,7 +34,12 @@ config.prefer_egl = true -- EGL 렌더링 API 선호 (성능/호환성 향상)
 ---------------------------------------------------------------------------------
 -- 모양
 ---------------------------------------------------------------------------------
-config.color_scheme = "Catppuccin Frappe"
+-- herdr 테마(tokyo-night)와 배경색을 맞춘다.
+-- herdr는 pane 본문 등 화면 대부분을 SGR 49(배경 기본값)로 그려서
+-- 호스트 터미널 배경이 그대로 노출된다. 따라서 herdr 배경을 바꾸려면
+-- herdr의 panel_bg 가 아니라 이쪽 배경색을 맞춰야 한다.
+-- Tokyo Night 배경 #1a1b26 = herdr config.toml 의 panel_bg 와 동일.
+config.color_scheme = "Tokyo Night"
 
 -- macOS 타이틀바 숨김 (Ghostty 설정에서 이관)
 config.window_decorations = "RESIZE"
