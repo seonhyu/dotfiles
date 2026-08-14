@@ -14,7 +14,7 @@ return {
       render_modes = { 'n', 'c', 't' },
       anti_conceal = { enabled = true },
       heading = {
-        icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
+        icons = { '# ', '## ', '### ', '#### ', '##### ', '###### ' },
         sign = false,
       },
       code = {

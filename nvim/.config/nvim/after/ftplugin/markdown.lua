@@ -21,5 +21,4 @@ map('n', '<localleader>t', '<cmd>TableModeToggle<cr>', vim.tbl_extend('force', o
 map('n', '<localleader>f', '<cmd>TableModeRealign<cr>', vim.tbl_extend('force', opts, { desc = '[M]arkdown table [F]ormat (realign)' }))
 
 -- Table operations
-map('n', '<localleader>tr', '<cmd>TableModeRealign<cr>', vim.tbl_extend('force', opts, { desc = '[T]able [R]ealign' }))
 map('n', '<localleader>ts', '<cmd>TableSort<cr>', vim.tbl_extend('force', opts, { desc = '[T]able [S]ort' }))

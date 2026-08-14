@@ -4,10 +4,9 @@ return {
   'ice345/markdown-table-wrap.nvim',
   ft = { 'markdown' },
   opts = {
-    -- 자동 전환 없음 — 파일을 열면 평소처럼 편집 모드(Source) 유지.
-    -- vim-table-mode 편집 워크플로를 방해하지 않기 위함.
-    auto_preview = false,
-    preview_mode = 'reader',
+    -- Markdown 파일을 열면 표를 원본 버퍼 위에 Inline으로 렌더링.
+    auto_preview = true,
+    preview_mode = 'inline',
     reader = {
       auto_open = 'never',
       wrap = true,
