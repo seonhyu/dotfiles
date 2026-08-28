@@ -1,0 +1,26 @@
+/* Vim Motions — 한글(CJK) 편집 보조 스타일
+   ~/WIKI/.obsidian/snippets/vim-motions-cjk.css 로 연결된다.
+   설정 > 모양 > CSS 스니펫에서 켠다. */
+
+/* Normal 모드 커서를 한글 글자 폭에 맞춰 또렷하게 */
+.cm-vim-cursor-block {
+  background-color: var(--text-accent);
+  opacity: 0.45;
+}
+
+/* EasyMotion / flash 라벨이 한글 본문 위에서도 읽히도록 대비를 높인다 */
+.cm-vim-easymotion-label,
+.cm-vim-flash-label {
+  font-family: var(--font-monospace);
+  font-weight: 700;
+  background-color: var(--color-red);
+  color: var(--text-on-accent);
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+/* which-key 팝업에서 한글 설명이 잘리지 않게 */
+.vim-motions-whichkey .whichkey-desc {
+  white-space: nowrap;
+  font-family: var(--font-interface);
+}
