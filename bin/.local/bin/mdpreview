@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+# ============================================
+# mdpreview: 표준 Markdown 프리뷰 명령
+# Usage: mdpreview [FILE] [-- <gh gfm-preview 옵션...>]
+#
+# Neovim / Emacs / 터미널이 모두 이 명령 하나를 호출한다.
+# 렌더링 주체는 editor가 아니라 `gh gfm-preview`(완전 로컬 렌더링).
+# ============================================
+
+set -euo pipefail
+
+PORT="${MDPREVIEW_PORT:-3333}"
+
+die() { printf 'mdpreview: %s\n' "$1" >&2; exit 1; }
+
+command -v gh >/dev/null 2>&1 || die "gh(GitHub CLI)가 필요하다: brew install gh"
+gh extension list 2>/dev/null | grep -q 'gfm-preview' \
+  || die "확장이 없다: gh extension install thiagokokada/gh-gfm-preview"
+
+# -- 이후는 gh gfm-preview 로 그대로 넘긴다
+EXTRA=()
+if [[ "${1:-}" == "--" ]]; then
+  shift; EXTRA=("$@"); set --
+elif [[ $# -gt 1 ]]; then
+  FIRST="$1"; shift
+  [[ "${1:-}" == "--" ]] && shift
+  EXTRA=("$@"); set -- "$FIRST"
+fi
+
+# 대상 파일 결정 (미지정 시 현재 디렉터리 README)
+TARGET="${1:-}"
+if [[ -z "$TARGET" ]]; then
+  for c in README.md readme.md README.markdown; do
+    [[ -f "$c" ]] && { TARGET="$c"; break; }
+  done
+  [[ -n "$TARGET" ]] || die "대상 파일이 없다. 파일을 지정하거나 README.md가 있는 곳에서 실행하라."
+fi
+[[ -f "$TARGET" ]] || die "파일을 찾을 수 없다: $TARGET"
+
+# gh gfm-preview는 파일의 디렉터리를 서버 root로 잡는다.
+TARGET_ABS="$(cd "$(dirname "$TARGET")" && pwd)/$(basename "$TARGET")"
+ROOT_DIR="$(dirname "$TARGET_ABS")"
+REL="$(basename "$TARGET_ABS")"
+URL="http://localhost:${PORT}/${REL}"
+
+open_browser() {
+  if command -v open >/dev/null 2>&1; then open "$1"
+  elif command -v xdg-open >/dev/null 2>&1; then xdg-open "$1"
+  else printf 'mdpreview: %s\n' "$1"; fi
+}
+
+# 중복 실행 방지 — 같은 root를 서빙하는 서버가 이미 있으면 브라우저만 연다.
+# (gh gfm-preview는 포트 충돌 시 조용히 임의 포트로 넘어가므로,
+#  그대로 두면 같은 문서에 서버가 여러 개 쌓인다.)
+PIDFILE="${TMPDIR:-/tmp}/mdpreview-$(printf '%s' "$ROOT_DIR" | cksum | cut -d' ' -f1).pid"
+if [[ -f "$PIDFILE" ]]; then
+  OLD_PID="$(head -1 "$PIDFILE" 2>/dev/null || true)"
+  OLD_URL="$(sed -n '2p' "$PIDFILE" 2>/dev/null || true)"
+  if [[ -n "$OLD_PID" ]] && kill -0 "$OLD_PID" 2>/dev/null; then
+    open_browser "${OLD_URL%/*}/${REL}"
+    printf 'mdpreview: 기존 서버 재사용 (pid %s)\n' "$OLD_PID"
+    exit 0
+  fi
+  rm -f "$PIDFILE"
+fi
+
+# 포트가 이미 사용 중이면 비어 있는 포트를 찾는다 (임의 포트 fallback 회피).
+port_busy() { lsof -nP -iTCP:"$1" -sTCP:LISTEN >/dev/null 2>&1; }
+if port_busy "$PORT"; then
+  for _ in $(seq 1 20); do
+    PORT=$((PORT + 1))
+    port_busy "$PORT" || break
+  done
+  URL="http://localhost:${PORT}/${REL}"
+fi
+
+# -A: 자동 브라우저 오픈을 끄고, 서버가 준비된 뒤 직접 연다.
+gh gfm-preview -A -p "$PORT" "${EXTRA[@]+"${EXTRA[@]}"}" "$TARGET_ABS" &
+SERVER_PID=$!
+printf '%s\n%s\n' "$SERVER_PID" "$URL" > "$PIDFILE"
+trap 'rm -f "$PIDFILE"' EXIT
+
+for _ in $(seq 1 50); do
+  kill -0 "$SERVER_PID" 2>/dev/null || break
+  port_busy "$PORT" && break
+  sleep 0.1
+done
+
+kill -0 "$SERVER_PID" 2>/dev/null || die "서버 시작 실패"
+open_browser "$URL"
+printf 'mdpreview: %s\n' "$URL"
+wait "$SERVER_PID"

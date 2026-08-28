@@ -450,6 +450,34 @@
          "  document.querySelectorAll('pre > code').forEach((c) => hljs.highlightElement(c));"
          "});</script>")))
 
+;; markdown preview를 CLI(`mdpreview` -> `gh gfm-preview`)로 통일한다.
+;; Neovim / 터미널 / Emacs가 모두 같은 renderer를 쓰므로 표시가 완전히 동일하다.
+;; Emacs는 launcher일 뿐이라 Emacs를 닫아도 preview 서버는 유지된다.
+;; 위의 markdown-css-paths 설정은 `markdown-export`(SPC m e) 등 내장 HTML 출력용으로 남겨둔다.
+(defun +my/markdown-preview-cli ()
+  "현재 파일을 `mdpreview'로 미리 본다."
+  (interactive)
+  (let ((file (buffer-file-name)))
+    (cond
+     ((null file) (user-error "저장되지 않은 버퍼는 preview할 수 없다"))
+     ((not (executable-find "mdpreview"))
+      (user-error "mdpreview를 찾을 수 없다 — dotfiles의 bin 패키지를 stow하라"))
+     (t
+      (when (buffer-modified-p) (save-buffer))
+      ;; Emacs를 닫아도 preview 서버가 살아있어야 하므로 완전히 분리한다.
+      ;; start-process의 자식은 Emacs 종료 시 함께 죽기 때문에
+      ;; nohup + setsid 대용으로 shell에서 재부모화(disown)한다.
+      (let ((process-connection-type nil))
+        (call-process "/bin/sh" nil 0 nil "-c"
+                      (concat "nohup mdpreview " (shell-quote-argument file)
+                              " >/dev/null 2>&1 &")))
+      (message "mdpreview: %s" (file-name-nondirectory file))))))
+
+(map! :after markdown-mode
+      :map markdown-mode-map
+      :localleader
+      :desc "Preview (mdpreview)" "p" #'+my/markdown-preview-cli)
+
 ;; -------------------------------------------------------------------------------
 ;; Code
 ;; -------------------------------------------------------------------------------

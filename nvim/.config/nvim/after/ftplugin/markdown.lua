@@ -9,7 +9,20 @@ vim.opt_local.conceallevel = 2
 vim.opt_local.concealcursor = ''
 
 -- Markdown preview
-map('n', '<localleader>p', '<cmd>MarkdownPreview<cr>', vim.tbl_extend('force', opts, { desc = '[M]arkdown [P]review toggle' }))
+-- 렌더링은 CLI(`mdpreview` -> `gh gfm-preview`)가 담당한다.
+-- Neovim은 launcher일 뿐이라 종료해도 preview 서버는 유지된다.
+map('n', '<localleader>p', function()
+  local file = vim.fn.expand('%:p')
+  if file == '' then
+    vim.notify('저장되지 않은 버퍼는 preview할 수 없다.', vim.log.levels.WARN)
+    return
+  end
+  if vim.bo.modified then
+    vim.cmd('write')
+  end
+  vim.fn.jobstart({ 'mdpreview', file }, { detach = true })
+  vim.notify('mdpreview: ' .. vim.fn.fnamemodify(file, ':t'))
+end, vim.tbl_extend('force', opts, { desc = '[M]arkdown [P]review' }))
 
 -- 버퍼 내 렌더링 토글
 map('n', '<localleader>r', '<cmd>RenderMarkdown toggle<cr>', vim.tbl_extend('force', opts, { desc = '[M]arkdown [R]ender toggle' }))
