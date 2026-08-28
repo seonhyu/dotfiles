@@ -223,3 +223,13 @@ Configuration mode가 `Lua only`인지 확인한다. `lua-vimrc`면 vimrc가 덮
 
 **설정 오류 확인**
 `:violations` — 설정 UI와 충돌하는 지시문을 보여준다.
+
+**빈 `Untitled` 탭이 생긴다**
+Vim Motions 0.130.0 의 buffers picker 버그다. 목록을 만들 때
+`app.workspace.getLeaf(false)` 를 호출하는데, 이 API는 사용 가능한 leaf 가
+없으면 **새로 만든다**. 다른 picker 소스는 모두 생성하지 않는
+`getActiveViewOfType` 을 쓰므로 `buffers.ts` 만의 문제다.
+
+그래서 `SPC b b` 는 코어 빠른 전환(`switcher:open`)으로 우회했다.
+플러그인 기본값인 <kbd>SPC f b</kbd> 는 여전히 이 버그를 탄다 — 대신
+<kbd>SPC b b</kbd> 를 쓴다. 내장 picker 를 꼭 쓰려면 <kbd>SPC b B</kbd>.

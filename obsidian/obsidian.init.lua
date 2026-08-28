@@ -155,12 +155,22 @@ leader.add({
 
 wk.set_group("<leader>b", "Buffer")
 
--- 플러그인이 등록한 실제 Obsidian 명령 ID를 직접 실행한다.
--- 문자열 RHS(":buffers<CR>")는 키 시퀀스를 재생하므로 빠르게 입력하면
--- ex 명령줄이 열리기 전에 키가 앞질러 가고 <CR>가 새 탭을 연다.
+-- ⚠ Vim Motions 0.130.0 의 buffers picker 는 목록을 만들 때
+--   app.workspace.getLeaf(false) 를 호출한다. Obsidian API 문서상 이 호출은
+--   "사용 가능한 leaf 가 없으면 새로 만든다" — 그래서 빈 Untitled 탭이 생긴다.
+--   (다른 picker 소스는 모두 생성하지 않는 getActiveViewOfType 을 쓴다.
+--    buffers.ts 만 예외라 업스트림 버그로 보인다.)
+--
+--   우회: 같은 "열려 있는 노트로 전환" 목적을 Obsidian 코어 빠른 전환으로
+--   대신한다. 부작용이 없고 한글 검색도 코어 쪽이 더 정확하다.
 map("n", "<leader>bb", function()
+  vim.obsidian.run_command("switcher:open")
+end, "[B]uffer list (빠른 전환)")
+
+-- 내장 buffers picker 를 그래도 쓰고 싶을 때 (빈 탭 부작용 감수)
+map("n", "<leader>bB", function()
   vim.obsidian.run_command("vim-motions:picker-buffers")
-end, "[B]uffer list")
+end, "[B]uffer picker (Vim Motions)")
 
 leader.add({
   { "bd", "workspace:close", desc = "[B]uffer [D]elete" },
