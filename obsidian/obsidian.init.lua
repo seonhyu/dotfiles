@@ -52,6 +52,8 @@ vim.opt.textobjects = true      -- mini.ai 대응 (마크다운 인식 텍스트
 vim.opt.navigation = true       -- ]h [h ]l ]n 구조 이동
 vim.opt.harpoon = true          -- Harpoon 대응
 vim.opt.oil = true              -- Oil 대응 (설정 키는 oilexplorer가 아니라 oil)
+vim.opt.picker = true           -- 내장 telescope 스타일 picker (Telescope 대응)
+vim.opt.workspacenav = true     -- 페인/탭/사이드바 키보드 제어
 vim.opt.jumplist = true         -- <C-o>/<C-i>
 vim.opt.undotree = true
 vim.opt.hardwrap = true         -- gq/gw
@@ -121,13 +123,8 @@ end
 wk.set_group("<leader>f", "Find/File")
 
 -- Neovim의 <leader>fd / fD — 현재 노트가 있는 폴더를 Oil로 연다.
-map("n", "<leader>fd", function()
-  vim.obsidian.oil.open(".")
-end, "[F]ind in current [D]irectory (Oil)")
-
-map("n", "<leader>fD", function()
-  vim.obsidian.oil.root()
-end, "[F]ind from vault root (Oil)")
+vim.keymap.set("n", "<leader>fd", ":Oil<CR>", { desc = "[F]ind in current [D]irectory (Oil)" })
+vim.keymap.set("n", "<leader>fD", ":Oil .<CR>", { desc = "[F]ind from vault root (Oil)" })
 
 -- Neovim의 <leader>fs / fS — Obsidian은 자동 저장이지만 손버릇을 살린다.
 map("n", "<leader>fs", function()
@@ -153,9 +150,9 @@ leader.add({
 
 wk.set_group("<leader>b", "Buffer")
 
-map("n", "<leader>bb", function()
-  vim.obsidian.pick("buffers")
-end, "[B]uffer list")
+-- ex 명령 문자열 RHS를 쓴다. Lua 콜백(vim.obsidian.pick)은 openPicker 콜백이
+-- 연결되지 않았을 때 조용히 no-op이 되지만, ex 명령은 별도 경로로 등록된다.
+vim.keymap.set("n", "<leader>bb", ":buffers<CR>", { desc = "[B]uffer list" })
 
 leader.add({
   { "bd", "workspace:close", desc = "[B]uffer [D]elete" },
@@ -240,13 +237,8 @@ leader.add({
 })
 
 -- Oil 탐색기 (Neovim의 Neo-tree \ 에 대응)
-map("n", "<leader>oe", function()
-  vim.obsidian.oil.open(".")
-end, "[O]pen [E]xplorer (Oil)")
-
-map("n", "\\", function()
-  vim.obsidian.oil.open(".")
-end, "Oil explorer")
+vim.keymap.set("n", "<leader>oe", ":Oil<CR>", { desc = "[O]pen [E]xplorer (Oil)" })
+vim.keymap.set("n", "\\", ":Oil<CR>", { desc = "Oil explorer" })
 
 -- ============================================================================
 -- 10. SPC T — 토글(Toggle)
