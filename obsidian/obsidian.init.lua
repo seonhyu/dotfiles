@@ -123,8 +123,13 @@ end
 wk.set_group("<leader>f", "Find/File")
 
 -- Neovim의 <leader>fd / fD — 현재 노트가 있는 폴더를 Oil로 연다.
-vim.keymap.set("n", "<leader>fd", ":Oil<CR>", { desc = "[F]ind in current [D]irectory (Oil)" })
-vim.keymap.set("n", "<leader>fD", ":Oil .<CR>", { desc = "[F]ind from vault root (Oil)" })
+map("n", "<leader>fd", function()
+  vim.cmd("Oil")
+end, "[F]ind in current [D]irectory (Oil)")
+
+map("n", "<leader>fD", function()
+  vim.cmd("Oil .")
+end, "[F]ind from vault root (Oil)")
 
 -- Neovim의 <leader>fs / fS — Obsidian은 자동 저장이지만 손버릇을 살린다.
 map("n", "<leader>fs", function()
@@ -150,9 +155,12 @@ leader.add({
 
 wk.set_group("<leader>b", "Buffer")
 
--- ex 명령 문자열 RHS를 쓴다. Lua 콜백(vim.obsidian.pick)은 openPicker 콜백이
--- 연결되지 않았을 때 조용히 no-op이 되지만, ex 명령은 별도 경로로 등록된다.
-vim.keymap.set("n", "<leader>bb", ":buffers<CR>", { desc = "[B]uffer list" })
+-- 플러그인이 등록한 실제 Obsidian 명령 ID를 직접 실행한다.
+-- 문자열 RHS(":buffers<CR>")는 키 시퀀스를 재생하므로 빠르게 입력하면
+-- ex 명령줄이 열리기 전에 키가 앞질러 가고 <CR>가 새 탭을 연다.
+map("n", "<leader>bb", function()
+  vim.obsidian.run_command("vim-motions:picker-buffers")
+end, "[B]uffer list")
 
 leader.add({
   { "bd", "workspace:close", desc = "[B]uffer [D]elete" },
@@ -237,8 +245,13 @@ leader.add({
 })
 
 -- Oil 탐색기 (Neovim의 Neo-tree \ 에 대응)
-vim.keymap.set("n", "<leader>oe", ":Oil<CR>", { desc = "[O]pen [E]xplorer (Oil)" })
-vim.keymap.set("n", "\\", ":Oil<CR>", { desc = "Oil explorer" })
+map("n", "<leader>oe", function()
+  vim.cmd("Oil")
+end, "[O]pen [E]xplorer (Oil)")
+
+map("n", "\\", function()
+  vim.cmd("Oil")
+end, "Oil explorer")
 
 -- ============================================================================
 -- 10. SPC T — 토글(Toggle)
@@ -317,7 +330,11 @@ wk.set_group("<leader>H", "Help")
 wk.set_group("<leader>h", "Harpoon")  -- Vim Motions 기본값 유지
 
 map("n", "<leader>Hh", function() vim.ob.ui.command_palette() end, "[H]elp (명령 팔레트)")
-map("n", "<leader>Hk", function() vim.cmd("map") end, "[H]elp [K]eymaps")
+-- :map 은 등록된 ex 명령이 아니다. which-key 팝업(SPC 누르고 대기)이
+-- 실질적인 키맵 목록이며, 전체 목록은 설정 UI에서 본다.
+map("n", "<leader>Hk", function()
+  vim.obsidian.run_command("app:open-settings")
+end, "[H]elp [K]eymaps (설정)")
 map("n", "<leader>Hc", function() vim.ob.ui.command_palette() end, "[H]elp [C]ommands")
 
 -- ============================================================================
