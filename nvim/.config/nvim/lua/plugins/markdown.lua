@@ -1,6 +1,6 @@
 -- Markdown plugins
 return {
-  -- 버퍼 내 마크다운 렌더링 (제목/목록/코드블록/표 시각화)
+  -- 버퍼 내 마크다운 렌더링 (제목/목록/코드블록 시각화)
   {
     'MeanderingProgrammer/render-markdown.nvim',
     ft = { 'markdown' },
@@ -29,31 +29,12 @@ return {
         unchecked = { icon = '󰄱 ' },
         checked = { icon = '󰱒 ' },
       },
-      -- 표는 markdown-table-wrap.nvim이 담당 (긴 셀 줄바꿈 지원).
+      -- 표는 markdown-table-wrap.nvim이 담당 (긴 셀 줄바꿈 지원, Reader 뷰).
       -- 제작자 권장대로 render-markdown 쪽 표 렌더러는 끈다.
+      -- 표 편집용 vim-table-mode는 제거했다: 전역 <leader>tt/<leader>tm 을 덮어쓰고
+      -- 활성화 시 <leader>tr/<leader>ts 를 가리며, <Tab> 매핑이 <C-i> 점프를 막았다.
       pipe_table = { enabled = false },
     },
-  },
-
-  -- Table mode (org-mode style)
-  {
-    'dhruvasagar/vim-table-mode',
-    ft = { 'markdown' },
-    config = function()
-      vim.g.table_mode_corner = '|'
-      vim.g.table_mode_corner_corner = '|'
-      vim.g.table_mode_header_fillchar = '-'
-
-      -- 기본 off — 표를 편집할 때만 <localleader>t 로 켠다
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'markdown',
-        callback = function()
-          local opts = { buffer = true, silent = true, noremap = false }
-          vim.keymap.set('n', '<Tab>', '<Plug>(table-mode-motion-right)', vim.tbl_extend('force', opts, { desc = 'Table: next cell' }))
-          vim.keymap.set('n', '<S-Tab>', '<Plug>(table-mode-motion-left)', vim.tbl_extend('force', opts, { desc = 'Table: previous cell' }))
-        end,
-      })
-    end,
   },
 
   -- Markdown preview
