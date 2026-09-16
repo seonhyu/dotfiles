@@ -5,6 +5,8 @@
 #
 # Neovim / Emacs / 터미널이 모두 이 명령 하나를 호출한다.
 # 렌더링 주체는 editor가 아니라 `gh gfm-preview`(완전 로컬 렌더링).
+# 브라우저 표시 폭은 gh gfm-preview 옵션이 없어 Stylus 사용자 스타일이 조정한다:
+#   ~/.config/stylus/mdpreview.user.css (stylus 패키지, README 참고)
 # ============================================
 
 set -euo pipefail

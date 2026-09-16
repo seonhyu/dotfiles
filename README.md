@@ -10,6 +10,7 @@ GNU Stow를 사용한 dotfiles 관리 저장소
 - `karabiner/` - Karabiner-Elements 키보드 커스터마이징
 - `nvim/` - Neovim 설정 (LazyVim 스타일 모듈화, Spacemacs 키맵, 한글 NFD 지원)
 - `obsidian/` - Obsidian Vim Motions 설정 (Neovim 키맵 이식, ~/WIKI vault 대상)
+- `stylus/` - Brave Stylus 사용자 스타일 (mdpreview 본문 폭 확장). 파일만 관리하고 Stylus 등록은 수동
 - `tmux/` - Tmux 터미널 멀티플렉서 설정
 - `wezterm/` - WezTerm 터미널 설정
 - `zsh/` - Zsh 설정 (Zinit, Starship, FZF 등)
@@ -45,6 +46,17 @@ stow -t ~ -n -v wezterm
 herdr plugin link ~/.config/herdr/local-plugins/last-workspace --enabled
 herdr server reload-config
 ```
+
+### stylus 사용자 스타일 등록
+
+`mdpreview`(gh gfm-preview)는 폭·글꼴 옵션이 없어 브라우저 쪽에서 스타일을 덮어쓴다.
+`stow -t ~ stylus` 뒤에 한 번만 등록한다.
+
+1. Brave에 [Stylus](https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahbeecmimnklnmndbke) 확장을 설치한다.
+2. `brave://extensions` → Stylus 세부정보 → **파일 URL에 대한 액세스 허용**을 켠다.
+3. 주소창에 `file:///Users/seonhyu/.config/stylus/mdpreview.user.css` 를 열면 Stylus 설치 화면이 뜬다. **Install** 을 누른다.
+   설치 화면의 **Live reload** 를 켜 두면 파일을 고칠 때마다 자동 반영된다.
+4. 폭 값은 Stylus 관리 화면의 스타일 설정(톱니바퀴)에서 바꿀 수 있다.
 
 ## 의존성 설치
 
