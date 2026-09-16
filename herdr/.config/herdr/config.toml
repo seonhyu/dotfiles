@@ -77,11 +77,12 @@ zoom = "prefix+z"
 resize_mode = "prefix+r"
 
 # ── Pane 순환 ──
-# last_pane은 workspace/tab을 가로질러 직전에 포커스한 pane으로 전환
-# prefix+Tab으로 현재 위치와 직전 위치를 왕복하며 prefix+o도 유지
+# last_pane은 workspace/tab을 가로질러 "직전에 포커스한 pane"으로 전환 (pane 단위)
+# 같은 workspace 안에서 pane을 옮긴 뒤에는 그 pane으로 돌아가므로
+# workspace 왕복 용도로는 쓸 수 없다. workspace 왕복은 prefix+tab (아래 플러그인)
 cycle_pane_next = ""
 cycle_pane_previous = ""
-last_pane = ["prefix+tab", "prefix+o"]
+last_pane = "prefix+o"
 
 # ── Tab (tmux window) ──
 # tmux: bind c new-window -c "#{pane_current_path}"
@@ -103,6 +104,9 @@ close_workspace = "prefix+shift+d"
 # 순서상 이전/다음 workspace 이동
 previous_workspace = "prefix+comma"
 next_workspace = "prefix+period"
+# tmux: bind Tab switch-client -l (직전 세션 토글)
+# → herdr에는 last_workspace 액션이 없어 로컬 플러그인으로 구현. 바인딩은 아래
+#   [[keys.command]] "toggle last workspace" 참조 (local-plugins/last-workspace)
 
 # tmux: Alt+1~5 세션 직접 전환
 # Herdr: Alt+1~9 번째 workspace로 직접 전환
@@ -132,6 +136,16 @@ command = "exec \"${SHELL:-sh}\""
 description = "open scratch terminal"
 width = "80%"
 height = "80%"
+
+# tmux: bind Tab switch-client -l → 직전 workspace 와 현재 workspace 왕복
+# 로컬 플러그인 local-plugins/last-workspace 의 toggle 액션을 호출한다.
+# 설치: stow -t ~ herdr
+#       herdr plugin link ~/.config/herdr/local-plugins/last-workspace --enabled
+[[keys.command]]
+key = "prefix+tab"
+type = "plugin_action"
+command = "seonhyu.last-workspace.toggle"
+description = "toggle last workspace"
 
 [ui]
 # tmux: set -g pane-border-style / pane-active-border-style / pane-border-lines heavy

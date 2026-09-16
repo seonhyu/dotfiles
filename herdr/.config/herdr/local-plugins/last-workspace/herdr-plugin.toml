@@ -1,0 +1,40 @@
+# herdr 로컬 플러그인: 직전 workspace 토글
+# tmux: bind Tab switch-client -l 에 해당하는 last_workspace 액션이
+# herdr 0.9.0 에 없어서 workspace.focused 이벤트로 최근 두 workspace 를
+# 기록해 두고 왕복한다. (herdr discussion #588 의 스크립트를 macOS 용으로 손봄)
+#
+# 위치: ~/.config/herdr/plugins/ 는 herdr 가 플러그인별 설정 디렉터리
+#       (plugins/config/<id>) 를 만드는 곳이라 stow 로 덮으면 저장소 안에
+#       런타임 데이터가 생긴다. 그래서 local-plugins/ 에 둔다.
+# 등록: herdr plugin link ~/.config/herdr/local-plugins/last-workspace --enabled
+# 확인: herdr plugin action list --plugin seonhyu.last-workspace
+# 로그: herdr plugin log list --plugin seonhyu.last-workspace
+
+id = "seonhyu.last-workspace"
+name = "Last Workspace"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Toggle between the two most recently focused workspaces (tmux switch-client -l)."
+platforms = ["macos", "linux"]
+
+# 서버 기동 직후 현재 workspace 를 이력의 시작점으로 기록
+[[startup]]
+command = ["./last-workspace", "initialize"]
+
+# 키에 바인딩되는 액션. config.toml 의 [[keys.command]] 에서
+# type = "plugin_action", command = "seonhyu.last-workspace.toggle" 로 호출
+[[actions]]
+id = "toggle"
+title = "Last workspace"
+contexts = ["global", "workspace"]
+command = ["./last-workspace", "toggle"]
+
+# workspace 포커스가 바뀔 때마다 (키/마우스/사이드바 무관) 이력 갱신
+[[events]]
+on = "workspace.focused"
+command = ["./last-workspace", "track"]
+
+# 닫힌 workspace 는 이력에서 제거
+[[events]]
+on = "workspace.closed"
+command = ["./last-workspace", "prune"]

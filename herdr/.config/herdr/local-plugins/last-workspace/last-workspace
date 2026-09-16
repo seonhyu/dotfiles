@@ -1,0 +1,168 @@
+#!/bin/bash
+# herdr last-workspace 플러그인 본체
+#
+# 최근 포커스한 workspace 두 개(current, previous)를 상태 파일에 기록하고
+# toggle 시 previous 로 전환한다. tmux 의 `switch-client -l` 과 같은 동작.
+#
+# macOS 기본 bash 3.2 로 동작하며 flock/jq 에 의존하지 않는다.
+# 잠금은 mkdir 원자성을 이용한다.
+#
+# 서브커맨드:
+#   initialize  서버 기동 시 현재 workspace 를 current 로 기록
+#   track       workspace.focused 이벤트: 포커스된 workspace 를 current 로, 기존 current 를 previous 로
+#   toggle      previous 가 살아 있으면 그쪽으로 포커스 이동 (이력도 맞바꿈)
+#   prune       workspace.closed 이벤트: 사라진 workspace 를 이력에서 제거
+
+set -u
+
+herdr_bin="${HERDR_BIN_PATH:-herdr}"
+plugin_id="${HERDR_PLUGIN_ID:-seonhyu.last-workspace}"
+state_home="${XDG_STATE_HOME:-$HOME/.local/state}"
+state_dir="${HERDR_PLUGIN_STATE_DIR:-$state_home/herdr/plugins/$plugin_id}"
+state_file="$state_dir/history"
+lock_dir="$state_dir/history.lock"
+
+current_workspace=""
+previous_workspace=""
+
+mkdir -p -- "$state_dir"
+
+# ── 잠금 (mkdir 기반) ──
+lock() {
+  local tries=0
+  while ! mkdir -- "$lock_dir" 2>/dev/null; do
+    tries=$((tries + 1))
+    if [ "$tries" -ge 100 ]; then
+      # 약 2초 이상 잡혀 있으면 죽은 프로세스의 잔재로 보고 회수
+      rm -rf -- "$lock_dir"
+      tries=0
+      continue
+    fi
+    sleep 0.02
+  done
+  trap 'rmdir -- "$lock_dir" 2>/dev/null' EXIT
+}
+
+# ── 이력 파일 (1행: current, 2행: previous) ──
+read_history() {
+  current_workspace=""
+  previous_workspace=""
+  if [ -f "$state_file" ]; then
+    {
+      IFS= read -r current_workspace || true
+      IFS= read -r previous_workspace || true
+    } < "$state_file"
+  fi
+}
+
+write_history() {
+  local tmp_file="$state_file.$$"
+  printf '%s\n%s\n' "$current_workspace" "$previous_workspace" > "$tmp_file" &&
+    mv -f -- "$tmp_file" "$state_file"
+}
+
+# ── herdr 질의 ──
+# 현재 포커스된 workspace id. 항상 스냅샷의 focused_workspace_id 를 쓴다.
+# 액션 호출 시 넘어오는 HERDR_WORKSPACE_ID 는 "액션의 대상 workspace"
+# (사이드바에서 선택된 행 등)라서 실제 포커스와 다를 수 있다.
+focused_workspace() {
+  "$herdr_bin" api snapshot 2>/dev/null |
+    sed -n 's/.*"focused_workspace_id":"\([^"]*\)".*/\1/p' |
+    head -n 1
+}
+
+# 이벤트 페이로드의 workspace id. HERDR_PLUGIN_EVENT_JSON 이 우선.
+event_workspace() {
+  local from_json=""
+  if [ -n "${HERDR_PLUGIN_EVENT_JSON:-}" ]; then
+    from_json="$(printf '%s' "$HERDR_PLUGIN_EVENT_JSON" |
+      sed -n 's/.*"workspace_id":"\([^"]*\)".*/\1/p' | head -n 1)"
+  fi
+  if [ -n "$from_json" ]; then
+    printf '%s\n' "$from_json"
+  else
+    printf '%s\n' "${HERDR_WORKSPACE_ID:-}"
+  fi
+}
+
+workspace_exists() {
+  "$herdr_bin" workspace get "$1" >/dev/null 2>&1
+}
+
+# focused 를 current 로 밀어 넣는다. 같으면 아무것도 안 한다.
+push_focused() {
+  local focused="$1"
+  if [ "$current_workspace" != "$focused" ]; then
+    previous_workspace="$current_workspace"
+    current_workspace="$focused"
+    write_history
+  fi
+}
+
+# ── 서브커맨드 ──
+initialize() {
+  local focused
+  focused="$(focused_workspace)"
+  [ -n "$focused" ] || exit 0
+  lock
+  read_history
+  push_focused "$focused"
+}
+
+track() {
+  local focused
+  focused="$(event_workspace)"
+  [ -n "$focused" ] || exit 0
+  lock
+  read_history
+  push_focused "$focused"
+}
+
+toggle() {
+  local focused target=""
+  focused="$(focused_workspace)"
+  [ -n "$focused" ] || exit 0
+
+  lock
+  read_history
+  # 이벤트를 놓쳤을 수 있으니 현재 위치를 먼저 반영
+  push_focused "$focused"
+
+  if [ -n "$previous_workspace" ] &&
+    [ "$previous_workspace" != "$current_workspace" ] &&
+    workspace_exists "$previous_workspace"; then
+    target="$previous_workspace"
+    previous_workspace="$current_workspace"
+    current_workspace="$target"
+    write_history
+  fi
+  rmdir -- "$lock_dir" 2>/dev/null
+  trap - EXIT
+
+  # 이력이 없거나 상대 workspace 가 닫혔으면 조용히 종료 (에러 토스트 방지)
+  [ -n "$target" ] || exit 0
+  "$herdr_bin" workspace focus "$target" >/dev/null
+}
+
+prune() {
+  lock
+  read_history
+  if [ -n "$current_workspace" ] && ! workspace_exists "$current_workspace"; then
+    current_workspace=""
+  fi
+  if [ -n "$previous_workspace" ] && ! workspace_exists "$previous_workspace"; then
+    previous_workspace=""
+  fi
+  write_history
+}
+
+case "${1:-}" in
+  initialize) initialize ;;
+  track) track ;;
+  toggle) toggle ;;
+  prune) prune ;;
+  *)
+    printf 'Usage: %s {initialize|track|toggle|prune}\n' "$0" >&2
+    exit 2
+    ;;
+esac
