@@ -9,7 +9,14 @@ return {
   },
   lazy = false,
   keys = {
-    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    {
+      '\\',
+      function()
+        require('utils.file-context').reveal()
+      end,
+      desc = 'NeoTree reveal',
+      silent = true,
+    },
   },
   opts = {
     default_component_configs = {

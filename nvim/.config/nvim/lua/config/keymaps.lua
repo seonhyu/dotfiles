@@ -17,21 +17,29 @@ map('t', '<Esc><Esc>', '<C-\\><C-n>', 'Exit terminal mode')
 -- ============================================================================
 
 local utils = require('utils.nfc')
+local file_context = require('utils.file-context')
 
 -- File operations (SPC f)
 map('n', '<leader>ff', function()
   utils.find_files_nfc()
 end, '[F]ind [F]iles (Korean NFD Fixed)')
 map('n', '<leader>fd', function()
-  local current_dir = vim.fn.expand '%:p:h'
+  local current_dir = file_context.directory()
+  if not current_dir then
+    return
+  end
   utils.find_files_nfc {
     cwd = current_dir,
     max_depth = 1,
   }
 end, '[F]ind files in current [D]irectory')
 map('n', '<leader>fD', function()
+  local current_dir = file_context.directory()
+  if not current_dir then
+    return
+  end
   utils.find_files_nfc {
-    cwd = vim.fn.expand '%:p:h',
+    cwd = current_dir,
   }
 end, '[F]ind files and [D]irs in current directory')
 map('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>', '[F]ind [R]ecent files')
@@ -114,7 +122,7 @@ end, '[T]oggle inlay [H]ints')
 map('n', '<leader>gg', '<cmd>LazyGit<cr>', '[G]it status (lazygit)')
 map('n', '<leader>gs', '<cmd>LazyGit<cr>', '[G]it [S]tatus')
 map('n', '<leader>gl', '<cmd>LazyGitFilter<cr>', '[G]it [L]og')
-map('n', '<leader>gf', '<cmd>LazyGitCurrentFile<cr>', '[G]it current [F]ile history')
+map('n', '<leader>gf', file_context.git_current_file, '[G]it current [F]ile history')
 map('n', '<leader>gc', '<cmd>LazyGit<cr>', '[G]it [C]ommit')
 map('n', '<leader>gp', '<cmd>LazyGit<cr>', '[G]it [P]ush/Pull')
 map('n', '<leader>gb', '<cmd>LazyGit<cr>', '[G]it [B]ranch')
@@ -131,15 +139,18 @@ map('n', '<leader>ghb', '<cmd>Gitsigns blame_line<cr>', '[G]it [H]unk [B]lame li
 
 -- Open operations (SPC o)
 map('n', '<leader>oP', '<cmd>Neotree toggle<cr>', '[O]pen [P]roject tree')
-map('n', '<leader>op', '<cmd>Neotree reveal<cr>', '[O]pen tree at current buffer [P]ath')
+map('n', '<leader>op', file_context.reveal, '[O]pen tree at current buffer [P]ath')
 map('n', '<leader>oe', function()
-  local file = vim.fn.expand '%:p'
+  local file = file_context.path()
+  if not file then
+    return
+  end
   if file == '' then
     vim.notify('No file in current buffer', vim.log.levels.WARN)
     return
   end
-  vim.fn.system('emacsclient -n "' .. file .. '"')
-  vim.notify('Opened in Emacs: ' .. vim.fn.expand '%:t', vim.log.levels.INFO)
+  vim.fn.system({ 'emacsclient', '-n', file })
+  vim.notify('Opened in Emacs: ' .. vim.fn.fnamemodify(file, ':t'), vim.log.levels.INFO)
 end, '[O]pen [E]macs')
 
 -- Error operations (SPC e)
