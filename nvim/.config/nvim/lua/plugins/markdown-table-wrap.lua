@@ -6,7 +6,16 @@
 -- 줄 번호가 표 앞부분에만 붙고 커서가 표를 벗어나는 것처럼 보인다. 필요할 때만 ,i 로 켠다.
 return {
   'ice345/markdown-table-wrap.nvim',
+  -- 아래 로컬 파서와 같은 버전에 고정. upstream 수정 채택 시 함께 제거한다.
+  commit = '176e9a72c71d48d969463525a1670c41fa2de972',
   ft = { 'markdown' },
+  init = function()
+    -- plugin 스크립트의 자동 setup보다 먼저 파서를 연결한다.
+    -- 캐시 수정 없이 식별자 내부의 밑줄을 보존한다.
+    package.preload['markdown-table-wrap.markdown'] = function()
+      return require('vendor.markdown-table-wrap.markdown')
+    end
+  end,
   opts = {
     -- 표가 있는 Markdown 버퍼는 자동으로 Reader(별도 보호 버퍼)로 진입.
     -- Reader에서 i/a/o 는 원본 줄로 이동해 편집하고, :w 는 원본 파일을 저장한다.

@@ -58,6 +58,14 @@ herdr server reload-config
    설치 화면의 **Live reload** 를 켜 두면 파일을 고칠 때마다 자동 반영된다.
 4. 폭 값은 Stylus 관리 화면의 스타일 설정(톱니바퀴)에서 바꿀 수 있다.
 
+## 플러그인 로컬 수정 기록
+
+- **2026-09-23 — `markdown-table-wrap.nvim` 파서 직접 수정 적용 중.** 표 안의
+  `sif_rpt_type`이 `sifrpttype`으로 표시되고 `rpt`가 기울임 처리되는 문제를 수정했다.
+  수정한 파서 소스를 이 저장소에 보관하고 원래 모듈 대신 로드한다. 설치 캐시를 직접 수정한 것은 아니다.
+  호환성을 위해 플러그인 버전도 고정되어 있으므로, 업데이트 시 이 수정의 필요 여부를 확인한다.
+  [수정 소스·적용 방식·해제 절차](nvim/.config/nvim/lua/vendor/markdown-table-wrap/README.md)를 참고한다.
+
 ## 의존성 설치
 
 ```bash
