@@ -26,6 +26,7 @@ path_prepend "$HOME/.local/bin"
 path_append "~/.lmstudio/bin"
 
 export PATH
+export PATH="$HOME/.cargo/bin:$PATH"
 
 #==================================================================
 # 2. Zsh 성능 최적화를 위한 캐시 디렉토리
@@ -95,6 +96,15 @@ bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
+
+# Ctrl-z 로 bg/fg toggle
+resume_job() {
+    zle -I
+    fg
+    zle -I
+}
+zle -N resume_job
+bindkey '^Z' resume_job
 
 #==================================================================
 # 히스토리 설정
@@ -180,6 +190,17 @@ alias la='ls -A --color'
 alias l='ls -CF --color'
 alias cc='CLAUDE_CODE_NO_FLICKER=1 claude'
 alias ccy='cc --allow-dangerously-skip-permissions'
+
+# Herdr can lose its cached host colors. Codex caches a failed OSC 10/11 probe
+# for the whole session, so refresh WezTerm's actual colors before TUI startup.
+codex() {
+  if [[ -t 0 && -t 1 && ${HERDR_ENV:-} == 1 && ${TERM_PROGRAM:-} == WezTerm ]] \
+      && [[ -x "$HOME/.local/bin/herdr-refresh-colors" ]]; then
+    "$HOME/.local/bin/herdr-refresh-colors"
+  fi
+  command codex "$@"
+}
+
 alias cdx='codex'
 alias cdxy='codex  --dangerously-bypass-approvals-and-sandbox'
 
