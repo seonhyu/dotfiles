@@ -163,10 +163,12 @@ map('n', '<leader>ee', vim.diagnostic.open_float, '[E]rror 상세 보기')
 map('n', '<leader><leader>', '<cmd>Telescope buffers<cr>', 'Switch buffer')
 map('n', '<leader><tab>', function()
   local cur = vim.api.nvim_get_current_buf()
+  -- Reader는 unlisted 버퍼라 방금 떠나온 원본이 가장 최근 버퍼로 잡힌다. 원본도 제외한다.
+  local source = file_context.source_buffer()
   local bufs = vim.fn.getbufinfo { buflisted = 1 }
   local best = nil
   for _, b in ipairs(bufs) do
-    if b.bufnr ~= cur and (not best or b.lastused > best.lastused) then
+    if b.bufnr ~= cur and b.bufnr ~= source and (not best or b.lastused > best.lastused) then
       best = b
     end
   end

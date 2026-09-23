@@ -5,14 +5,24 @@ function M.is_reader()
   return vim.api.nvim_buf_get_name(0):match("^markdown%-table%-wrap://reader/") ~= nil
 end
 
-function M.path()
+function M.source_buffer()
   if not M.is_reader() then
-    return vim.fn.expand("%:p")
+    return nil
   end
   -- A Reader already has the plugin loaded. Do not load it for ordinary files.
   local plugin = package.loaded["markdown-table-wrap"]
   local source = plugin and plugin.resolve_source_buffer(vim.api.nvim_get_current_buf())
   if source and vim.api.nvim_buf_is_valid(source) then
+    return source
+  end
+end
+
+function M.path()
+  if not M.is_reader() then
+    return vim.fn.expand("%:p")
+  end
+  local source = M.source_buffer()
+  if source then
     local path = vim.api.nvim_buf_get_name(source)
     if path ~= "" and not path:match("^%a[%w+.-]*://") then
       return path
