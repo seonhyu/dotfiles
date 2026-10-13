@@ -8,10 +8,6 @@
 local map = vim.keymap.set
 local opts = { buffer = true, silent = true }
 
--- render-markdown이 **, _ 등 원본 마커를 숨기려면 conceal 필요
-vim.opt_local.conceallevel = 2
-vim.opt_local.concealcursor = ''
-
 -- 현재 버퍼가 Reader면 원본 버퍼로 해석한다. 아니면 현재 버퍼 그대로.
 local function source_buffer()
   local bufnr = vim.api.nvim_get_current_buf()

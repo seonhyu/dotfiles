@@ -9,6 +9,8 @@ return {
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     opts = {
+      -- 기본은 원문 그대로 보고, 필요할 때 ,r 로 렌더링을 켠다
+      enabled = false,
       file_types = { 'markdown' },
       -- 커서가 있는 줄은 원본 문법 그대로 보여 편집이 쉽도록
       render_modes = { 'n', 'c', 't' },
