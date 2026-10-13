@@ -39,11 +39,13 @@ if [[ -z "$TARGET" ]]; then
 fi
 [[ -f "$TARGET" ]] || die "파일을 찾을 수 없다: $TARGET"
 
-# gh gfm-preview는 파일의 디렉터리를 서버 root로 잡는다.
+# gh gfm-preview에 파일을 넘기면 어떤 .md 경로를 요청해도 그 파일만 돌려준다.
+# 문서 사이 링크를 따라가려면 디렉터리를 넘기는 -D 모드로 띄운다.
+# root는 git 저장소 최상위다. 파일의 디렉터리를 root로 잡으면 ../ 링크가 root 밖으로 나가 끊긴다.
 TARGET_ABS="$(cd "$(dirname "$TARGET")" && pwd)/$(basename "$TARGET")"
-ROOT_DIR="$(dirname "$TARGET_ABS")"
-REL="$(basename "$TARGET_ABS")"
-URL="http://localhost:${PORT}/${REL}"
+ROOT_DIR="$(git -C "$(dirname "$TARGET_ABS")" rev-parse --show-toplevel 2>/dev/null || dirname "$TARGET_ABS")"
+REL="${TARGET_ABS#"$ROOT_DIR"/}"
+BASE_URL="http://localhost:${PORT}"
 
 open_browser() {
   if command -v open >/dev/null 2>&1; then open "$1"
@@ -57,11 +59,24 @@ open_browser() {
 PIDFILE="${TMPDIR:-/tmp}/mdpreview-$(printf '%s' "$ROOT_DIR" | cksum | cut -d' ' -f1).pid"
 if [[ -f "$PIDFILE" ]]; then
   OLD_PID="$(head -1 "$PIDFILE" 2>/dev/null || true)"
-  OLD_URL="$(sed -n '2p' "$PIDFILE" 2>/dev/null || true)"
+  OLD_BASE_URL="$(sed -n '2p' "$PIDFILE" 2>/dev/null || true)"
+  OLD_MODE="$(sed -n '3p' "$PIDFILE" 2>/dev/null || true)"
   if [[ -n "$OLD_PID" ]] && kill -0 "$OLD_PID" 2>/dev/null; then
-    open_browser "${OLD_URL%/*}/${REL}"
-    printf 'mdpreview: 기존 서버 재사용 (pid %s)\n' "$OLD_PID"
-    exit 0
+    if [[ "$OLD_MODE" == "dir" ]]; then
+      open_browser "${OLD_BASE_URL}/${REL}"
+      printf 'mdpreview: 기존 서버 재사용 (pid %s)\n' "$OLD_PID"
+      exit 0
+    fi
+    # 파일 하나만 서빙하던 이전 방식의 서버는 링크를 따라갈 수 없어 내리고 새로 띄운다.
+    # 그 서버를 띄운 launcher가 종료하며 pid 파일을 지우므로 launcher가 끝날 때까지 기다린다.
+    OLD_LAUNCHER="$(ps -o ppid= -p "$OLD_PID" 2>/dev/null | tr -d ' ' || true)"
+    pkill -P "$OLD_PID" 2>/dev/null || true
+    kill "$OLD_PID" 2>/dev/null || true
+    for _ in $(seq 1 30); do
+      [[ -n "$OLD_LAUNCHER" ]] && kill -0 "$OLD_LAUNCHER" 2>/dev/null || break
+      sleep 0.1
+    done
+    printf 'mdpreview: 이전 방식 서버 종료 (pid %s)\n' "$OLD_PID"
   fi
   rm -f "$PIDFILE"
 fi
@@ -73,13 +88,15 @@ if port_busy "$PORT"; then
     PORT=$((PORT + 1))
     port_busy "$PORT" || break
   done
-  URL="http://localhost:${PORT}/${REL}"
+  BASE_URL="http://localhost:${PORT}"
 fi
+URL="${BASE_URL}/${REL}"
 
 # -A: 자동 브라우저 오픈을 끄고, 서버가 준비된 뒤 직접 연다.
-gh gfm-preview -A -p "$PORT" "${EXTRA[@]+"${EXTRA[@]}"}" "$TARGET_ABS" &
+# -D: root 디렉터리 아래 문서를 요청 경로대로 돌려준다.
+gh gfm-preview -A -D -p "$PORT" "${EXTRA[@]+"${EXTRA[@]}"}" "$ROOT_DIR" &
 SERVER_PID=$!
-printf '%s\n%s\n' "$SERVER_PID" "$URL" > "$PIDFILE"
+printf '%s\n%s\n%s\n' "$SERVER_PID" "$BASE_URL" "dir" > "$PIDFILE"
 trap 'rm -f "$PIDFILE"' EXIT
 
 for _ in $(seq 1 50); do
