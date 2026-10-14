@@ -40,10 +40,10 @@ stow -t ~ -n -v wezterm
 
 ### herdr 로컬 플러그인 등록
 
-`stow -t ~ herdr` 뒤에 한 번만 실행한다. `prefix+tab` 의 직전 workspace 토글이 이 플러그인에 의존한다.
+`stow -t ~ herdr` 뒤에 한 번만 실행한다. `prefix+tab` 의 직전 workspace 토글과 `prefix+f` 의 직전 tab 토글이 이 플러그인에 의존한다.
 
 ```bash
-herdr plugin link ~/.config/herdr/local-plugins/last-workspace --enabled
+herdr plugin link ~/.config/herdr/local-plugins/last-focus --enabled
 herdr server reload-config
 ```
 

@@ -1,0 +1,57 @@
+# herdr 로컬 플러그인: 직전 workspace / 직전 tab 토글
+# tmux 의 `switch-client -l`(직전 세션)과 `last-window`(직전 창)에 해당하는
+# 액션이 herdr 0.9.4 에도 없어서, 포커스 이벤트로 최근 두 개를 기록해 두고 왕복한다.
+# (herdr discussion #588 의 스크립트를 macOS 용으로 손봄)
+#
+# min_herdr_version 0.9.1: 0.9.0 서버는 키보드·사이드바로 이동할 때 포커스
+# 이벤트를 보내지 않아 이력이 어긋난다 (herdr issue #3824).
+#
+# 위치: ~/.config/herdr/plugins/ 는 herdr 가 플러그인별 설정 디렉터리
+#       (plugins/config/<id>) 를 만드는 곳이라 stow 로 덮으면 저장소 안에
+#       런타임 데이터가 생긴다. 그래서 local-plugins/ 에 둔다.
+# 등록: herdr plugin link ~/.config/herdr/local-plugins/last-focus --enabled
+# 확인: herdr plugin action list --plugin seonhyu.last-focus
+# 로그: herdr plugin log list --plugin seonhyu.last-focus
+
+id = "seonhyu.last-focus"
+name = "Last Focus"
+version = "0.2.0"
+min_herdr_version = "0.9.1"
+description = "Toggle to the previously focused workspace or tab (tmux switch-client -l / last-window)."
+platforms = ["macos", "linux"]
+
+# 서버 기동 직후 현재 workspace/tab 을 이력의 시작점으로 기록
+[[startup]]
+command = ["./last-focus", "initialize"]
+
+# 키에 바인딩되는 액션. config.toml 의 [[keys.command]] 에서
+# type = "plugin_action", command = "seonhyu.last-focus.<id>" 로 호출
+[[actions]]
+id = "toggle-workspace"
+title = "Last workspace"
+contexts = ["global", "workspace"]
+command = ["./last-focus", "toggle-workspace"]
+
+[[actions]]
+id = "toggle-tab"
+title = "Last tab"
+contexts = ["global", "workspace"]
+command = ["./last-focus", "toggle-tab"]
+
+# 포커스가 바뀔 때마다 (키/마우스/사이드바 무관) 이력 갱신
+[[events]]
+on = "workspace.focused"
+command = ["./last-focus", "track-workspace"]
+
+[[events]]
+on = "tab.focused"
+command = ["./last-focus", "track-tab"]
+
+# 닫힌 workspace/tab 은 이력에서 제거
+[[events]]
+on = "workspace.closed"
+command = ["./last-focus", "prune"]
+
+[[events]]
+on = "tab.closed"
+command = ["./last-focus", "prune"]

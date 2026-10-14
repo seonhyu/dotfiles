@@ -1,0 +1,267 @@
+#!/bin/bash
+# herdr last-focus 플러그인 본체
+#
+# 최근 포커스한 workspace 두 개, 그리고 workspace 별로 최근 포커스한 tab 두 개를
+# 상태 파일에 기록해 두고 toggle 시 직전 대상으로 전환한다.
+#   workspace 토글: tmux `switch-client -l`
+#   tab 토글      : tmux `last-window` (같은 workspace 안에서만)
+#
+# macOS 기본 bash 3.2 로 동작하며 flock/jq 에 의존하지 않는다.
+# 잠금은 mkdir 원자성을 이용한다.
+#
+# 상태 파일 (1행: current, 2행: previous):
+#   workspace          workspace id
+#   tab.<workspace_id> 해당 workspace 의 tab id
+#
+# 서브커맨드:
+#   initialize        서버 기동 시 현재 workspace/tab 을 current 로 기록
+#   track-workspace   workspace.focused 이벤트: 포커스된 workspace 를 current 로
+#   track-tab         tab.focused 이벤트: 포커스된 tab 을 그 workspace 의 current 로
+#   toggle-workspace  직전 workspace 가 살아 있으면 그쪽으로 포커스 이동
+#   toggle-tab        현재 workspace 의 직전 tab 이 살아 있으면 그쪽으로 포커스 이동
+#   prune             workspace.closed / tab.closed 이벤트: 사라진 대상을 이력에서 제거
+
+set -u
+
+herdr_bin="${HERDR_BIN_PATH:-herdr}"
+plugin_id="${HERDR_PLUGIN_ID:-seonhyu.last-focus}"
+state_home="${XDG_STATE_HOME:-$HOME/.local/state}"
+state_dir="${HERDR_PLUGIN_STATE_DIR:-$state_home/herdr/plugins/$plugin_id}"
+workspace_file="$state_dir/workspace"
+lock_dir="$state_dir/history.lock"
+
+current=""
+previous=""
+
+mkdir -p -- "$state_dir"
+
+# ── 잠금 (mkdir 기반) ──
+lock() {
+  local tries=0
+  while ! mkdir -- "$lock_dir" 2>/dev/null; do
+    tries=$((tries + 1))
+    if [ "$tries" -ge 100 ]; then
+      # 약 2초 이상 잡혀 있으면 죽은 프로세스의 잔재로 보고 회수
+      rm -rf -- "$lock_dir"
+      tries=0
+      continue
+    fi
+    sleep 0.02
+  done
+  trap 'rmdir -- "$lock_dir" 2>/dev/null' EXIT
+}
+
+unlock() {
+  rmdir -- "$lock_dir" 2>/dev/null
+  trap - EXIT
+}
+
+# ── 이력 파일 ──
+tab_file() {
+  printf '%s/tab.%s\n' "$state_dir" "$1"
+}
+
+read_history() {
+  current=""
+  previous=""
+  if [ -f "$1" ]; then
+    {
+      IFS= read -r current || true
+      IFS= read -r previous || true
+    } < "$1"
+  fi
+}
+
+write_history() {
+  local tmp_file="$1.$$"
+  printf '%s\n%s\n' "$current" "$previous" > "$tmp_file" &&
+    mv -f -- "$tmp_file" "$1"
+}
+
+# focused 를 current 로 밀어 넣는다. 같으면 아무것도 안 한다.
+# current 가 비어 있으면(prune 으로 지워진 경우) previous 는 그대로 둔다.
+push_focused() {
+  local file="$1" focused="$2"
+  if [ "$current" != "$focused" ]; then
+    [ -z "$current" ] || previous="$current"
+    current="$focused"
+    write_history "$file"
+  fi
+}
+
+# 이벤트에서 id 를 못 읽었을 때 원본 페이로드를 stderr 로 남긴다 (plugin log 에 기록됨)
+report_missing() {
+  printf 'last-focus: %s 를 찾지 못함. event=%s\n' "$1" "${HERDR_PLUGIN_EVENT_JSON:-}" >&2
+}
+
+# ── herdr 질의 ──
+# 현재 포커스는 항상 스냅샷의 focused_* 필드에서 읽는다.
+# 액션 호출 시 넘어오는 HERDR_WORKSPACE_ID/HERDR_TAB_ID 는 "액션의 대상"
+# (사이드바에서 선택된 행 등)이라서 실제 포커스와 다를 수 있다.
+snapshot=""
+load_snapshot() {
+  snapshot="$("$herdr_bin" api snapshot 2>/dev/null)"
+}
+
+snapshot_field() {
+  printf '%s' "$snapshot" |
+    sed -n "s/.*\"$1\":\"\\([^\"]*\\)\".*/\\1/p" |
+    head -n 1
+}
+
+# 이벤트 페이로드의 필드. HERDR_PLUGIN_EVENT_JSON 이 우선이고 없으면 env 로 대체.
+event_field() {
+  local field="$1" fallback="$2" from_json=""
+  if [ -n "${HERDR_PLUGIN_EVENT_JSON:-}" ]; then
+    from_json="$(printf '%s' "$HERDR_PLUGIN_EVENT_JSON" |
+      sed -n "s/.*\"$field\":\"\\([^\"]*\\)\".*/\\1/p" | head -n 1)"
+  fi
+  if [ -n "$from_json" ]; then
+    printf '%s\n' "$from_json"
+  else
+    printf '%s\n' "$fallback"
+  fi
+}
+
+workspace_exists() {
+  "$herdr_bin" workspace get "$1" >/dev/null 2>&1
+}
+
+tab_exists() {
+  "$herdr_bin" tab get "$1" >/dev/null 2>&1
+}
+
+# tab id 는 "w1:t2" 형식이라 앞부분이 workspace id 다 (이벤트에 workspace_id 가 없을 때 대체)
+workspace_of_tab() {
+  printf '%s\n' "${1%%:*}"
+}
+
+# ── 서브커맨드 ──
+initialize() {
+  local ws tab
+  load_snapshot
+  ws="$(snapshot_field focused_workspace_id)"
+  tab="$(snapshot_field focused_tab_id)"
+  [ -n "$ws" ] || exit 0
+  lock
+  read_history "$workspace_file"
+  push_focused "$workspace_file" "$ws"
+  if [ -n "$tab" ]; then
+    read_history "$(tab_file "$ws")"
+    push_focused "$(tab_file "$ws")" "$tab"
+  fi
+}
+
+track_workspace() {
+  local ws
+  ws="$(event_field workspace_id "${HERDR_WORKSPACE_ID:-}")"
+  [ -n "$ws" ] || { report_missing workspace_id; exit 0; }
+  lock
+  read_history "$workspace_file"
+  push_focused "$workspace_file" "$ws"
+}
+
+track_tab() {
+  local tab ws
+  tab="$(event_field tab_id "${HERDR_TAB_ID:-}")"
+  [ -n "$tab" ] || { report_missing tab_id; exit 0; }
+  ws="$(event_field workspace_id "")"
+  [ -n "$ws" ] || ws="$(workspace_of_tab "$tab")"
+  lock
+  read_history "$(tab_file "$ws")"
+  push_focused "$(tab_file "$ws")" "$tab"
+}
+
+toggle_workspace() {
+  local focused target=""
+  load_snapshot
+  focused="$(snapshot_field focused_workspace_id)"
+  [ -n "$focused" ] || exit 0
+
+  lock
+  read_history "$workspace_file"
+  # 이벤트를 놓쳤을 수 있으니 현재 위치를 먼저 반영
+  push_focused "$workspace_file" "$focused"
+
+  if [ -n "$previous" ] && [ "$previous" != "$current" ] &&
+    workspace_exists "$previous"; then
+    target="$previous"
+    previous="$current"
+    current="$target"
+    write_history "$workspace_file"
+  fi
+  unlock
+
+  # 이력이 없거나 상대 workspace 가 닫혔으면 조용히 종료 (에러 토스트 방지)
+  [ -n "$target" ] || exit 0
+  "$herdr_bin" workspace focus "$target" >/dev/null
+}
+
+toggle_tab() {
+  local ws focused file target=""
+  load_snapshot
+  ws="$(snapshot_field focused_workspace_id)"
+  focused="$(snapshot_field focused_tab_id)"
+  [ -n "$ws" ] && [ -n "$focused" ] || exit 0
+  file="$(tab_file "$ws")"
+
+  lock
+  read_history "$file"
+  push_focused "$file" "$focused"
+
+  if [ -n "$previous" ] && [ "$previous" != "$current" ] &&
+    tab_exists "$previous"; then
+    target="$previous"
+    previous="$current"
+    current="$target"
+    write_history "$file"
+  fi
+  unlock
+
+  [ -n "$target" ] || exit 0
+  "$herdr_bin" tab focus "$target" >/dev/null
+}
+
+prune() {
+  local file ws
+  lock
+
+  read_history "$workspace_file"
+  if [ -n "$current" ] && ! workspace_exists "$current"; then
+    current=""
+  fi
+  if [ -n "$previous" ] && ! workspace_exists "$previous"; then
+    previous=""
+  fi
+  write_history "$workspace_file"
+
+  for file in "$state_dir"/tab.*; do
+    [ -f "$file" ] || continue
+    ws="${file##*/tab.}"
+    if ! workspace_exists "$ws"; then
+      rm -f -- "$file"
+      continue
+    fi
+    read_history "$file"
+    if [ -n "$current" ] && ! tab_exists "$current"; then
+      current=""
+    fi
+    if [ -n "$previous" ] && ! tab_exists "$previous"; then
+      previous=""
+    fi
+    write_history "$file"
+  done
+}
+
+case "${1:-}" in
+  initialize) initialize ;;
+  track-workspace) track_workspace ;;
+  track-tab) track_tab ;;
+  toggle-workspace) toggle_workspace ;;
+  toggle-tab) toggle_tab ;;
+  prune) prune ;;
+  *)
+    printf 'Usage: %s {initialize|track-workspace|track-tab|toggle-workspace|toggle-tab|prune}\n' "$0" >&2
+    exit 2
+    ;;
+esac
